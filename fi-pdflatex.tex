@@ -203,9 +203,9 @@ Na aplikaci bylo stanoveno několik funkčních požadavků \cite{Kostelnik2016t
 
 Funkční požadavky shrnuje diagram případů užití na obr. \ref{fig:useCase1}.
 
-\begin{figure}
+\begin{figure}[h!]
     \centering
-    \includegraphics[width=13cm]{images/Use-case-1.eps}
+    \includegraphics[width=10cm]{images/Use-case-1.eps}
     \caption{Diagram případů užití shrnující veškerou funkcionalitu původní skórovací aplikace.}
     \label{fig:useCase1}
 \end{figure}
@@ -229,7 +229,7 @@ Tabulka $auth\_user$ slouží pro ukládání uživatelských účtů. Sloupec $
 
 Tabulka $auth\_group$ slouží pro ukládání uživatelských skupin, které jsou využity pro rozdělení uživatelů do jednotlivých týmů. Tabulka $auth\_user\_groups$ zajišťuje vazbu mezi uživateli a skupinami. Systém pro správu uživatelů dále obsahuje mechanismy pro nastavování oprávnění i na úrovni uživatelských skupin. Skórovací aplikace však těchto vlastností nevyužívá, a proto je pro zjednodušení neuvádím.
 
-\begin{figure}[t!]
+\begin{figure}[h!]
     \centering
     \includegraphics[width=13cm]{images/ERD-django.eps}
     \caption{Entitně relační diagram zachycující strukturu dat v systému správy uživatelů frameworku Django}
@@ -237,6 +237,13 @@ Tabulka $auth\_group$ slouží pro ukládání uživatelských skupin, které js
 \end{figure}
 
 Při implementaci předešlé skórovací aplikace byl pozměněn původně navržený datový model a vlivem těchto rozdílů se do databáze zanesly nejrůznější nedostatky. V následujících odstavcích nejdříve popíšu samotný datový model, který je zachycen na obrázku \ref{fig:erdOldApp}. Následně shrnu nedostatky tohoto modelu. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=13.5cm]{images/ERD-old-app.eps}
+    \caption{Entitně relační diagram popisující datový model původní aplikace}
+    \label{fig:erdOldApp}
+\end{figure}
 
 Tabulka $Exercise$ obsahovala informaci o vytvořeném cvičení. Do sloupce $timestamp$ se ukládal čas začátku cvičení. Sloupce $duration$ nesl informaci o délce trvání cvičení v celých hodinách a do sloupce $name$ bylo možné z GUI nastavit hodnotu $start$ nebo $stop$, která označovala, zda jde o nastavení času začátku cvičení, nebo ukončení cvičení. S hodnotou $stop$ však aplikace žádným způsobem dále nepracovala, jelikož délka cvičení byla nastavena atributem $duration$. Data, která měla v tomto sloupci uloženou hodnotu $stop$, tedy neměla žádný význam.
 
@@ -255,13 +262,6 @@ V tabulce $service$ byl uložen seznam služeb, jejíž dostupnost se během cvi
 Tabulka $states$ obsahovala záznam o zkontrolované dostupnosti nebo nedostupnosti dané služby. Při kontrole dané služby byl v tabulce vytvořen záznam, zda je služba, specifikovaná ve sloupci $service$, dostupná, nebo nedostupná. Stav dostupnosti byl uložen v atributu $state$ pomocí hodnoty $up$ nebo $down$. Dále se ukládal čas provedené kontroly.
 
 Zbývající tabulkou je $sumofservicelog$, která je velice podobná tabulce $sumofobjectivelog$ a v této tabulce je pro každý tým uložen vývoj skóre z automatického hodnocení. Poslední vložený záznam pro daný tým by měl odpovídat aktuální hodnotě skóre z automatického hodnocení.
-
-\begin{figure}[b]
-    \centering
-    \includegraphics[width=13.5cm]{images/ERD-old-app.eps}
-    \caption{Entitně relační diagram popisující datový model původní aplikace}
-    \label{fig:erdOldApp}
-\end{figure}
 
 \subsection{Nedostatky datového modelu}
 
@@ -380,6 +380,8 @@ Zbývající tabulky $auth\_user$, $auth\_group$ a $auth\_user\_groups$ jsou sou
     \caption{Entitně relační diagram mapující kompletní strukturu nového datového modelu}
     \label{fig:erdNewApp}
 \end{figure}
+
+\newpage
 
 \section{Návrh API}
 
