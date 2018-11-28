@@ -311,7 +311,7 @@ Během několika ročníků cvičení Cyber Czech se objevila celá řada násle
 \item Zlepšení správy uživatelských účtů -- původní aplikace neobsahovala žádné nástroje pro správu uživatelů a tato správa musela být prováděna přímo v databázi samotného systému. Nové API by tedy mělo obsahovat funkce pro vytváření a úpravu uživatelů a jejich zařazování do dříve definovaných týmů.
 \item Nastavení, pro které týmy může uživatel zadávat hodnocení -- u každého uživatele bude možné nastavit, kterým modrým týmům může zadávat hodnocení. Během cvičení je typické, že určití členové červeného týmu provádí útoky pouze na vybraný modrý tým. Pomocí tohoto nastavení bude tedy možné vytvořit uživatelský účet, který bude moci hodnotit pouze předdefinovaný tým a bude tím sníženo riziko možné chyby při zadávání hodnocení.
 \item Vytvoření rozvrhu pro hodnocené události -- jednou ze zásadních novinek nové aplikace bude zobrazení rozvrhu naplánovaných událostí, kde uživatelé skórovací aplikace velice přehledně uvidí, které události by měly být v jakém čase prováděny. Jednotlivým událostem bude možné nastavovat, zda jsou již ve stavu provádění, případně zda událost byla úspěšně, nebo neúspěšně provedena. Bude tedy nezbytné umožnit k událostem ukládat čas, kdy mají být události provedeny. Údaj, který se bude ukládat, bude pouze počet hodin a minut od začátku cvičení, kdy má daná událost nastat. Díky tomu bude možné stanovit různý čas zahájení cvičení a v systému bude uloženo, že daná událost má být provedena například dvě hodiny po zahájení cvičení.
-\item Možnost odesílat upozornění na plánované události -- tento požadavek navazuje na předchozí požadavek s plánováním událostí do přehledného rozvrhu. Prezentační vrstva by měla zajistit upozornění uživatele na události, které by měly být právě zahájeny. V servisní vrstvě musí být možné nastavit, zda pro danou událost má takové upozornění být vytvořeno.
+\item Možnost odesílat upozornění na plánované události -- Prezentační vrstva by měla zajistit upozornění uživatele na události, které by měly být právě zahájeny. V servisní vrstvě musí být možné nastavit, zda pro danou událost má takové upozornění být vytvořeno.
 \item Používání herního času -- herní čas představuje počet hodin a minut od zahájení cvičení. Pro lepší čitelnost informací v prezentační vrstvě je požadováno, aby servisní vrstva prováděla výpočet herního času na základě nastaveného zahájení cvičení a tento herní čas byl odesílán spolu s daty o hodnocení.
 \item Možnost nahrávání souborů k hodnocení – při vytváření hodnocení by mělo být možné nahrávat například snímek obrazovky nebo jiný obrazový, případně textový soubor.
 \item Možnost nastavení ikony a dalších rozlišovacích prvků týmu -- aby bylo možné v prezentační vrstvě týmy patřičně rozlišit, byl vznesen požadavek na možnost uložení malé ikony pro každý tým a dále na nastavení barvy, která bude pro daný tým použita při vykreslování grafů.
@@ -385,111 +385,114 @@ Zbývající tabulky $auth\_user$, $auth\_group$ a $auth\_user\_groups$ jsou sou
 
 \section{Návrh API}
 
-Po dokončení revize datového modelu byl vytvořen návrh API pro novou aplikaci. Tento návrh se řídil principy REST (Representational state transfer), což je softwarová architektura, definující sadu pravidel, jakým způsobem bude přistupováno k určitému webovému zdroji a jakým způsobem budou probíhat operace s tímto zdrojem \cite{RoyThomasFielding2000ArchitecturalArchitectures}. Architektura byla navržena pro distribuované prostředí, které je v našem případě představováno oddělenou servisní a prezentační vrstvou, které mezi sebou komunikují pomocí HTTP protokolu. Dle architektury by webový zdroj měl podporovat operaci čtení, vytváření, upravování a mazání, tedy tzv. CRUD\footnote{Zkratka shrnující čtyři základní operace s daty. Vytvoření (create), čtení (read), úprava (update) a mazání (delete).}. V případě HTTP protokolu se využívá metody GET pro získání dat, POST pro vytváření dat, PUT pro úpravu již existujících dat a DELETE pro mazání dat. Dále tato architektura popisuje, jakým způsobem by měla být data reprezentovány ve strojově čitelném formátu. \cite{RoyThomasFielding2000ArchitecturalArchitectures}
+Po dokončení revize datového modelu byl vytvořen návrh API pro novou aplikaci. Tento návrh se řídil principy REST (Representational state transfer), což je softwarová architektura, definující sadu pravidel, jakým způsobem bude přistupováno k určitému webovému zdroji a jakým způsobem budou probíhat operace s tímto zdrojem \cite{RoyThomasFielding2000ArchitecturalArchitectures}.
+REST architektura byla navržena pro distribuované systémy, ve kterých jsou komponenty systému rozděleny do samostatných celků a tyto mezi sebou komunikují pomocí zasílání zpráv přes počítačovou síť. V našem případě je toto prostředí představováno oddělenou servisní a prezentační vrstvou a pro komunikaci je využit HTTP protokol.  Dle principů REST by webový zdroj měl podporovat operaci čtení, vytváření, upravování a mazání, tedy tzv. CRUD\footnote{Zkratka shrnující čtyři základní operace s daty. Vytvoření (create), čtení (read), úprava (update) a mazání (delete).}. V případě HTTP protokolu se využívá metody GET pro získání dat, POST pro vytváření dat, PUT pro úpravu již existujících dat a DELETE pro mazání dat. Dále tato architektura popisuje, jakým způsobem by měla být data reprezentována ve strojově čitelném formátu. \cite{RoyThomasFielding2000ArchitecturalArchitectures}
 
-Při návrhu API jsem využil online nástroje Swagger\footnote{www.swagger.io}, který generuje velice přehlednou dokumentaci pro API a umožňuje její sdílení i dalším vývojářům. Dostupnost této dokumentace zajišťovala usnadnění práce mezi více programátory. Následující text obsahuje pouze stručný přehled, který má za úkol nastínit strukturu vytvořeného API. Kompletní dokumentace s přesným popisem odesílaných a přijímaných dat se nachází v elektronických přílohách práce.
+Při návrhu API jsem využil online nástroje Swagger\footnote{www.swagger.io}, který generuje velice přehlednou dokumentaci pro API a umožňuje její sdílení i dalším vývojářům.
+
+Následující text obsahuje pouze stručný přehled, který má za úkol nastínit strukturu vytvořeného API. Kompletní dokumentace s přesným popisem odesílaných a přijímaných dat se nachází v elektronických přílohách práce.
 
 \renewcommand\labelitemii{$\square$}
 \begin{itemize}
-    \item /users
+    \item $/users$
     \begin{itemize}
-        \item GET -- získání seznamu všech uživatelů
-        \item POST -  vytvoření nového uživatele
+        \item $GET$ -- získání seznamu všech uživatelů
+        \item $POST$ --  vytvoření nového uživatele
     \end{itemize}
     
-    \item /users/{user}
+    \item $/users/{user}$
     \begin{itemize}
-        \item GET - získání detailu uživatele
-        \item PUT - upravení existujícího uživatele
-        \item DELETE - odstranění existujícího uživatele
+        \item $GET$ -- získání detailu uživatele
+        \item $PUT$ -- upravení existujícího uživatele
+        \item $DELETE$ -- odstranění existujícího uživatele
     \end{itemize}
     
-    \item /teams
+    \item $/teams$
     \begin{itemize}
-        \item GET - získání seznam všech týmů
-        \item POST -  vytvoření nového týmu
+        \item $GET$ -- získání seznamu všech týmů
+        \item $POST$ --  vytvoření nového týmu
     \end{itemize}
     
-    \item /teams/{team}
+    \item $/teams/{team}$
     \begin{itemize}
-        \item GET - získání detailu týmu
-        \item PUT - upravení existujícího týmu
-        \item DELETE - odstranění existujícího týmu
+        \item $GET$ -- získání detailu týmu
+        \item $PUT$ -- upravení existujícího týmu
+        \item $DELETE$ -- odstranění existujícího týmu
     \end{itemize}
     
-    \item /exercises
+    \item $/exercises$
     \begin{itemize}
-        \item GET - získání informací o naplánovaném cvičení
-        \item POST - vytvoření nového cvičení
+        \item $GET$ -- získání informací o naplánovaném cvičení
+        \item $POST$ -- vytvoření nového cvičení
     \end{itemize}
     
-    \item /objectives
+    \item $/objectives$
     \begin{itemize}
-        \item GET - získání seznam všech událostí
-        \item POST -  vytvoření nové události
+        \item $GET$ -- získání seznam všech událostí
+        \item $POST$ --  vytvoření nové události
     \end{itemize}
         
-    \item /objectives/{objective}
+    \item $/objectives/{objective}$
     \begin{itemize}
-        \item GET - získání detailu události
-        \item PUT - upravení existující události
-        \item DELETE - odstranění existující události
+        \item $GET$ -- získání detailu události
+        \item $PUT$ -- upravení existující události
+        \item $DELETE$ -- odstranění existující události
     \end{itemize}
         
-    \item /charts/timeline
+    \item $/charts/timeline$
     \begin{itemize}
-        \item GET - získání časové osy s jednotlivými změnami bodového hodnocení
+        \item $GET$ -- získání časové osy s jednotlivými změnami bodového hodnocení
     \end{itemize}
         
-    \item /charts/score
+    \item $/charts/score$
     \begin{itemize}
-        \item GET - získání celkového skóre
+        \item $GET$ -- získání celkového skóre
     \end{itemize}
         
-    \item /logs/automatic
+    \item $/logs/automatic$
     \begin{itemize}
-        \item GET - získání seznam všech automatických hodnocení
-        \item POST -  vytvoření nového automatického hodnocení
+        \item $GET$ -- získání seznamu všech automatických hodnocení
+        \item $POST$ --  vytvoření nového automatického hodnocení
     \end{itemize}
         
-    \item /logs/automatic/{log}
+    \item $/logs/automatic/{log}$
     \begin{itemize}
-        \item GET - získání detailu automatického hodnocení
-        \item DELETE - odstranění existující události
+        \item $GET$ -- získání detailu automatického hodnocení
+        \item $DELETE$ -- odstranění existující události
     \end{itemize}
             
-    \item /logs/manual
+    \item $/logs/manual$
     \begin{itemize}
-        \item GET - získání seznamu všech manuálních hodnocení
-        \item POST -  vytvoření nového manuálního hodnocení
+        \item $GET$ -- získání seznamu všech manuálních hodnocení
+        \item $POST$ --  vytvoření nového manuálního hodnocení
     \end{itemize}
             
-    \item /logs/manual/{log}
+    \item $/logs/manual/{log}$
     \begin{itemize}
-        \item GET - získání detailu manuálního hodnocení
-        \item PUT - upravení existujícího hodnocení
-        \item DELETE - odstranění existujícího hodnocení
+        \item $GET$ -- získání detailu manuálního hodnocení
+        \item $PUT$ -- upravení existujícího hodnocení
+        \item $DELETE$ -- odstranění existujícího hodnocení
     \end{itemize}
             
-    \item /logs/manual/{log}/files
+    \item $/logs/manual/{log}/files$
     \begin{itemize}
-        \item GET - získání seznamu všech souborů pro dané manuálních hodnocení
-        \item POST - vytvoření nového souboru pro dané hodnocení
+        \item $GET$ -- získání seznamu všech souborů pro dané manuálních hodnocení
+        \item $POST$ -- vytvoření nového souboru pro dané hodnocení
     \end{itemize}
             
-    \item /logs/manual/{log}/files/{file}
+    \item $/logs/manual/{log}/files/{file}$
     \begin{itemize}
-        \item DELETE - odstranění existujícího souboru
+        \item $DELETE$ -- odstranění existujícího souboru
     \end{itemize}
             
-    \item /export/database
+    \item $/export/database$
     \begin{itemize}
-        \item GET - získání odkazu pro stažení zálohy databáze
+        \item $GET$ -- získání odkazu pro stažení zálohy databáze
     \end{itemize}
                 
-    \item /export/feedback
+    \item $/export/feedback$
     \begin{itemize}
-        \item GET - získání dat pro feedback portlet (slouží pro přípravu dokumentů se zpětnou vazbou pro členy modrého týmu)
+        \item $GET$ -- získání dat pro feedback portlet (slouží pro přípravu dokumentů se zpětnou vazbou pro členy modrého týmu)
     \end{itemize}
 
 \end{itemize}
@@ -498,12 +501,14 @@ Při návrhu API jsem využil online nástroje Swagger\footnote{www.swagger.io},
 \chapter{Implementace nové skórovací aplikace}
 
 \section{Struktura projektu}
-Framework Django ve spojení s Django REST framework umožňuje vytváření přehledného a strukturovaného kódu. V následujících kapitolách popíšu nejdůležitější části struktury nově vytvořené aplikace.
+Pro implementaci byl využit Framework Django ve spojení s Django REST framework. Díky zvoleným nástrojům lze vytvářet přehledný a strukturovaný kód. V následujících kapitolách popíšu nejdůležitější části struktury nově vytvořené aplikace.
 
 \subsection{Adresářová struktura}
-V hlavním adresáři aplikace se nachází soubor $manage.py$. Tento soubor slouží pro spouštění příkazů frameworku Django, tedy například spuštění vývojového webového serveru nebo automatických testů. Dále je provedeno rozčlenění na dva samostatné adresáře $cyberex\_api$ a $scoring$.
+V hlavním adresáři aplikace se nachází soubor $manage.py$. Soubor slouží pro spouštění příkazů frameworku Django, tedy například spuštění vývojového webového serveru nebo automatických testů. Adresářová struktura je rozdělena na dva samostatné adresáře $scoring$ a $cyberex\_api$.
 
-Adresář $scoring$ obsahuje konfigurační soubor $settings.py$ ve kterém se nachází veškeré nastavení aplikace. V souboru $globals.py$ je zadefinována hodnota výchozího bodového skóre každého týmu. $urls.py$ obsahuje routovací pravidla, pomocí kterých se příchozí požadavky předávají správným částem aplikace. Rozdělení příchozích požadavků podle modulů je následující.
+Adresář $scoring$ obsahuje konfigurační soubor $settings.py$, ve kterém se nachází veškeré nastavení aplikace. V souboru $globals.py$ je zadefinována hodnota výchozího bodového skóre každého týmu. $urls.py$ obsahuje routovací pravidla, pomocí kterých se příchozí požadavky předávají jednotlivým modulům.
+
+Zmíněné příchozí požadavky jsou dle modulů rozděleny podle následujícího přehledu.
 
 \begin{itemize}
     \item $api/v1/$ -- modul skórovací aplikace
@@ -511,57 +516,68 @@ Adresář $scoring$ obsahuje konfigurační soubor $settings.py$ ve kterém se n
     \item $admin/$ -- modul administrace, která je generována frameworkem
 \end{itemize}
 
-Adresář $cyberex\_api$ obsahuje veškeré zdrojové kódy skórovací aplikace. Rozdělení souborů je následující.
+Adresář $cyberex\_api$ obsahuje veškeré zdrojové kódy skórovací aplikace. Adresářová struktura je následující.
 
 \begin{itemize}
     \item $admin.py$ -- konfigurace pro automaticky generovanou administraci
     \item $helpers.py$ -- pomocné funkce, např. pro počítání herního času k záznamům o hodnocení
-    \item $models.py$ -- definice databázového modelu pro ORM systém, tento budu ještě blíže popisovat v následující podkapitole
+    \item $models.py$ -- definice databázového modelu pro ORM systém, viz kapitola \ref{model}
     \item $permissions.py$ -- pravidla autorizačního systému
-    \item $serializers.py$ -- soubor tříd zajišťující převod dat do strojově čitelného formátu, bude popsán v samostatné podkapitole
+    \item $serializers.py$ -- soubor tříd zajišťující převod dat do strojově čitelného formátu, viz kapitola \ref{serializer}
     \item $tests.py$ -- automatické testy
     \item $urls.py$ -- definice routovacích pravidel, na základě příchozího požadavku je každý požadavek předán správné funkci v souboru $views.py$
-    \item $views.py$ -- soubor tříd, které obsluhují příchozí požadavky, nasměrované díky routovacím pravidlům, opět bude popsán v samostatné podkapitole
+    \item $views.py$ -- soubor tříd, které obsluhují příchozí požadavky, viz kapitola \ref{radic}
 \end{itemize}
 
 \subsection{Model}
-Framework Django obsahuje propracovaný ORM systém. Veškeré datové modely jsou popsány v souboru $models.py$ a na základě těchto definic je automaticky vygenerována struktura databáze. Model je pouze univerzálním popisem datové struktury a o zprostředkování veškeré práce s databází se stará framework, ten může pracovat jak s MySQL databází, tak například PostgreSQL. Každá entita je reprezentována samostatnou třídou a může být rozšířena o vlastní metody, toho jsem využil například pro naprogramování funkce, pomocí které lze pro entitu týmu získat i všechna vložená hodnocení. Tento přístup zachovává lepší strukturu kódu, jelikož metody, které se starají pouze o získání dat, jsou stále zapsány v modelu.
+\label{model}
+Framework Django obsahuje propracovaný ORM systém. Veškeré datové modely jsou popsány v souboru $models.py$ a na základě těchto definic je automaticky vygenerována struktura databáze. Model je pouze univerzálním popisem datové struktury, která je nezávislá na použitém databázovém systému. Podporované databázové systémy jsou PostgreSQL, MySQL, SQLite a Oracle. Framework sám spravuje schéma databáze a sestavuje dotazy podle zvoleného databázového systému.
 
-\subsection{Řadič}
-Všechny příchozí požadavky na URL adresu $/api/v1$ jsou pomocí routovacích pravidel předány patřičným funkcím v souboru $views.py$. Tyto metody představují řídící logiku celé aplikace. V případě požadavků na získání informací provede funkce načtení dat z modelu, následuje předání dat do serializační metody a následný výstup je odeslán v odpovědi serveru. Pro požadavky na vytváření, úpravu, nebo mazání záznamů, zajišťuje funkce případné správné předání přijatých dat do serializační metody a následnou další práci s daty. 
+Každá entita je reprezentována samostatnou třídou a může být rozšířena o vlastní metody. Uvedený přístup byl vhodný například při implementaci funkce, která získá pro entitu týmu všechna vložená hodnocení. Tímto je zachována lepší strukturu kódu, jelikož metody, které se starají pouze o získání dat, jsou stále zapsány v modelu.
 
 \subsection{Serializace dat}
+\label{serializer}
+V systému jsou databázová data reprezentována pomocí entit ORM systému, pro jejich převod do strojově čitelného formátu slouží speciální třídy v souboru $serializers.py$. Pomocí těchto tříd lze však provést i opačný proces, tedy ze strojově čitelného formátu vytvořit nebo upravit entitu. Pomocí mapování na ORM datový model entity je možné realizovat, aby tento proces probíhal zcela automaticky. Programátor však může i nadále do tohoto procesu zasáhnout implementací vlastní metody pro ukládání či editaci. Implementace vlastních metod jsem využil pro ukládání záznamu o hodnocení, kdy se ukládají data do dvou různých databázových tabulek a není tak možné využít generického chování funkcí pro ukládání.
 
-V systému jsou databázová data reprezentována pomocí entit ORM systému, pro jejich převod do strojově čitelného formátu, slouží speciální třídy v souboru $serializers.py$. Pomocí těchto tříd lze však provést i opačný proces, tedy ze strojově čitelného formátu, vytvořit nebo upravit entitu. Pomocí mapování na ORM datový model entity, je možné, aby tento proces probíhal zcela automaticky, programátor však může i nadále do tohoto procesu zasáhnout implementací vlastní ukládací nebo editační metody. Této vlastnosti je v aplikaci využito pro zpracování POST a PUT požadavků, kdy přijatá data jsou serializační třídou zpracována a pokud jsou validní, je na základě dat vytvořen nový záznam v databázi, případně upraven již existující záznam. V případě nevalidních dat je vygenerována vyjímka, kterou je možné v odpovědi odeslat, že daná data nejsou validní.
+\subsection{Řadič}
+\label{radic}
+Všechny příchozí požadavky na URL adresu $/api/v1$ jsou pomocí routovacích pravidel předány patřičným funkcím v souboru $views.py$. Tyto metody představují řídící logiku celé aplikace. V případě požadavků na získání informací funkce provede načtení dat z modelu. Následuje předání dat do serializační metody a vzniklý výstup je odeslán v odpovědi serveru. Funkce zajišťuje při požadavcích na vytváření, úpravu nebo mazání záznamů předání přijatých dat do serializační metody. V případě validační chyby dat se funkce postará o vygenerování chybového hlášení. Pokud je nový záznam úspěšně vytvořen nebo upraven, odešle funkce v odpovědi serveru tento záznam.
 
 \section{Instalace a spouštění aplikace}
-Aplikace pro svůj běh vyžaduje interpretr jazyka Python ve verzi 3.5 a funkčnost je závislá na instalaci několika dalších modulů. Abych zajistil co nejjednodušší instalaci těchto závislostí, rozhodl jsem se využít nástroje Pipenv\footnote{www.pipenv.readthedocs.io}. V následujících kapitolách popíšu použití tohoto nástroje a způsob, jakým byla aplikace distribuována mezi další vývojáře.
+Aplikace pro svůj běh vyžaduje interpretr jazyka Python ve verzi 3.5 a instalaci několika dalších modulů. Abych zajistil co nejjednodušší instalaci těchto závislostí, rozhodl jsem se využít nástroje Pipenv\footnote{www.pipenv.readthedocs.io}. V následujících kapitolách popíšu použití tohoto nástroje a způsob, jakým byla aplikace distribuována mezi další vývojáře.
 
 \subsection{Řešení závislostí pomocí nástroje Pipenv}
-Nástroj Pipenv v sobě spojuje dvě důležité funkcionality. Tou první je správce balíčků, pomocí kterého je možné snadno definovat závislosti aplikace a následně je instalovat pomocí spuštění jediného příkazu. Druhou funkcionalitou je nástroj pro spouštění softwaru v uzavřeném prostředí, které je nakonfigurováno podle definovaných závislostí. Díky tomu je možné v jednom operačním systému spouštět programy pro rozdílné verze jazyka Python a odlišné verze modulů tohoto jazyka.
+Nástroj Pipenv v sobě spojuje dvě důležité funkcionality. První je správce balíčků, pomocí kterého je možné snadno definovat všechny potřebné závislosti aplikace a následně je jednorázově nainstalovat jediným příkazem. Druhou funkcionalitou je nástroj pro spouštění softwaru v uzavřeném prostředí, které je nakonfigurováno podle definovaných závislostí. Díky tomu je možné v jednom operačním systému spouštět programy pro rozdílné verze jazyka Python a odlišné verze modulů tohoto jazyka.
 
-Veškeré závislosti jsou definovány v souboru $Pipfile$, nachází se zde požadovaná verze jazyka Python a seznam vyžadovaných modulů. Pro spuštění je nutné mít na počítači nainstalován interpretr jazyka Python a nástroj Pipenv. Pomocí příkazu programu Pipenv je možné nainstalovat veškeré závislosti a pomocí dalšího příkazu je možné již spustit samotnou aplikaci.
+Veškeré závislosti jsou definovány v souboru $Pipfile$, kde se nachází požadovaná verze jazyka Python a seznam vyžadovaných modulů. Pro spuštění je nutné mít na počítači nainstalován interpretr jazyka Python a nástroj Pipenv. Pomocí příkazu programu Pipenv lze nainstalovat veškeré závislosti.
 
 \begin{lstlisting}
 pipenv install
+\end{lstlisting}
+
+Pomocí dalšího příkazu lze již spustit samotnou aplikaci.
+
+\begin{lstlisting}
 pipenv run runserver
 \end{lstlisting}
 
 Příkaz \lstinline[columns=fixed]{pipenv run runserver} je alias definovaný v souboru $Pipfile$ a reprezentuje příkaz \lstinline[columns=fixed]{python manage.py runserver}. Příkaz zapne vývojový server frameworku Django.
 
-Díky použitým nástrojům je spuštění aplikace velmi snadné. Toto řešení má ale stále několik nevýhod. Instalace vyžaduje provedení několika specifických kroků. Po spuštění neobsahuje aplikace žádná data a tak je nutné provést několik dalších kroků pro nastavení alespoň uživatelských účtů pro přihlášení. Vývojový server spouštěný při lokální instalaci, se liší od serveru, který je používán v produkčním prostředí v KYPO. Z těchto důvodů jsem se rozhodl pro využití nástroje Vagrant\footnote{www.vagrantup.com}, který za pomocí virtualizace spustí a nakonfiguruje nový virtuální počítač, na kterém bude aplikace spuštěna, správně nastavena a vývojář pracující pouze s API nebude muset provádět žádné specifické nastavení.
+Díky použitým nástrojům je spuštění aplikace velice snadné, ale je zde několik dalších nedostatků. Instalace se skládá z několika kroků, při kterých může dojít k chybě. V nainstalované aplikaci neexistují žádná testovací data, včetně uživatelských účtů a vývojový server spouštěný při lokální instalaci se liší od serveru, který je používán v produkčním prostředí v KYPO. Z těchto důvodů jsem se rozhodl pro využití nástroje Vagrant\footnote{www.vagrantup.com}, který za pomocí virtualizace spustí a nakonfiguruje nový virtuální počítač se skórovací aplikací.
 
-\subsection{Spouštění aplikace ve virtuálním prostředí}
+\subsection{Spuštění aplikace ve virtuálním prostředí}
 
 Pro zprovoznění aplikace je nezbytné mít k dispozici počítač podporující virtualizaci a dále nainstalované programy VirtualBox\footnote{www.virtualbox.org} a Vagrant. Pomocí jediného příkazu poté dojde ke spuštění virtuálního počítače, na který bude předinstalován operační systém Linux a do tohoto systému budou následně nainstalovány veškeré programy a balíčky nutné pro fungování aplikace. Po připravení prostředí pro běh systému jsou spuštěny další příkazy, které provedou vytvoření uživatelských účtů, ale také vytvoření testovacích dat, aby bylo možné spuštěnou aplikaci ihned využívat. 
 
 Prostředí ve virtuálním počítači je nakonfigurováno tak, aby se co nejvíce blížilo produkčnímu prostředí v KYPO. Jako webový server se používá Apache2, který je nakonfigurován tak, aby komunikoval pomocí šifrovaného protokolu HTTPS. Aplikace s webovým serverem komunikuje pomocí WSGI (Web Server Gateway Interface). WSGI představuje jednotné rozhraní pro komunikaci webových serverů a aplikací naprogramovaných v jazyce Python.
 
-Jako relační databázový systém se využívá SQLite. Tento systém byl zvolen převážně kvůli svojí jednoduchosti. Nejedná se o klasický klient–server systém, nýbrž databáze je zpřístupněna pomocí knihovny, která poskytuje rozhraní pro práci s databází. Knihovna nutná pro práci s touto databází je již součástí instalace Pythonu. Databázová data jsou poté uložena v jednom souboru, který je možné přenášet mezi různými operačními systémy \cite{sqlite}.
+Jako relační databázový systém se využívá SQLite, který byl zvolen převážně kvůli svojí jednoduchosti.
 
 \section{Optimalizace SQL dotazů}
 
-Při volání koncového bodu $/charts/score$ v API, získává aplikace aktuální výsledky bodů z automatického skórování nad tabulkou $logs$. Operace pracuje s několika tisíci záznamy, během jednoho cvičení jich může být vygenerováno až 10000. Během testování aplikace se ukázalo, že ORM systém je pro operace nad tímto množstvím dat nevhodný a získávání skóre trvalo řádově několik sekund. Mnohem optimálnější formou pro získávání těchto dat je použití agregačních SQL dotazů. Pro získání celkového bodového zisku z automatického skóringu je použit dotaz, používající funkci $SUM$, která vrací součet vybraných hodnot a funkce $GROUP\ BY$. Ta provede seskupení vybraných dat podle identifikátorů jednotlivých týmů. Nezbytnou součástí dotazu je podmínka na platnost hodnocení a na výběr pouze automatického hodnocení.
+Aplikace získává při volání koncového bodu $/charts/score$ v API aktuální výsledky bodů z automatického skórování nad tabulkou $logs$. Během jednoho cvičení může být vygenerováno až 10000 záznamů hodnocení, a tak aplikace musí být schopna pracovat s velkými počty záznamů. Testováním aplikace se ukázalo, že ORM systém je pro operace nad tímto množstvím dat nevhodný a získávání skóre trvalo řádově několik sekund. V tomto případě se ukázalo jako efektivní využít agregačních SQL dotazů. 
+
+Konkrétně pro získání celkového bodového zisku z automatického skóringu byl použit následující SQL dotaz.
 
 \begin{markdown*}{%
   fencedCode,
@@ -573,7 +589,11 @@ GROUP BY team_id
 ```
 \end{markdown*}
 
-Při volání $/charts/timeline$ v API, dochází k vygenerování dat, která obsahují všechny změny bodového skóre v čase. I tato operace je prováděna nad tabulkou $logs$ a při větším počtu záznamů se opět použití ORM systému ukázalo jako nevhodné. S přihlédnutím ke skutečnosti, že automatický skórovací systém vkládá do aplikace záznamy o nedostupnosti služeb v dávkách (např. 4 záznamy ve stejný okamžik), jsem se rozhodl využít opět agregační dotaz, který takové záznamy spojí do jednoho a zrychlí tak získávání záznamů a sníží se datový objem dat. Použitý databázový dotaz seskupuje záznamy, které jsou zaslány ve stejnou sekundu. Opět je využito funkce $SUM$ pro záskání celkové sumy bodů u seskupených dat. Podmínka na validitu hodnocení zajišťuje získání pouze správných záznamů.
+Dotaz využívá funkce $SUM$ pro získání součtu bodů a klauzule $GROUP\ BY$, pro seskupení dat podle identifikátorů jednotlivých týmů. Výběr dat je omezen pouze na validní záznamy z automatického skórování.
+
+Všechny změny bodového skóre v čase se získávají pomocí volání API $/charts/timeline$. Vzhledem k tomu, že tyto hodnoty se opět berou z výše uvedené tabulky $logs$, naráží tato operace opět na limity ORM systému. S přihlédnutím ke skutečnosti, že automatický skórovací systém vkládá do aplikace záznamy o nedostupnosti služeb v dávkách (např. 4 záznamy ve stejný okamžik), jsem se rozhodl využít opět agregační dotaz, který takové záznamy spojí do jednoho a zrychlí tak získávání záznamů a sníží se datový objem dat.
+
+Výsledný SQL dotaz má nasledující podobu.
 
 \begin{markdown*}{%
   fencedCode,
@@ -586,15 +606,19 @@ ORDER BY time
 ```
 \end{markdown*}
 
+V dotazu dochází pomocí klauzule $GROUP\ BY$ k seskupení dat, která mají stejný čas vložení. Opět je využito funkce $SUM$ pro získání celkové sumy bodů.
+
 \section{Automatické testování}
 
-Nedílnou součástí celého projektu jsou automatické systémové testy, které testují softwarovou aplikaci jako celek, aby se zkontrolovalo, zda se systém chová dle požadavků \cite{difSysTest}. Díky svojí komplexitě mohou testy odhalit chybné chování na kterékoliv vrstvě aplikace. Příkladem systémového testu je vložení nového záznamu do systému pomocí API a následně provedení kontroly, zda odpověď serveru obsahuje očekávaná data a zda je tento záznam správně uložen v databázovém systému.
+Nedílnou součástí celého projektu jsou automatické systémové testy, které testují softwarovou aplikaci jako celek, zda se chová dle požadavků \cite{difSysTest}.
 
-Pro implementaci testů byly využity knihovny obsažené v Django REST framework. Pomocí dostupných funkcí je možné sestavit HTTP požadavek, který bude odeslán na spuštěný vývojový server, kde je aplikace dočasně spuštěna. Po odeslání požadavku, jsou zpřístupněna data, která byla ze serveru obdržena. V testech je zadefinováno, jaká data by aplikace měla vracet a pomocí jednoduchého porovnání lze rychle ověřit správnost těchto dat. V případě vytváření, úpravy, nebo mazání dat se zároveň provádí i kontrola dat v databázovém systému. 
+Díky svojí komplexitě mohou testy odhalit chybné chování na kterékoliv vrstvě aplikace. Příkladem systémového testu je vložení nového záznamu do systému pomocí API a následné provedení kontroly, zda odpověď serveru obsahuje očekávaná data včetně kontroly správného uložení dat v databázovém systému.
+
+Pro implementaci testů byly využity knihovny obsažené v Django REST framework. Pomocí dostupných funkcí je možné sestavit HTTP požadavek, který bude odeslán na spuštěný vývojový server. Po odeslání požadavku je možné provést kontrolu, zda data obdržená v odpovědi serveru odpovídají očekávaným datům. V případě vytváření, úpravy, nebo mazání dat se zároveň provádí i kontrola dat v databázovém systému. 
 
 Celkem bylo implementováno 57 testů. Pro každý existující koncový bod API a každou dostupnou HTTP metodu existuje minimálně jeden test. Pro metody POST a PUT existují typicky varianty testu s validními a nevalidními daty. Testy se nachází v souboru $tests.py$ v adresáři $cyberex\_api$ a jejich spuštění je možné provést v příkazové řádce, spuštěním příkazu $test$ frameworku Django.
 
-Tyto testy jsem využíval pro ověření funkčnosti celého systému po provedení úprav. V praxi je vhodné ověřovat testováním funkčnost softwaru před každou změnou na produkčním prostředí.
+Výše uvedené testy jsem využíval pro ověření funkčnosti celého systému po provedení úprav. V praxi je vhodné ověřovat testováním funkčnost softwaru před každou změnou na produkčním prostředí.
 
 \section{Reálné nasazení aplikace na Cyber Czech 2018}
 
