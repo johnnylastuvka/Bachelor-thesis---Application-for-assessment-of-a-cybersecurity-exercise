@@ -93,39 +93,49 @@
 \chapter*{Úvod}
 \addcontentsline{toc}{chapter}{Úvod}
 
-Kybernetické útoky, snažící se prolomit zabezpečení počítačových systémů, narůstají na intenzitě a komplexnosti. Z tohoto důvodu rostou i nároky kladené na správce těchto systémů. Ti musí být schopni systémy vhodně zabezpečit a dokázat reagovat na jakoukoliv formu kybernetického útoku. Jejich znalosti a zkušenosti jsou rozhodujícím faktorem při prevenci proti útokům, ale také při řešení situací spojených s probíhajícím útokem.
+Kybernetické útoky, snažící se prolomit zabezpečení počítačových systémů, narůstají na intenzitě a komplexnosti. Z tohoto důvodu rostou i nároky kladené na správce těchto systémů. Musí být být schopni systémy vhodně zabezpečit a dokázat reagovat na jakoukoliv formu kybernetického útoku. Jejich znalosti a zkušenosti jsou rozhodujícím faktorem při prevenci proti útokům, ale také při řešení situací spojených s probíhajícím útokem.
 
 Vhodnou metodou vzdělávání jsou kybernetická bezpečnostní cvičení, při kterých účastníci soutěží s ostatními týmy. Vyzkouší si nejen své znalosti a schopnosti rychle reagovat na hrozící útoky, ale také si například osvojí vedení komunikace s médii nebo orgány činnými v trestním řízení.
 
 Jedním z těchto cvičení je i Cyber Czech, které je prozatím jediné pravidelně pořádané cvičení svého druhu v České republice. \cite{cyberex} Akce probíhá v Kybernetickém polygonu Masarykovy univerzity, který vznikl v roce 2015. Tento prostor nabízí technické prostředky pro vytvoření plně funkčních počítačových sítí a zařízení, která se v nich nachází ve virtuálním prostředí.
 
-Předmětem této práce je na míru vytvořený software, který je na cvičeních Cyber Czech používán k hodnocení účastníků a umožňuje vyhodnocovat výsledky z tohoto cvičení. Původní program vykazoval nedostatky, které jsou v práci podrobně rozebrány, a na jejich základě s uvážením nových požadavků je navržena a implementována nová aplikace. Aplikace byla rozdělena na dva samostatné celky. Servisní vrstvu, jejíž návrh a vývoj je předmětem této práce, a prezentační vrstvu vytvořenou v rámci jiné práce. Oba tyto celky spolu komunikují díky aplikačnímu programovému rozhraní servisní vrstvy. 
+Předmětem této práce je na míru vytvořený software, který je na cvičeních Cyber Czech používán k hodnocení účastníků a umožňuje vyhodnocovat výsledky z tohoto cvičení. Původní program vykazoval nedostatky, které jsou v práci podrobně rozebrány, a na jejich základě s uvážením nových požadavků je navržena a implementována nová aplikace. 
+
+Aplikace byla rozdělena na dva samostatné celky. Servisní vrstvu, jejíž návrh a vývoj je předmětem této práce, a prezentační vrstvu vytvořenou v rámci jiné práce. Oba tyto celky spolu komunikují díky aplikačnímu programovému rozhraní servisní vrstvy. 
 
 \chapter{Kyberbezpečnostní cvičení Cyber Czech}
 
-Žijeme v digitalizované době, kdy se internet stal součástí života více než jedné poloviny populace \cite{worldStats}. Pomocí internetu můžeme přistupovat nejen k jednoduchým webovým stránkám, ale také k mnohem komplexnějším informačním systémům. Všechny tyto systémy, komunikující pomocí internetu, jsou však v ohrožení útočníků, kteří se je mohou pokusit kompromitovat nebo do nich proniknout. Kybernetické útoky jsou stále intenzivnější a mnohem komplexnější a je tedy potřeba stále více kyberbezpečnostních profesionálů. Pro tyto profesionály jsou nezbytné nejen znalosti nejrůznějších typů útoků a způsoby, jak se proti těmto útokům bránit. Neméně důležité jsou také zkušenosti s obranou proti reálným útokům, kdy tito odborníci musejí ve stresové situaci a v co nejkratším čase odvrátit probíhající útok nebo alespoň minimalizovat možné dopady. Z tohoto důvodu se stávají stále populárnější kyberbezpečnostní cvičení, kde účastníci mohou znalosti a zkušenosti získávat pomocí aktivního zapojení do cvičení.
+Žijeme v digitalizované době, kdy se internet stal součástí života více než jedné poloviny populace \cite{worldStats}. Pomocí internetu můžeme přistupovat nejen k jednoduchým webovým stránkám, ale také k mnohem komplexnějším informačním systémům. Všechny tyto systémy, komunikující pomocí internetu, jsou však v ohrožení útočníků, kteří se je mohou pokusit kompromitovat nebo do nich proniknout. Kybernetické útoky jsou stále intenzivnější a mnohem komplexnější, a je tedy potřeba stále více kyberbezpečnostních profesionálů. 
+
+Pro tyto profesionály jsou nezbytné znalosti nejrůznějších typů útoků a způsoby, jak se proti těmto útokům bránit. Neméně důležité jsou také zkušenosti s obranou proti reálným útokům, kdy tito odborníci musejí ve stresové situaci a v co nejkratším čase odvrátit probíhající útok nebo alespoň minimalizovat možné dopady. 
+
+Z tohoto důvodu se stávají stále populárnější kyberbezpečnostní cvičení, kde mohou účastníci nové znalosti a zkušenosti získávat a prohlubovat pomocí aktivního zapojení do cvičení.
 
 \section{Kybernetický polygon Masarykovy univerzity}
 
 Kybernetický polygon Masarykovy univerzity (zkráceně KYPO) vznikl jako projekt s unikátním prostředím uzpůsobeným pro výzkum, vývoj a analýzu hrozeb v oboru informační bezpečnosti a bezpečnosti kritických informačních infrastruktur. Provádí se v něm školení a cvičení počítačové bezpečnosti, výzkum ochrany proti kybernetickým útokům, forenzní analýzy a bezpečnostní experimenty nad počítačovými sítěmi.
 
-KYPO je navržen jako modulární distribuovaný systém. \cite{Vykopal2017KYPOCases} Virtuální prostředí KYPO je vytvořeno v cloudu, díky tomu je možné velice rychle a opakovaně vytvářet nové funkční počítačové sítě a zařízení v těchto sítích. Stejně tak je možné velice snadno provádět údržbu těchto sítí a zařízení. Díky uzavřenému virtuálnímu prostředí KYPO je možné, aby uživatelé mohli ve vytvořených sítích bezpečně provádět jakékoliv experimenty, aniž by mohly být ovlivněny počítačové systémy mimo toto prostředí.
+KYPO je navržen jako modulární distribuovaný systém. \cite{Vykopal2017KYPOCases} Virtuální prostředí KYPO je vytvořeno v cloudu, díky tomu je možné velice rychle a opakovaně vytvářet nové funkční počítačové sítě včetně zařízení v nich. Stejně tak je možné velice snadno provádět údržbu těchto sítí a zařízení. Uzavřené virtuální prostředí KYPO zajišťuje, aby uživatelé mohli ve vytvořených sítích bezpečně provádět jakékoliv experimenty, aniž by mohly být ovlivněny počítačové systémy mimo toto prostředí.
 
 
 \subsection{Využití kybernetického polygonu}
 Díky technologiím, které jsou v KYPO dostupné, nachází tento systém všestranné využití. 
 \begin{itemize}
 \item Výzkum a vývoj -- v KYPO probíhá výzkum, vývoj a testování nových metod a systémů pro detekci a zmírnění počítačových útoků v různých síťových infrastrukturách.
-\item Forenzní analýzy -- díky plně virtuálnímu prostředí a nástrojům, které umožňují monitorování napříč celým vytvořeným systémem, je možné provádět základní forenzní analýzy. Uživatelé mohou spustit virtuální obraz neznámého nebo napadeného stroje v předdefinovaném prostředí a díky nástrojům, které jsou ve virtuálním prostředí dostupné, mohou provádět analýzy takového stroje. 
-\item Výuka a kyberbezpečnostní cvičení -- dále KYPO slouží pro výuku v rámci studia na Masarykově univerzitě a také zde probíhá kyberbezpečnostní cvičení Cyber Czech.
+\item Forenzní analýzy -- díky plně virtuálnímu prostředí a nástrojům, které umožňují monitorování napříč celým vytvořeným systémem, je možné provádět základní forenzní analýzy. Uživatelé jsou schopni spustit virtuální obraz neznámého nebo napadeného stroje v předdefinovaném prostředí a ten mohou pomocí zmíněných nástrojů analyzovat. 
+\item Výuka a kyberbezpečnostní cvičení -- KYPO slouží pro výuku v rámci studia na Masarykově univerzitě a také zde probíhá kyberbezpečnostní cvičení Cyber Czech.
 \end{itemize}
 
 \section{Kyberbezpečnostní cvičení Cyber Czech}
-Cyber Czech je kyberbezpečnostní cvičení, pořádané Ústavem výpočetní techniky Masarykovy univerzity spolu s Národním centrem kybernetické bezpečnosti, který je součástí Národního bezpečnostního úřadu. Jedná se o cvičení, které je postaveno na principu, kdy proti sobě stojí dva týmy, tým modrý (bránící) a tým červený (útočící). Cílem červeného týmu je napadnout různé systémy ve virtuální infrastruktuře modrého týmu, který se naopak snaží proti těmto útokům ubránit. Během cvičení jsou ověřovány technické znalosti členů modrého týmu, ale zároveň jsou zkoušeny i jejich schopnosti jednání ve stresových situacích a v časové tísni. Kromě technických dovedností musejí členové modrých týmů například zvládat komunikovat s fiktivními novináři, policií nebo legitimními uživateli jejich systému.
+Cyber Czech je kyberbezpečnostní cvičení, pořádané Ústavem výpočetní techniky Masarykovy univerzity spolu s Národním centrem kybernetické bezpečnosti, který je součástí Národního bezpečnostního úřadu. Jedná se o cvičení, které je postaveno na principu, kdy proti sobě stojí dva týmy, tým modrý (bránící) a tým červený (útočící). Cílem červeného týmu je napadnout různé systémy ve virtuální infrastruktuře modrého týmu, který se naopak snaží proti těmto útokům ubránit.
 
-Jedná se o cvičení, zahrnující aktivní formu účasti, které je určeno odborníkům z řad správců počítačových systémů. Cvičení je postaveno především na principu obrany před útočníky, kteří vykonávají útoky podle předem připraveného scénáře. Útočníci jsou plně seznámeni se síťovou infrastrukturou modrého týmu a veškerá slabá místa, která útočící tým zneužívá, jsou pečlivě předem připravena. Celé cvičení je řízeno fiktivním scénářem, který je všem účastníkům předem představen. Mimo samotný příběh cvičení, jsou účastníci předem seznámeni se síťovou infrastrukturou, kterou musí zabezpečovat, a před samotným zahájením cvičení mají také účastníci prostor k tomu, aby provedli iniciální zabezpečení svěřené sítě.
+Během cvičení jsou ověřovány technické znalosti členů modrého týmu, ale zároveň jsou zkoušeny i jejich schopnosti jednání ve stresových situacích a v časové tísni. Kromě technických dovedností musejí členové modrých týmů například zvládat komunikovat s fiktivními novináři, policií nebo legitimními uživateli jejich systému.
 
-Cvičení se typicky účastní šest modrých týmů a každý z těchto týmů spravuje zcela identickou počítačovou síť. Červený tým poté na síť každého modrého týmu provádí stejné typy útoků. Celé cvičení pak probíhá formou soutěže mezi těmito šesti týmy, kdy týmy začínají s jistým bodovým základem a během cvičení mohou různými způsoby získávat, nebo naopak ztrácet body. Vítězným týmem je ten, který má na konci cvičení nejvíce bodů. Soutěžní mód cvičení může ovlivňovat hladinu stresu účastníků a vyvíjet tak napětí a stres, které jsou přítomny při zvládání reálných situací.
+Jedná se o cvičení, zahrnující aktivní formu účasti, které je určeno odborníkům z řad správců počítačových systémů. Cvičení je postaveno především na principu obrany před útočníky, kteří vykonávají útoky podle předem připraveného scénáře. Útočníci jsou plně seznámeni se síťovou infrastrukturou modrého týmu a veškerá slabá místa, která útočící tým zneužívá, jsou pečlivě předem připravena.
+
+Celé cvičení je řízeno fiktivním scénářem, který je všem účastníkům předem představen. Mimo samotný příběh cvičení jsou účastníci předem seznámeni se síťovou infrastrukturou, kterou musí zabezpečovat, a před samotným zahájením cvičení mají také účastníci prostor k tomu, aby provedli iniciální zabezpečení svěřené sítě.
+
+Cvičení se typicky účastní šest modrých týmů a každý z těchto týmů spravuje zcela identickou počítačovou síť. Červený tým na síť každého modrého týmu provádí stejné typy útoků. Celé cvičení probíhá formou soutěže mezi těmito šesti týmy, kdy týmy začínají s jistým bodovým základem a během cvičení mohou různými způsoby získávat, nebo naopak ztrácet body. Vítězným týmem je ten, který má na konci cvičení nejvíce bodů. Soutěžní mód cvičení může ovlivňovat hladinu stresu účastníků a vyvíjet tak napětí a stres, které jsou přítomny při zvládání reálných situací.
 
 Ke správě skóre modrých týmů během cvičení slouží skórovací aplikace, jejíž inovace je předmětem této bakalářské práce. 
 
@@ -135,21 +145,21 @@ Ke správě skóre modrých týmů během cvičení slouží skórovací aplikac
 \begin{itemize}
 \item Modrý tým -- tým lidí, kteří jsou v průběhu cvičení zkoušeni. Během cvičení se musí řídit pravidly cvičení a také zákony vztahujícími se na kybernetickou bezpečnost, tedy například ohlašovací povinností kybernetických bezpečnostních incidentů.
 \item Červený tým -- tým útočníků, složený z odborníků na kybernetickou bezpečnost. 
-\item Bílý tým -- tým lidí, kteří se starají o organizaci a průběh cvičení. Dohlížejí na dodržování pravidel cvičení, na vývoj situace mezi červeným týmem a modrými týmy a dále zajišťují podporu pro modré týmy, pokud mají nějaké dotazy. Simulují média, která podle probíhajícího scénáře cvičení vznáší na modré týmy dotazy. Dále simulují právní poradce, orgány činné v trestním řízení a jiné fiktivní instituce vystupující ve scénáři.
+\item Bílý tým -- tým lidí, kteří se starají o organizaci a průběh cvičení. Dohlížejí na dodržování pravidel cvičení, na vývoj situace mezi červeným týmem a modrými týmy a na požádání zodpovídají dotazy modrého týmu. Simulují média, která podle probíhajícího scénáře cvičení vznáší na modré týmy dotazy. Dále simulují právní poradce, orgány činné v trestním řízení a jiné fiktivní instituce vystupující ve scénáři.
 \item Blondýny -- tým lidí, kteří představují reálné uživatele systémů, o které se modré týmy starají. Provádějí legitimní operace a modrý tým musí zajistit, aby systémy, se kterými pracují, byly vždy dostupné.
 \item Zelený tým -- tým lidí, spravující celou infrastrukturu používanou na cvičení. Jsou zodpovědní za konfiguraci všech virtuálních počítačů a sítí, za monitoring sítí a za skórovací infrastrukturu. Na žádost modrého týmu mohou provést servisní zásah v jejich síti, typicky obnovení požadovaného stroje do stavu před zahájením cvičení.
 \end{itemize}
 
 \subsection{Skórovací aplikace}
-Pro hodnocení účastníků cvičení Cyber Czech slouží na míru vytvořený software, který je dostupný jako webová stránka a umožňuje zadávání hodnocení pro modré týmy a nabízí přehledné zobrazení aktuálního skóre všech modrých týmů. Do programu mají přístup všichni účastníci cvičení, kteří zadávají hodnocení modrým týmům. Z toho vyplývá, že modré týmy do aplikace přístup nemají. Modrým týmům je během cvičení promítáno celkové skóre, ve kterém se mohou dozvědět základní informace o svém bodovém zisku a mohou zjistit své pořadí vzhledem k ostatním týmům. Komplexnější zpětná vazba je účastníkům poskytována až po skončení cvičení \cite{Vykopal2017TimelyExercises}.
+Pro hodnocení účastníků cvičení Cyber Czech aktuálně slouží na míru vytvořený software, který je dostupný jako webová stránka a umožňuje zadávání hodnocení pro modré týmy a nabízí přehledné zobrazení aktuálního skóre všech modrých týmů. Do programu mají přístup všichni účastníci cvičení, kteří zadávají hodnocení za modré týmy, které do systému přístup nemají. Modré týmy mají pouze přehled prostřednictvím promítání o svém celkovém skóre a pořadí mezi týmy. Komplexnější zpětná vazba je účastníkům poskytována až po skončení cvičení \cite{Vykopal2017TimelyExercises}.
 
 \subsection{Hodnocené oblasti}
-Během cvičení získávají modré týmy hodnocení, na kterém závisí jejich umístění ve výsledném pořadí. Hodnocení je rozděleno do několika složek.
+Během cvičení získávají modré týmy hodnocení, na kterém závisí jejich umístění ve výsledném pořadí. Hodnocení je rozděleno do několika oblastní podle zdroje hodnocení.
 
 \begin{itemize}
-\item Hodnocení pomocí automatického skórování -- během cvičení je pomocí automatických systémů kontrolováno, zda v systému, který modrý tým spravuje, jsou dostupné všechny legitimní služby. Jedná se například o e-mailové servery, webové služby a jiné prvky spravovaných systémů. Modré týmy jsou poté bodově penalizovány za případnou nedostupnost těchto služeb.
+\item Hodnocení pomocí automatického skórování -- během cvičení je pomocí automatických systémů kontrolováno, zda v systému, který modrý tým spravuje, jsou dostupné všechny legitimní služby. Jedná se například o e-mailové servery, webové služby a jiné prvky spravovaných systémů. V případě nedostupnosti uvedených služeb jsou modré týmy adekvátně penalizovány.
 \item Hodnocení od červeného týmu -- během cvičení provádí červený tým útoky podle předem naplánovaného scénáře. Do skórovací aplikace poté červený tým zadává bodovou penalizaci za útoky, které se zdařily.
-\item Hodnocení od bílého týmu -- bílý tým představuje fiktivní média, orgány činné v trestním řízení, ale zastupuje také roli koordinátora cvičení. Hodnotí převážně intenzitu a formu komunikace. Bílý tým může zadávat záporné hodnocení za nedostatečnou komunikaci, nebo naopak kladné hodnocení za vhodnou komunikaci.
+\item Hodnocení od bílého týmu -- bílý tým představuje fiktivní média, orgány činné v trestním řízení a zastupuje také roli koordinátora cvičení. Hodnotí převážně intenzitu a formu komunikace. Bílý tým může zadávat záporné hodnocení za nedostatečnou komunikaci, nebo naopak kladné hodnocení za adekvátní komunikaci.
 \item Hodnocení od blondýn -- při cvičení je nezbytné, aby systémy byly neustále dostupné legitimním uživatelům. V případě, že systémy nejsou dostupné, případně neumožňují uživatelům plnohodnotné použití, zadávají blondýny modrému týmu bodovou penalizaci.
 \item Hodnocení od zeleného týmu -- v případě, že modrý tým narazí na problémy, které není schopen vyřešit, má možnost si vyžádat servisní zásah od organizátorů cvičení, za každou opravu v infrastruktuře modrého týmu zelený tým odečte body danému týmu.
 \end{itemize}
@@ -159,7 +169,7 @@ Jak lze vidět na obrázku \ref{fig:kypoNetwork}, síť vytvořená pro potřeby
 
 \begin{itemize}
     \item Globální síť -- představuje společnou síťovou infrastrukturu, ve které se nachází např. DNS nebo e-mailové servery. Jedná se o simulaci veřejného internetu, ve kterém se nachází jak útočníci, tak legitimní uživatelé systému. V síti se nachází skórovací aplikace, kterou se budu později blíže zabývat. Aby mohli účastníci cvičení například stahovat bezpečnostní aktualizace nebo vyhledávat potřebné informace na webových serverech, je tato síť připojena také k veřejnému internetu.
-    \item Sítě modrých týmů -- každý modrý tým má k dispozici identickou síť, která je pomocí brány připojena do globální sítě. Každá síť modrého týmu obsahuje kritickou infrastrukturu a zranitelné služby, které se snaží napadnout červený tým. Síť modrých týmů je dále rozdělena do několika celků na demilitarizovanou zónu (DMZ), pracovní stanice a servery. V síti je přítomna monitorovací služba, která sleduje síťový provoz, a do této služby je integrována logovací infrastruktura. Každý stroj v síti je poté nakonfigurován tak, aby zapisoval do centrálního logovacího serveru veškeré změny stavu této služby \cite{CeledaKYPO-AExercises}. Monitorovací infrastruktury využívá skórovací aplikace, která na základě zjištěných nedostupností určitých služeb v síti modrého týmu vytváří bodové penalizace pro tento tým.
+    \item Sítě modrých týmů -- každý modrý tým má k dispozici identickou síť, která je pomocí brány připojena do globální sítě. Každá síť modrého týmu obsahuje kritickou infrastrukturu a zranitelné služby, které se snaží napadnout červený tým. Síť modrých týmů je dále rozdělena do několika celků na demilitarizovanou zónu (DMZ), pracovní stanice a servery. V síti je přítomna monitorovací služba, která sleduje síťový provoz, a do této služby je integrována logovací infrastruktura. Každý stroj v síti je poté nakonfigurován tak, aby zapisoval do centrálního logovacího serveru veškeré změny stavu této služby \cite{CeledaKYPO-AExercises}. Monitorovací infrastruktury využívá skórovací aplikace, která na základě zjištěných nedostupností určitých služeb v síti modrého týmu uděluje bodové penalizace pro tento tým.
 \end{itemize}
 
 \begin{figure}[h]
@@ -176,7 +186,7 @@ Jak lze vidět na obrázku \ref{fig:kypoNetwork}, síť vytvořená pro potřeby
 Původní aplikace pro hodnocení účastníků kyberbezpečnostního cvičení Cyber Czech byla navržena v rámci diplomové práce Bezpečnostní cvičení v prostředí KYPO, kterou zpracoval Mgr. Milan Kostelník \cite{Kostelnik2016thesis}. V rámci zmíněné diplomové práce byl navržen model hodnocení účastníků cvičení, byly stanoveny funkční požadavky na skórovací aplikaci a dále byl navržen datový model a základní požadavky na grafické zpracování aplikace. Implementace navržené aplikace byla zajištěna Ústavem výpočetní techniky Masarykovy univerzity. Výsledná implementace aplikace se však v nejrůznějších detailech lišila od původního návrhu. V rozboru proto dále analyzuji reálně vytvořenou aplikaci.  
 
 \section{Použité technologie}
-Pro implementaci skórovací aplikace byl zvolen programovací jazyk Python s použitím frameworku Django, který je určen pro tvorbu webových systémů. Nyní blíže popíšu tyto technologie a důvody pro jejich použití.
+Pro implementaci skórovací aplikace byl zvolen programovací jazyk Python s použitím frameworku Django, který je určen pro tvorbu webových systémů. 
 
 \subsection{Python}
 Python je dynamicky interpretovaný programovací jazyk. Vývoj aplikací v Pythonu je rychlý a jeho použití je možné na většině běžných platforem (Unix, Microsoft Windows, macOS). Python lze využít jak pro psaní krátkých skriptů, tak pro vybudování komplexních systémů. Toho bylo v softwaru využito pro naprogramování skriptu pro obsluhu automatického skórování a zároveň vybudování komplexní skórovací aplikace. Pro Python existuje velké množství již hotových knihovních modulů, usnadňujících vývojáři rutinní úlohy. Jedním z těchto modulů je i framework Django, pomocí kterého je skórovací software vytvořen.
@@ -620,11 +630,25 @@ Celkem bylo implementováno 57 testů. Pro každý existující koncový bod API
 
 Výše uvedené testy jsem využíval pro ověření funkčnosti celého systému po provedení úprav. V praxi je vhodné ověřovat testováním funkčnost softwaru před každou změnou na produkčním prostředí.
 
-\section{Reálné nasazení aplikace na Cyber Czech 2018}
-
-
-
 \chapter{Závěr}
+
+%% Zatím spíše pracovní závěr
+%% - popisuje jak výsledek práce, tak nasazení na cyberex, 
+%% tak doporučení pro další vývoj
+%% 
+%% formulujte doporučení pro další rozvoj.
+%% --------------------
+%% - správa týmů přes portál 
+%% - správa uživatelů přes portál
+%% - mapa nedostupných služeb automatického skóringu
+%% - stránkování na backendu (aut. skóring i manual) ??? Asi zbytečné
+%% - 
+
+V rámci mojí bakalářské práce byl vytvořen nástroj pro hodnocení účastníků kyberbezpečnostního cvičení Cyber Czech. Nástroj zajišťuje pouze servisní vrstvu celé skórovací aplikace a pomocí REST API komunikuje s prezentační vrstvou, která je vytvořena jako webová stránka a vznikla v rámci jiné bakalářské práce. Jako celek vytvořený software plně nahradil stávající aplikaci a kromě zachování veškeré původní funkcionality, byl nástroj rozšířen o nové funkce.
+
+Vytvořená aplikace byla použita hned při dvou cvičeních Cyber Czech 2018 a reálné nasazení skórovací aplikace neobjevilo žádné vážné nedostatky. Během druhého cvičení se objevily problémy s odezvou API, které však byly způsobeny dlouhodobým přetížením serveru, kde byla aplikace spuštěna. Dále se ukázalo, že v aplikaci chybí nástroj, pro efektivní hromadné mazání automatických hodnocení. Při cvičení se objevila chyba v jednom ze systémů se kterým pracovali členové modrého týmu. Vlivem této chyby došlo k vložení několika stovek automatických hodnocení, které bylo potřeba smazat. Veškeré záznamy musely být manuálně vyhledány a smazány. 
+
+Díky reálnému využití je zcela jisté, že v budoucnu bude vývoj aplikace dále pokračovat. Již během druhého cvičení se zjistilo, že aplikace potřebuje lepší nástroje pro správu dat, pro případ nutnosti administrátorského zásahu. Další zajímavou funkcí, kterou by aplikace mohla disponovat, je výpis všech služeb, které jsou kontrolovány automatickým skóringem, a to včetně stavu těchto služeb. Výpisu by mohlo být využito pro znázornění, které služby jsou aktuálně dostupné nebo nedostupné a tento přehled by mohl být využit i pro porovnávání aktuálního stavu mezi všemi tými. Funkce, která by mohla přinést zjednodušení v práci s aplikací, je propojení správy uživatelů s již existujícím systémem v KYPO. Uživatelské účty jsou zvlášť vytvářeny ve skórovací aplikaci a zvlášť v portálu KYPO, který slouží pro přístup ke všem ostatním systémům používaným při cvičení. Pokud by do budoucna bylo možné tyto přihlašovací procesy spojit, přineslo by to zjednodušení celé správy uživatelů. Obdobný námět na vylepšení platí i pro správu týmů, které jsou opět zadávány do portálu KYPO a samostatně do skórovací aplikace. Ve skórovací aplikaci je pak u týmu uložen identifikátor z portálu KYPO. 
 
 \printbibliography[heading=bibintoc] %% Print the bibliography.
 
