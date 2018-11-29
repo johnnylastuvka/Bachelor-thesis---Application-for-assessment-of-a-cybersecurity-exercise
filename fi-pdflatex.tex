@@ -32,7 +32,7 @@
 \usepackage{epsfig}
 
 \usepackage[
-  czech
+  main=czech
 ]{babel}
 %%
 %%   \begin{otherlanguage}{german}  ... \end{otherlanguage}
@@ -90,13 +90,13 @@
 \chapter*{Úvod}
 \addcontentsline{toc}{chapter}{Úvod}
 
-Kybernetické útoky, snažící se prolomit zabezpečení počítačových systémů, narůstají na intenzitě a komplexnosti. Z tohoto důvodu rostou i nároky kladené na správce těchto systémů. Musí být být schopni systémy vhodně zabezpečit a dokázat reagovat na jakoukoliv formu kybernetického útoku. Jejich znalosti a zkušenosti jsou rozhodujícím faktorem při prevenci proti útokům, ale také při řešení situací spojených s probíhajícím útokem.
+Kybernetické útoky, snažící se prolomit zabezpečení počítačových systémů, narůstají na intenzitě a komplexnosti. Z tohoto důvodu rostou i nároky kladené na správce těchto systémů. Musí být schopni systémy vhodně zabezpečit a dokázat reagovat na jakoukoliv formu kybernetického útoku. Jejich znalosti a zkušenosti jsou rozhodujícím faktorem při prevenci proti útokům, ale také při řešení situací spojených s probíhajícím útokem.
 
 Vhodnou metodou vzdělávání jsou kybernetická bezpečnostní cvičení, při kterých účastníci soutěží s ostatními týmy. Vyzkouší si nejen své znalosti a schopnosti rychle reagovat na hrozící útoky, ale také si například osvojí vedení komunikace s médii nebo orgány činnými v trestním řízení.
 
-Jedním z těchto cvičení je i Cyber Czech, které je prozatím jediné pravidelně pořádané cvičení svého druhu v České republice. \cite{cyberex} Akce probíhá v Kybernetickém polygonu Masarykovy univerzity, který vznikl v roce 2015. Tento prostor nabízí technické prostředky pro vytvoření plně funkčních počítačových sítí a zařízení, která se v nich nachází ve virtuálním prostředí.
+Jedním z těchto cvičení je i Cyber Czech, které je prozatím jediné pravidelně pořádané cvičení svého druhu v České republice. \cite{cyberex} Akce probíhá v Kybernetickém polygonu Masarykovy univerzity, který vznikl v roce 2015. Tento prostor nabízí technické prostředky pro vytvoření plně funkčních počítačových sítí a zařízení ve virtuálním prostředí.
 
-Předmětem této práce je na míru vytvořený software, který je na cvičeních Cyber Czech používán k hodnocení účastníků a umožňuje vyhodnocovat výsledky z tohoto cvičení. Původní program vykazoval nedostatky, které jsou v práci podrobně rozebrány, a na jejich základě s uvážením nových požadavků je navržena a implementována nová aplikace. 
+Předmětem této práce je na míru vytvořený software, který je na cvičeních Cyber Czech používán k hodnocení účastníků a umožňuje vyhodnocovat výsledky z tohoto cvičení. Původní program vykazoval nedostatky, které jsou v práci podrobně rozebrány, a na jejich základě je s uvážením nových požadavků navržena a implementována nová aplikace. 
 
 Aplikace byla rozdělena na dva samostatné celky. Servisní vrstvu, jejíž návrh a vývoj je předmětem této práce, a prezentační vrstvu vytvořenou v rámci jiné práce. Oba tyto celky spolu komunikují díky aplikačnímu programovému rozhraní servisní vrstvy. 
 
@@ -112,7 +112,7 @@ Z tohoto důvodu se stávají stále populárnější kyberbezpečnostní cviče
 
 Kybernetický polygon Masarykovy univerzity (zkráceně KYPO) vznikl jako projekt s unikátním prostředím uzpůsobeným pro výzkum, vývoj a analýzu hrozeb v oboru informační bezpečnosti a bezpečnosti kritických informačních infrastruktur. Provádí se v něm školení a cvičení počítačové bezpečnosti, výzkum ochrany proti kybernetickým útokům, forenzní analýzy a bezpečnostní experimenty nad počítačovými sítěmi.
 
-KYPO je navržen jako modulární distribuovaný systém. \cite{Vykopal2017KYPOCases} Virtuální prostředí KYPO je vytvořeno v cloudu, díky tomu je možné velice rychle a opakovaně vytvářet nové funkční počítačové sítě včetně zařízení v nich. Stejně tak je možné velice snadno provádět údržbu těchto sítí a zařízení. Uzavřené virtuální prostředí KYPO zajišťuje, aby uživatelé mohli ve vytvořených sítích bezpečně provádět jakékoliv experimenty, aniž by mohly být ovlivněny počítačové systémy mimo toto prostředí.
+KYPO je navržen jako modulární distribuovaný systém. \cite{Vykopal2017KYPOCases} Virtuální prostředí KYPO je vytvořeno v cloudu, ve kterém je možné velice rychle a opakovaně vytvářet nové funkční počítačové sítě včetně zařízení v nich. Stejně tak je možné velice snadno provádět údržbu těchto sítí a zařízení. Uzavřené virtuální prostředí KYPO zajišťuje, aby uživatelé mohli ve vytvořených sítích bezpečně provádět jakékoliv experimenty, aniž by mohly být ovlivněny počítačové systémy mimo toto prostředí.
 
 
 \subsection{Využití kybernetického polygonu}
@@ -120,7 +120,7 @@ Díky technologiím, které jsou v KYPO dostupné, nachází tento systém všes
 \begin{itemize}
 \item Výzkum a vývoj -- v KYPO probíhá výzkum, vývoj a testování nových metod a systémů pro detekci a zmírnění počítačových útoků v různých síťových infrastrukturách.
 \item Forenzní analýzy -- díky plně virtuálnímu prostředí a nástrojům, které umožňují monitorování napříč celým vytvořeným systémem, je možné provádět základní forenzní analýzy. Uživatelé jsou schopni spustit virtuální obraz neznámého nebo napadeného stroje v předdefinovaném prostředí a ten mohou pomocí zmíněných nástrojů analyzovat. 
-\item Výuka a kyberbezpečnostní cvičení -- KYPO slouží pro výuku v rámci studia na Masarykově univerzitě a také zde probíhá kyberbezpečnostní cvičení Cyber Czech.
+\item Výuka a kyberbezpečnostní cvičení -- KYPO slouží pro výuku v rámci studia na Masarykově univerzitě a také zde probíhají již zmíněná kyberbezpečnostní cvičení Cyber Czech.
 \end{itemize}
 
 \section{Kyberbezpečnostní cvičení Cyber Czech}
@@ -140,11 +140,11 @@ Ke správě skóre modrých týmů během cvičení slouží skórovací aplikac
 Účastníci cvičení jsou rozděleni do čtyř skupin podle jejich úlohy při cvičení.
 
 \begin{itemize}
-\item Modrý tým -- tým lidí, kteří jsou v průběhu cvičení zkoušeni. Během cvičení se musí řídit pravidly cvičení a také zákony vztahujícími se na kybernetickou bezpečnost, tedy například ohlašovací povinností kybernetických bezpečnostních incidentů.
+\item Modrý tým -- tým hračů, kteří jsou v průběhu cvičení zkoušeni. Během cvičení se musí řídit pravidly cvičení a také zákony vztahujícími se na kybernetickou bezpečnost, tedy například ohlašovací povinností kybernetických bezpečnostních incidentů.
 \item Červený tým -- tým útočníků, složený z odborníků na kybernetickou bezpečnost. 
 \item Bílý tým -- tým lidí, kteří se starají o organizaci a průběh cvičení. Dohlížejí na dodržování pravidel cvičení, na vývoj situace mezi červeným týmem a modrými týmy a na požádání zodpovídají dotazy modrého týmu. Simulují média, která podle probíhajícího scénáře cvičení vznáší na modré týmy dotazy. Dále simulují právní poradce, orgány činné v trestním řízení a jiné fiktivní instituce vystupující ve scénáři.
-\item Blondýny -- tým lidí, kteří představují reálné uživatele systémů, o které se modré týmy starají. Provádějí legitimní operace a modrý tým musí zajistit, aby systémy, se kterými pracují, byly vždy dostupné.
-\item Zelený tým -- tým lidí, spravující celou infrastrukturu používanou na cvičení. Jsou zodpovědní za konfiguraci všech virtuálních počítačů a sítí, za monitoring sítí a za skórovací infrastrukturu. Na žádost modrého týmu mohou provést servisní zásah v jejich síti, typicky obnovení požadovaného stroje do stavu před zahájením cvičení.
+\item Blondýny -- tým osob, představující reálné uživatele systémů, o které se modré týmy starají. Provádějí legitimní operace a modrý tým musí zajistit, aby systémy, se kterými pracují, byly vždy dostupné.
+\item Zelený tým -- tým odborníků, spravující celou infrastrukturu používanou na cvičení. Jsou zodpovědní za konfiguraci všech virtuálních počítačů a sítí, za monitoring sítí a za skórovací infrastrukturu. Na žádost modrého týmu mohou provést servisní zásah v jejich síti, typicky obnovení požadovaného stroje do stavu před zahájením cvičení.
 \end{itemize}
 
 \subsection{Skórovací aplikace}
@@ -165,14 +165,14 @@ Během cvičení získávají modré týmy hodnocení, na kterém závisí jejic
 Jak lze vidět na obrázku \ref{fig:kypoNetwork}, síť vytvořená pro potřeby cvičení je rozdělena do dvou podsítí, kterým se budu věnovat v následujících bodech.
 
 \begin{itemize}
-    \item Globální síť -- představuje společnou síťovou infrastrukturu, ve které se nachází např. DNS nebo e-mailové servery. Jedná se o simulaci veřejného internetu, ve kterém se nachází jak útočníci, tak legitimní uživatelé systému. V síti se nachází skórovací aplikace, kterou se budu později blíže zabývat. Aby mohli účastníci cvičení například stahovat bezpečnostní aktualizace nebo vyhledávat potřebné informace na webových serverech, je tato síť připojena také k veřejnému internetu.
-    \item Sítě modrých týmů -- každý modrý tým má k dispozici identickou síť, která je pomocí brány připojena do globální sítě. Každá síť modrého týmu obsahuje kritickou infrastrukturu a zranitelné služby, které se snaží napadnout červený tým. Síť modrých týmů je dále rozdělena do několika celků na demilitarizovanou zónu (DMZ), pracovní stanice a servery. V síti je přítomna monitorovací služba, která sleduje síťový provoz, a do této služby je integrována logovací infrastruktura. Každý stroj v síti je poté nakonfigurován tak, aby zapisoval do centrálního logovacího serveru veškeré změny stavu této služby \cite{CeledaKYPO-AExercises}. Monitorovací infrastruktury využívá skórovací aplikace, která na základě zjištěných nedostupností určitých služeb v síti modrého týmu uděluje bodové penalizace pro tento tým.
+    \item Globální síť -- představuje společnou síťovou infrastrukturu, ve které se nachází např. DNS nebo e-mailové servery. Jedná se o simulaci veřejného internetu, ve které operují jak útočníci, tak legitimní uživatelé systému. Na serveru v této síti, je spuštěna skórovací aplikace, kterou se budu později blíže zabývat. Aby mohli účastníci cvičení například stahovat bezpečnostní aktualizace nebo vyhledávat potřebné informace na webových serverech, je tato síť připojena také k veřejnému internetu.
+    \item Sítě modrých týmů -- každý modrý tým má k dispozici identickou síť, která je pomocí brány připojena do globální sítě. Každá síť modrého týmu obsahuje kritickou infrastrukturu a zranitelné služby, které se snaží napadnout červený tým. Síť modrých týmů je dále rozdělena do tří celků -- na demilitarizovanou zónu (DMZ), pracovní stanice a na servery. V síti je přítomna monitorovací služba, která sleduje síťový provoz, a do této služby je integrována logovací infrastruktura. Každý stroj v síti je poté nakonfigurován tak, aby zapisoval do centrálního logovacího serveru veškeré změny stavu této služby \cite{CeledaKYPO-AExercises}. Monitorovací infrastruktury využívá skórovací aplikace, která na základě zjištěných nedostupností služeb vytváří bodové penalizace.
 \end{itemize}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=10cm]{images/kypo-network.eps}
-    \caption{Schéma znázorňující rozvržení sítě při kybernetickém cvičení Cyber Czech \cite{Vykopal2017LessonsRange}}
+    \caption{Schéma rozvržení sítě při kybernetickém cvičení Cyber Czech \cite{Vykopal2017LessonsRange}}
     \label{fig:kypoNetwork}
 \end{figure}
 
@@ -186,16 +186,16 @@ Původní aplikace pro hodnocení účastníků kyberbezpečnostního cvičení 
 Pro implementaci skórovací aplikace byl zvolen programovací jazyk Python s použitím frameworku Django, který je určen pro tvorbu webových systémů. 
 
 \subsection{Python}
-Python je dynamicky interpretovaný programovací jazyk. Vývoj aplikací v Pythonu je rychlý a jeho použití je možné na většině běžných platforem (Unix, Microsoft Windows, macOS). Python lze využít jak pro psaní krátkých skriptů, tak pro vybudování komplexních systémů. Toho bylo v softwaru využito pro naprogramování skriptu pro obsluhu automatického skórování a zároveň vybudování komplexní skórovací aplikace. Pro Python existuje velké množství již hotových knihovních modulů, usnadňujících vývojáři rutinní úlohy. Jedním z těchto modulů je i framework Django, pomocí kterého je skórovací software vytvořen.
+Python je dynamicky interpretovaný programovací jazyk. Využívá se pro rychlý vývoj aplikací, které jsou přenositelné na většinu běžných platforem (Unix, Microsoft Windows, macOS). Python lze využít jak pro psaní krátkých skriptů, tak pro vybudování komplexních systémů. Jazyk byl využit ve skriptu pro obsluhu automatického skórování a zároveň pro vybudování komplexní skórovací aplikace. Výhodou je dostupnost velkého množství knihoven, které mohou vývojáři usnadnit rutinní úlohy. Jedním z těchto modulů je i framework Django, pomocí kterého je skórovací software vytvořen.
 
 \subsection{Django}
 
-Django je open source webový framework, jehož hlavní úlohou je zjednodušit a urychlit vývoj komplexních webových aplikací napojených na databázový systém. Tento systém byl zvolen pro svoji jednoduchost a nabízené výhody, které nyní shrnu. Framework umožňuje snadné budování Model-view-controller (MVC) softwarové architektury a vytvářet tak přehledně strukturovaný kód. Obsahuje propracovaný systém pro objektově relační mapování (ORM), které zajišťuje konverzi dat mezi relační databází a objektově orientovanou aplikací. Při vývoji je tak programátorovi ulehčena práce s databázovou vrstvou. Další výhodou je možnost generování automatické administrace pro datový model vytvořený pomocí Django ORM. Framework obsahuje propracovaný systém pro autentizaci a autorizaci uživatelů. 
+Django je open source webový framework, jehož hlavní úlohou je zjednodušit a urychlit vývoj komplexních webových aplikací napojených na databázový systém. Tento systém byl zvolen pro svoji jednoduchost a nabízené výhody. Framework umožňuje snadné budování Model-view-controller (MVC) softwarové architektury, která vede vývojáře k udržování přehledného a strukturovaného kódu. Obsahuje propracovaný systém pro objektově relační mapování (ORM), který zajišťuje konverzi dat mezi relační databází a objektově orientovanou aplikací. Při vývoji je tak programátorovi ulehčena práce s databázovou vrstvou. Další výhodou je možnost generování automatické administrace pro datový model vytvořený pomocí Django ORM. Framework obsahuje propracovaný systém pro autentizaci a autorizaci uživatelů. 
 
 \section{Požadavky na skórovací aplikaci}
 
 \subsection{Systémové požadavky}
-Pro zajištění co nejjednodušší přístupnosti aplikace bylo požadováno, aby systém měl webové rozhraní, do kterého se mohou účastníci cvičení přihlašovat a zadávat manuální hodnocení.
+Aby přístup do aplikace byl co nejjednodušší, bylo požadováno, aby systém fungoval jako webový portál.
 
 \subsection{Funkční požadavky}
 Na aplikaci bylo stanoveno několik funkčních požadavků \cite{Kostelnik2016thesis}.
@@ -213,24 +213,24 @@ Funkční požadavky shrnuje diagram případů užití na obr. \ref{fig:useCase
 \begin{figure}[h!]
     \centering
     \includegraphics[width=10cm]{images/Use-case-1.eps}
-    \caption{Diagram případů užití shrnující veškerou funkcionalitu původní skórovací aplikace.}
+    \caption{Diagram případů užití původní skórovací aplikace.}
     \label{fig:useCase1}
 \end{figure}
 
 \section{Model hodnocení účastníků cvičení}
-Model pro hodnocení týmů účastnících se cvičení Cyber Czech byl navržen tak, aby týmy získávaly bodovou penalizaci za nedostupnost předem definovaných služeb (dostupnost byla kontrolována automaticky, proto se používá termín automatické hodnocení) a dále týmy získávaly, nebo ztrácely body pomocí manuálně zadaného hodnocení od červeného týmu, bílého týmu, fiktivních uživatelů spravovaného systému a nebo od organizátorů cvičení (zelený tým).
+Model pro hodnocení týmů, účastnících se cvičení Cyber Czech, byl navržen tak, aby týmy získávaly bodovou penalizaci za nedostupnost předem definovaných služeb (dostupnost byla kontrolována automaticky, proto se používá termín automatické hodnocení) a dále týmy získávaly, nebo ztrácely body pomocí manuálně zadaného hodnocení od červeného týmu, bílého týmu, fiktivních uživatelů spravovaného systému a nebo od organizátorů cvičení (zelený tým).
 
 \subsection{Automatické skórování}
-Během cvičení byli členové modrého týmu bodově penalizováni za nedostupnost legitimních služeb. Pro kontrolu dostupnosti těchto služeb se využíval monitorovací systém přítomný ve virtuálním prostředí KYPO. V případě nedostupnosti služby byl vložen záznam do fronty v RabbitMQ serveru a aplikace si poté tento záznam načetla a vyhodnotila, zda má dojít k bodové penalizaci a týmu byly případně odečteny body za nedostupnost služby.
+Během cvičení byli členové modrého týmu bodově penalizováni za nedostupnost legitimních služeb. Pro kontrolu dostupnosti těchto služeb se využíval monitorovací systém přítomný ve virtuálním prostředí KYPO. V případě nedostupnosti služby byl vložen záznam do fronty v RabbitMQ\footnote{www.rabbitmq.com} serveru a aplikace si poté tento záznam načetla a vyhodnotila, zda má dojít k bodové penalizaci a týmu byly případně odečteny body za nedostupnost služby.
 \subsection{Manuální skórování}
-Kromě bodové penalizace za nedostupnost definovaných služeb bylo v aplikaci možné zadávat i manuální bodové ohodnocení. Toto hodnocení zadávali členové červeného týmu, bílého týmu, členové skupiny legitimních uživatelů systému nebo členové zeleného týmu. Zadávat hodnocení bylo možné jen pro předem definované události, které měly stanovenou dolní a horní bodovou mez. V případě červeného týmu odpovídaly tyto události předem naplánovaným útokům. Naopak v případě bílého týmu nebo legitimních uživatelů se jednalo o události obecné povahy, např. komunikace s modrým týmem.
+Kromě bodové penalizace za nedostupnost definovaných služeb bylo v aplikaci možné zadávat i manuální bodové ohodnocení. Toto hodnocení zadávali členové červeného týmu, bílého týmu, členové skupiny legitimních uživatelů systému nebo členové zeleného týmu. Zadávat hodnocení bylo možné jen pro předem definované události, které měly stanovenou dolní a horní bodovou mez. V případě červeného týmu odpovídaly tyto události předem naplánovaným útokům. Naopak pro bílý tým nebo legitimní uživatele se jednalo o události obecné povahy, např. komunikace s modrým týmem.
 
 Manuální hodnocení bylo možné zadávat pomocí formuláře, kde uživatel vybral modrý tým, kterému hodnocení zadává. Dále vybral požadovanou událost, zadal bodové ohodnocení z definovaného intervalu a také mohl hodnocení doplnit slovním komentářem.
 
 \section{Datový model}
 \subsection{Popis datového modelu}
 
-Entitně relační diagram na obr. \ref{fig:erdDjango} ukazuje část ze systému pro správu uživatelů, která je součástí Django frameworku a je využívána skórovací aplikací. Nyní blíže popíšu entity, které se v diagramu nachází.
+Entitně relační diagram na obr. \ref{fig:erdDjango} ukazuje část systému pro správu uživatelů, která je součástí Django frameworku a je využívána skórovací aplikací. Nyní blíže popíšu entity, které se v diagramu nachází.
 
 Tabulka $auth\_user$ slouží pro ukládání uživatelských účtů. Sloupec $is\_superuser$ označuje super uživatele, který automaticky získává nejvyšší oprávnění pro správu systému. Atribut $is\_staff$ identifikuje uživatelský účet, který má přístup do administrace, kterou framework Django automaticky vytváří. Zbývající atribut $is\_active$ reprezentuje, zda je možné se k účtu přihlásit.
 
@@ -243,7 +243,7 @@ Tabulka $auth\_group$ slouží pro ukládání uživatelských skupin, které js
     \label{fig:erdDjango}
 \end{figure}
 
-Při implementaci předešlé skórovací aplikace byl pozměněn původně navržený datový model a vlivem těchto rozdílů se do databáze zanesly nejrůznější nedostatky. V následujících odstavcích nejdříve popíšu samotný datový model, který je zachycen na obrázku \ref{fig:erdOldApp}. Následně shrnu nedostatky tohoto modelu. 
+Při implementaci stávající skórovací aplikace byl pozměněn původně navržený datový model a vlivem těchto rozdílů se do databáze zanesly nejrůznější nedostatky. V následujících odstavcích nejdříve popíšu samotný datový model, který je zachycen na obrázku \ref{fig:erdOldApp}. Následně shrnu nedostatky tohoto modelu. 
 
 \begin{figure}[h!]
     \centering
@@ -252,13 +252,13 @@ Při implementaci předešlé skórovací aplikace byl pozměněn původně navr
     \label{fig:erdOldApp}
 \end{figure}
 
-Tabulka $Exercise$ obsahovala informaci o vytvořeném cvičení. Do sloupce $timestamp$ se ukládal čas začátku cvičení. Sloupce $duration$ nesl informaci o délce trvání cvičení v celých hodinách a do sloupce $name$ bylo možné z GUI nastavit hodnotu $start$ nebo $stop$, která označovala, zda jde o nastavení času začátku cvičení, nebo ukončení cvičení. S hodnotou $stop$ však aplikace žádným způsobem dále nepracovala, jelikož délka cvičení byla nastavena atributem $duration$. Data, která měla v tomto sloupci uloženou hodnotu $stop$, tedy neměla žádný význam.
+Tabulka $Exercise$ obsahovala informaci o vytvořeném cvičení. Do sloupce $timestamp$ se ukládal čas začátku cvičení. Sloupec $duration$ nesl informaci o délce trvání cvičení v celých hodinách a do sloupce $name$ bylo možné z GUI nastavit hodnotu $start$ nebo $stop$, která označovala, zda jde o nastavení času začátku cvičení, nebo ukončení cvičení. S hodnotou $stop$ však aplikace žádným způsobem dále nepracovala, jelikož délka cvičení byla nastavena atributem $duration$. Data, která měla v tomto sloupci uloženou hodnotu $stop$, tedy neměla žádný význam.
 
 Tabulka $Team$ obsahovala informace o týmech účastnících se cvičení. Atribut $gateway$ sloužil pro zadání identifikátoru, který identifikoval hodnoty z automatického skórování pro daný tým.
 
-Tabulka $Objective$ sloužila pro ukládání událostí, za které mělí být účastníci cvičení hodnoceni. Pouze na základě akcí, definovaných v této tabulce, bylo možné zadávat v aplikaci bodové ohodnocení soutěžícím týmům. Každá událost měla uložen svůj název, zkratku, kategorii, minimální a maximální bodové ohodnocení a uživatelskou roli určující, který tým smí hodnocení pro danou událost odeslat. Tento atribut od sebe rozlišoval červený tým, bílý tým, blondýny nebo do něj bylo možné uložit hodnotu, která určovala, že danou událost může hodnotit kdokoliv s přístupem do skórovací aplikace. Atribut $category$ obsahoval číselný identifikátor role, avšak tento sloupec nebyl v aplikaci využit. Při vytvoření záznamu v tabulce $sumofobjectivelog$ se tento sloupec překopíroval do sloupce $category$, ale dále se s touto hodnotou nikde v aplikaci nepracovalo.
+Tabulka $Objective$ sloužila pro ukládání událostí, za které měli být účastníci cvičení hodnoceni. Pouze na základě akcí, definovaných v této tabulce, bylo možné zadávat v aplikaci bodové ohodnocení soutěžícím týmům. Každá událost měla uložen svůj název, zkratku, kategorii, minimální a maximální bodové ohodnocení a uživatelskou roli určující, který tým smí hodnocení pro danou událost odeslat. Tento atribut od sebe rozlišoval červený tým, bílý tým, blondýny nebo do něj bylo možné uložit hodnotu, která určovala, že danou událost může hodnotit kdokoliv s přístupem do skórovací aplikace. Atribut $category$ obsahoval číselný identifikátor role, avšak tento sloupec nebyl v aplikaci využit. Při vytvoření záznamu v tabulce $sumofobjectivelog$ se tento sloupec překopíroval do sloupce $category$, ale dále se s touto hodnotou nikde v aplikaci nepracovalo.
 
-Tabulka $log$ obsahovala záznam o samotném zadání hodnocení. U této tabulky došlo k velkému odchýlení od původního návrhu, jelikož měla sloužit pro uložení záznamu jak o automatickém, tak i manuálním skórování. Výhodou původního záměru mělo být usnadnění sledování skóre v čase. Avšak ve výsledné implementaci se do této tabulky ukládala data pouze z manuálního hodnocení. Tabulka obsahovala vazbu na konkrétní tým, typ, který byl vždy nastaven na hodnotu $O$. Dále časovou značku, kategorii, která odpovídala uživatelské roli uložené pro danou událost z tabulky $objective$, referenci na samotnou událost, bodové ohodnocení a na závěr informaci o tom, zda je záznam platný. 
+Tabulka $log$ obsahovala záznam o samotném zadání hodnocení. U této tabulky došlo k velkému odchýlení od původního návrhu, protože měla sloužit pro uložení záznamu jak o automatickém, tak i manuálním skórování. Výhodou původního záměru mělo být usnadnění sledování skóre v čase. Avšak ve výsledné implementaci se do této tabulky ukládala data pouze z manuálního hodnocení. Tabulka obsahovala typ hodnocené události, který byl vždy nastaven na hodnotu $O$ a vazbu na konkrétní tým. Dále časovou značku, kategorii, která odpovídala uživatelské roli uložené pro danou událost z tabulky $objective$, referenci na samotnou událost, bodové ohodnocení a na závěr informaci o tom, zda je záznam platný. 
 
 K tabulce $log$ se dále váže tabulka $comment$, do které byl uložen případný slovní komentář k udělenému ohodnocení. Pomocí cizího klíče byla uložena v tabulce reference na daný log.
 
@@ -276,7 +276,7 @@ V původním datovém modelu jsem shledal několik nedostatků. V následující
 
 V tabulce $sumofservicelog$ neexistuje žádná vazba, ze které by šlo určit, která služba byla nedostupná a způsobila tak bodovou penalizaci. V původním návrhu datového modelu měla být tato informace uložena v tabulce $log$, avšak při implementaci se tato tabulka pro automatické hodnocení nevyužila. 
 
-Nelze snadno sledovat vývoj bodového ohodnocení v čase, jelikož pro přesné zjištění těchto dat je nutné procházet dvě tabulky ($log$ a $sumofservicelog$). Tento nedostatek opět souvisí s nevyužitím tabulky $log$ i pro automatické hodnocení.
+Nelze snadno sledovat vývoj bodového ohodnocení v čase, protože pro přesné zjištění těchto dat je nutné procházet dvě tabulky ($log$ a $sumofservicelog$). Tento nedostatek opět souvisí s nevyužitím tabulky $log$ i pro automatické hodnocení.
 
 Tabulky $sumofservicelog$ a $sumofobjectivelog$ jsou nadbytečné. Potřebné informace by mohly být dostupné v tabulce $log$. Navíc pomocí agregačních dotazů nad touto tabulkou by bylo možné získat celkové skóre v řádu desítek milisekund i nad obrovským množstvím záznamů. Nutnost neustálé aktualizace dat v této tabulce vnáší navíc do aplikace složitější logiku náchylnou na chybu. 
 
@@ -290,7 +290,7 @@ Nedostatkem v relačním návrhu je skutečnost, že pro ukládání dat, která
 
 Kromě nedostatků v datovém modelu vykazovala aplikace další anomálie, které se projevovaly neočekávanými pády aplikace, případně výpisem chybných dat v aplikaci.
 
-K neočekávanému pádu aplikace docházelo např. při odeslání manuálního hodnocení, kde bodové ohodnocení bylo mimo specifikovaný rozsah. Další chybu způsobovalo odeslání formuláře bez vybraného týmu. Oba případy způsobily pád aplikace, uživateli byla zobrazena chyba a pomocí tlačítka zpět se musel uživatel vrátit na původní stránku.
+K neočekávanému pádu aplikace docházelo např. při odeslání manuálního hodnocení, kde bodové ohodnocení bylo mimo specifikovaný rozsah. Další chybu způsobovalo odeslání formuláře bez vybraného týmu. Oba případy způsobily pád aplikace, uživateli byla zobrazena chyba a pomocí tlačítka zpět se musel vrátit na původní stránku.
 
 Chybně se chovala i časomíra, ukazující, kolik času zbývá do konce cvičení. Výpočty s časem nebyly prováděny správně, a tak například po ukončení cvičení docházelo k zobrazení časového údaje se záporným počtem hodin, které zbývají do ukončení cvičení.
 
@@ -306,9 +306,9 @@ Nová aplikace musí plně zachovat původní funkcionalitu a být rozšířena 
 
 Jak již bylo nastíněno v úvodu této kapitoly, jeden z hlavních požadavků na novou aplikaci je zajištění větší modularity celého systému. Z tohoto důvodu došlo ke dvěma zcela zásadním změnám.
 
-Bylo rozhodnuto o rozdělení aplikace na samostatnou servisní vrstvu, která pomocí aplikačního programového rozhraní (API) bude poskytovat data prezentační vrstvě. Servisní vrstva skórovací aplikace tedy bude představovat samostatnou aplikaci a k této bude souběžně vyvíjena prezentační vrstva, která bude zpracována opět jako webová stránka za pomocí javascriptového frameworku Angular. Zmíněná webová aplikace bude vyvíjena v rámci jiné bakalářské práce. Pomocí provedeného rozdělení bude zajištěna větší nezávislost samotných systémů a aplikace bude moci lépe využívat moderních principů vývoje webových stránek. Tím je například dynamická aktualizace pouze vybraných částí webové stránky pomocí javascriptu, bez nutnosti načítat opakovaně kompletní webovou stránku. V budoucnu by tento krok mohl dále přinést možnost  snadného napojení i dalších subsystémů na samotnou skórovací aplikaci. Například by mohlo být možné systém propojit s další aplikací, která se stará o přípravu dat pro tvorbu dokumentu se zpětnou vazbou, který dostávají členové modrého týmu po ukončení cvičení, tzv. feedback portlet.
+Bylo rozhodnuto o rozdělení aplikace na samostatnou servisní vrstvu, která pomocí aplikačního programového rozhraní (API) bude poskytovat data prezentační vrstvě. Servisní vrstva skórovací aplikace tedy bude představovat samostatnou aplikaci a k ní bude souběžně vyvíjena prezentační vrstva, která bude zpracována opět jako webová stránka za pomocí javascriptového frameworku Angular. Zmíněná webová aplikace bude vyvíjena v rámci jiné bakalářské práce. Pomocí provedeného rozdělení bude zajištěna větší nezávislost samotných systémů a aplikace bude moci lépe využívat moderních principů vývoje webových stránek. Tím je například dynamická aktualizace pouze vybraných částí webové stránky pomocí Javascriptu bez nutnosti načítat opakovaně celou webovou stránku. V budoucnu by tento krok mohl dále přinést možnost  snadného napojení i dalších subsystémů na samotnou skórovací aplikaci. Například by mohlo být možné systém propojit s další aplikací, která se stará o přípravu dat pro tvorbu dokumentu se zpětnou vazbou, který dostávají členové modrého týmu po ukončení cvičení, tzv. feedback portlet.
 
-Dalším krokem, který zjednoduší architekturu celé aplikace, je vyčlenění logiky automatického skóringu. Původní aplikace obsahovala skript, který se po spuštění připojil k RabbitMQ serveru a odtud načítal údaje o nedostupnosti služeb, které byly do fronty zapisovány pomocí monitorovacího systému KYPO. Skript následně pomocí předdefinovaných pravidel rozhodoval o bodové penalizaci za nedostupnost služeb a tuto penalizaci ukládal do databáze. Bylo rozhodnuto, že bude celý proces kontroly dostupnosti služeb a vyhodnocování případné bodové penalizace vyčleněn z nové aplikace a bude zajištěn samostatným systémem. Tento systém poté bude pomocí dostupného API zapisovat již pouze informaci o udělené bodové penalizaci do skórovací aplikace.
+Dalším krokem, který zjednoduší architekturu celé aplikace, je vyčlenění logiky automatického skóringu. Původní aplikace obsahovala skript, který se po spuštění připojil k RabbitMQ serveru a odtud načítal údaje o nedostupnosti služeb, které byly do fronty zapisovány pomocí monitorovacího systému KYPO. Skript následně pomocí předdefinovaných pravidel rozhodoval o bodové penalizaci za nedostupnost služeb a tuto penalizaci ukládal do databáze. Bylo rozhodnuto, že bude z nové aplikace vyčleněn celý proces kontroly dostupnosti služeb i vyhodnocování případné bodové penalizace a vše bude zajištěno samostatným systémem. Nezávislý systém bude schopen předávat informaci o udělené bodové penalizace pomocí dostupného API do skórovací aplikace.
 
 \subsection{Funkční požadavky}
 
@@ -316,9 +316,9 @@ Během několika ročníků cvičení Cyber Czech se objevila celá řada násle
 
 \begin{itemize}
 \item Zlepšení správy uživatelských účtů -- původní aplikace neobsahovala žádné nástroje pro správu uživatelů a tato správa musela být prováděna přímo v databázi samotného systému. Nové API by tedy mělo obsahovat funkce pro vytváření a úpravu uživatelů a jejich zařazování do dříve definovaných týmů.
-\item Nastavení, pro které týmy může uživatel zadávat hodnocení -- u každého uživatele bude možné nastavit, kterým modrým týmům může zadávat hodnocení. Během cvičení je typické, že určití členové červeného týmu provádí útoky pouze na vybraný modrý tým. Pomocí tohoto nastavení bude tedy možné vytvořit uživatelský účet, který bude moci hodnotit pouze předdefinovaný tým a bude tím sníženo riziko možné chyby při zadávání hodnocení.
-\item Vytvoření rozvrhu pro hodnocené události -- jednou ze zásadních novinek nové aplikace bude zobrazení rozvrhu naplánovaných událostí, kde uživatelé skórovací aplikace velice přehledně uvidí, které události by měly být v jakém čase prováděny. Jednotlivým událostem bude možné nastavovat, zda jsou již ve stavu provádění, případně zda událost byla úspěšně, nebo neúspěšně provedena. Bude tedy nezbytné umožnit k událostem ukládat čas, kdy mají být události provedeny. Údaj, který se bude ukládat, bude pouze počet hodin a minut od začátku cvičení, kdy má daná událost nastat. Díky tomu bude možné stanovit různý čas zahájení cvičení a v systému bude uloženo, že daná událost má být provedena například dvě hodiny po zahájení cvičení.
-\item Možnost odesílat upozornění na plánované události -- Prezentační vrstva by měla zajistit upozornění uživatele na události, které by měly být právě zahájeny. V servisní vrstvě musí být možné nastavit, zda pro danou událost má takové upozornění být vytvořeno.
+\item Řízení přístupu pro hodnocení týmů -- u každého uživatele bude možné nastavit, kterým modrým týmům může zadávat hodnocení. Během cvičení je typické, že určití členové červeného týmu provádí útoky pouze na vybraný modrý tým. Pomocí tohoto nastavení bude tedy možné vytvořit uživatelský účet, který bude moci hodnotit pouze předdefinovaný tým a bude tím sníženo riziko možné chyby při zadávání hodnocení.
+\item Vytvoření rozvrhu pro hodnocené události -- jednou ze zásadních novinek nové aplikace bude zobrazení rozvrhu naplánovaných událostí, kde uživatelé skórovací aplikace velice přehledně uvidí, které události by měly být v jakém čase prováděny. Jednotlivým událostem bude možné nastavovat, zda jsou již ve stavu provádění, případně zda událost byla úspěšně, nebo neúspěšně provedena. Bude tedy nezbytné k událostem umožnit ukládat čas, kdy mají být události provedeny. Údaj, který se bude ukládat, bude pouze počet hodin a minut od začátku cvičení, kdy má daná událost nastat. Díky tomu bude možné stanovit různý čas zahájení cvičení a v systému bude uloženo, že daná událost má být provedena například dvě hodiny po zahájení cvičení.
+\item Možnost odesílat upozornění na plánované události -- prezentační vrstva by měla zajistit upozornění uživatele na události, které by měly být právě zahájeny. V servisní vrstvě musí být možné nastavit, zda pro danou událost má takové upozornění být vytvořeno.
 \item Používání herního času -- herní čas představuje počet hodin a minut od zahájení cvičení. Pro lepší čitelnost informací v prezentační vrstvě je požadováno, aby servisní vrstva prováděla výpočet herního času na základě nastaveného zahájení cvičení a tento herní čas byl odesílán spolu s daty o hodnocení.
 \item Možnost nahrávání souborů k hodnocení – při vytváření hodnocení by mělo být možné nahrávat například snímek obrazovky nebo jiný obrazový, případně textový soubor.
 \item Možnost nastavení ikony a dalších rozlišovacích prvků týmu -- aby bylo možné v prezentační vrstvě týmy patřičně rozlišit, byl vznesen požadavek na možnost uložení malé ikony pro každý tým a dále na nastavení barvy, která bude pro daný tým použita při vykreslování grafů.
@@ -329,20 +329,20 @@ Veškerou novou funkcionalitu systému zachycuje diagram případu užití na ob
 \begin{figure}
     \centering
     \includegraphics[width=15cm]{images/Use-case-2.eps}
-    \caption{Diagram případu užití, který popisuje veškerou funkcionalitu obsaženou v API nové skórovací aplikace}
+    \caption{Diagram případu užití funkcionalit API nové skórovací aplikace}
     \label{fig:useCase2}
 \end{figure}
 
 \section{Požadavky na použité technologie}
 
-Původní skórovací aplikace byla implementována pomocí programovacího jazyka Python, pro který existuje velké množství knihovních modulů, mezi než patří i použitý framework Django. Tento systém velice usnadňuje tvorbu webových aplikací a existuje pro něj rozšíření v podobě Django REST framework. Rozšíření je určeno speciálně pro vytváření API a pomocí nástrojů, které obsahuje, je možné efektivně vyvíjet propracované systémy. Výhodou tohoto frameworku je především výborná provázanost s Django ORM systémem, kdy není nutné implementovat například funkce pro ukládání a úpravu dat, jelikož tyto funkce jsou obstarány automaticky. Dále tato nástavba umožňuje snadný převod dat do strojově čitelných formátů (JSON, XML) za použití tzv. serializerů. Nezbytnou součástí frameworku je rozhraní pro vytváření automatických systémových testů pro jednotlivé přístupové body v API.
+Původní skórovací aplikace byla implementována pomocí programovacího jazyka Python s využitím frameworku Django. Tento systém velice usnadňuje tvorbu webových aplikací a existuje pro něj rozšíření v podobě Django REST framework. Rozšíření je určeno speciálně pro vytváření API a pomocí nástrojů, které obsahuje, je možné efektivně vyvíjet propracované systémy. Výhodou tohoto frameworku je především výborná provázanost s Django ORM systémem, kdy není nutné implementovat například funkce pro ukládání a úpravu dat, protože tyto funkce jsou obstarány automaticky. Dále tato nástavba umožňuje snadný převod dat do strojově čitelných formátů (JSON, XML) za použití tzv. serializerů. Nezbytnou součástí frameworku je rozhraní pro vytváření automatických systémových testů pro jednotlivé přístupové body v API.
 
 U jazyka Python dojde k přechodu z verze 2.7 na verzi 3.5, jelikož verze 2.7 je již zastaralá a bylo oznámeno ukončení podpory této verze k roku 2020 \cite{python27}.
 
 
 \section{Revize datového modelu}
 
-Při revizi původního datového modelu jsem zjistil, že aplikace vykazuje mnohé nedostatky. Zaměřil jsem se především na odstranění duplicity dat a kvalitnější interpretaci ukládaných informací, aby bylo možné sestavovat efektivnější databázové dotazy. Dále jsem se zaměřil na zlepšení v oblasti řízení přístupu uživatelů k datům.
+Při revizi původního datového modelu jsem zjistil, že aplikace vykazuje mnohé nedostatky. Zaměřil jsem se především na odstranění duplicity dat a kvalitnější interpretaci ukládaných informací, aby bylo možné sestavovat efektivnější databázové dotazy. Dále jsem se zabýval zlepšením v oblasti řízení přístupu uživatelů k datům.
 
 Z pohledu duplicity dat bylo nevyhovující ukládání bodového hodnocení pro daný tým. Duplicita spočívala v tom, že se při každém vložení nového hodnocení informace vložila nejprve do tabulky $logs$ a poté se aktualizovala hodnota se součtem hodnocení pro konkrétní tým v tabulce $sumofobjectivelog$.
 
@@ -351,7 +351,7 @@ V databázovém modelu chyběla identifikace uživatelů zodpovědných za vlož
 V případě ukládání manuálního a automatického hodnocení se jedná o data se stejnou strukturou. Bohužel, v původním návrhu byla tato data ukládána odděleně do dvou tabulek $logs$ a $states$, což vedlo ke složitější logice při sestavování databázových dotazů.
 
 \subsection{Návrh řešení nedostatků datového modelu}
-Pro ukládání automatického nebo manuálního hodnocení je navržena jedna společná tabulka, která nese informaci o tom, který tým je hodnocen, kdy k hodnocení došlo a počet udělených bodů. Data, která jsou specifická pro konkrétní typ hodnocení, jsou poté uložena v samostatné tabulce. Mezi těmito tabulkami je vytvořena vazba. Díky tomu je možné snadněji procházet data pouze z jednoho typu hodnocení.
+Pro ukládání automatického nebo manuálního hodnocení je navržena jedna společná tabulka, která nese informaci o tom, který tým je hodnocen, kdy bylo hodnocení provedeno a počet udělených bodů. Data, která jsou specifická pro konkrétní typ hodnocení, jsou poté uložena v samostatné tabulce. Mezi těmito tabulkami je vytvořena vazba. Díky tomu je možné snadněji procházet data pouze z jednoho typu hodnocení.
 
 Významnou změnou v datovém modelu bylo vypuštění databázových tabulek, které obsahovaly průběžný součet bodů pro daný tým. Tyto tabulky bylo nutné aktualizovat při každé změně bodového hodnocení. Data o aktuálním bodovém zisku daného týmu bude možné ukládat bez duplicit a zjistit je i bez původních tabulek pomocí agregačních dotazů nad tabulkou, ve které jsou uloženy veškeré záznamy z hodnocení. Tato změna přinese zjednodušení ve výsledné implementaci aplikace.
 
@@ -384,7 +384,7 @@ Zbývající tabulky $auth\_user$, $auth\_group$ a $auth\_user\_groups$ jsou sou
 \begin{figure}
     \centering
     \includegraphics[width=12.5cm]{images/ERD-new-app.eps}
-    \caption{Entitně relační diagram mapující kompletní strukturu nového datového modelu}
+    \caption{Entitně relační diagram nového datového modelu}
     \label{fig:erdNewApp}
 \end{figure}
 
@@ -393,7 +393,7 @@ Zbývající tabulky $auth\_user$, $auth\_group$ a $auth\_user\_groups$ jsou sou
 \section{Návrh API}
 
 Po dokončení revize datového modelu byl vytvořen návrh API pro novou aplikaci. Tento návrh se řídil principy REST (Representational state transfer), což je softwarová architektura, definující sadu pravidel, jakým způsobem bude přistupováno k určitému webovému zdroji a jakým způsobem budou probíhat operace s tímto zdrojem \cite{RoyThomasFielding2000ArchitecturalArchitectures}.
-REST architektura byla navržena pro distribuované systémy, ve kterých jsou komponenty systému rozděleny do samostatných celků a tyto mezi sebou komunikují pomocí zasílání zpráv přes počítačovou síť. V našem případě je toto prostředí představováno oddělenou servisní a prezentační vrstvou a pro komunikaci je využit HTTP protokol.  Dle principů REST by webový zdroj měl podporovat operaci čtení, vytváření, upravování a mazání, tedy tzv. CRUD\footnote{Zkratka shrnující čtyři základní operace s daty. Vytvoření (create), čtení (read), úprava (update) a mazání (delete).}. V případě HTTP protokolu se využívá metody GET pro získání dat, POST pro vytváření dat, PUT pro úpravu již existujících dat a DELETE pro mazání dat. Dále tato architektura popisuje, jakým způsobem by měla být data reprezentována ve strojově čitelném formátu. \cite{RoyThomasFielding2000ArchitecturalArchitectures}
+REST architektura byla navržena pro distribuované systémy, ve kterých jsou komponenty systému rozděleny do samostatných celků komunikujících pomocí zasílání zpráv přes počítačovou síť. V našem případě je toto prostředí představováno oddělenou servisní a prezentační vrstvou a pro komunikaci je využit HTTP protokol.  Dle principů REST by webový zdroj měl podporovat operaci čtení, vytváření, upravování a mazání, tedy tzv. CRUD\footnote{Zkratka shrnující čtyři základní operace s daty. Vytvoření (create), čtení (read), úprava (update) a mazání (delete).}. V případě HTTP protokolu se využívá metody GET pro získání dat, POST pro vytváření dat, PUT pro úpravu již existujících dat a DELETE pro mazání dat. Dále tato architektura popisuje, jakým způsobem by měla být data reprezentována ve strojově čitelném formátu. \cite{RoyThomasFielding2000ArchitecturalArchitectures}
 
 Při návrhu API jsem využil online nástroje Swagger\footnote{www.swagger.io}, který generuje velice přehlednou dokumentaci pro API a umožňuje její sdílení i dalším vývojářům.
 
@@ -548,7 +548,7 @@ V systému jsou databázová data reprezentována pomocí entit ORM systému, pr
 
 \subsection{Řadič}
 \label{radic}
-Všechny příchozí požadavky na URL adresu $/api/v1$ jsou pomocí routovacích pravidel předány patřičným funkcím v souboru $views.py$. Tyto metody představují řídící logiku celé aplikace. V případě požadavků na získání informací funkce provede načtení dat z modelu. Následuje předání dat do serializační metody a vzniklý výstup je odeslán v odpovědi serveru. Funkce zajišťuje při požadavcích na vytváření, úpravu nebo mazání záznamů předání přijatých dat do serializační metody. V případě validační chyby dat se funkce postará o vygenerování chybového hlášení. Pokud je nový záznam úspěšně vytvořen nebo upraven, odešle funkce v odpovědi serveru tento záznam.
+Všechny příchozí požadavky na URL adresu $/api/v1$ jsou pomocí routovacích pravidel předány patřičným funkcím v souboru $views.py$. Tyto metody představují řídící logiku celé aplikace. V případě příchozích požadavků na získání informací funkce provede načtení dat z modelu. Následuje předání dat do serializační metody a vzniklý výstup je odeslán v odpovědi serveru. Funkce zajišťuje při požadavcích na vytváření, úpravu nebo mazání záznamů předání přijatých dat do serializační metody. V případě validační chyby dat se funkce postará o vygenerování chybového hlášení. Pokud je nový záznam úspěšně vytvořen nebo upraven, odešle funkce v odpovědi serveru tento záznam.
 
 \section{Instalace a spouštění aplikace}
 Aplikace pro svůj běh vyžaduje interpretr jazyka Python ve verzi 3.5 a instalaci několika dalších modulů. Abych zajistil co nejjednodušší instalaci těchto závislostí, rozhodl jsem se využít nástroje Pipenv\footnote{www.pipenv.readthedocs.io}. V následujících kapitolách popíšu použití tohoto nástroje a způsob, jakým byla aplikace distribuována mezi další vývojáře.
@@ -556,7 +556,7 @@ Aplikace pro svůj běh vyžaduje interpretr jazyka Python ve verzi 3.5 a instal
 \subsection{Řešení závislostí pomocí nástroje Pipenv}
 Nástroj Pipenv v sobě spojuje dvě důležité funkcionality. První je správce balíčků, pomocí kterého je možné snadno definovat všechny potřebné závislosti aplikace a následně je jednorázově nainstalovat jediným příkazem. Druhou funkcionalitou je nástroj pro spouštění softwaru v uzavřeném prostředí, které je nakonfigurováno podle definovaných závislostí. Díky tomu je možné v jednom operačním systému spouštět programy pro rozdílné verze jazyka Python a odlišné verze modulů tohoto jazyka.
 
-Veškeré závislosti jsou definovány v souboru $Pipfile$, kde se nachází požadovaná verze jazyka Python a seznam vyžadovaných modulů. Pro spuštění je nutné mít na počítači nainstalován interpretr jazyka Python a nástroj Pipenv. Pomocí příkazu programu Pipenv lze nainstalovat veškeré závislosti.
+Veškeré závislosti jsou definovány v souboru $Pipfile$, kde se nachází požadovaná verze jazyka Python a seznam vyžadovaných modulů. Pro spuštění je nutné mít na počítači nainstalován interpreter jazyka Python a nástroj Pipenv. Pomocí příkazu programu Pipenv lze nainstalovat veškeré závislosti.
 
 \begin{lstlisting}
 pipenv install
@@ -570,11 +570,11 @@ pipenv run runserver
 
 Příkaz \lstinline[columns=fixed]{pipenv run runserver} je alias definovaný v souboru $Pipfile$ a reprezentuje příkaz \lstinline[columns=fixed]{python manage.py runserver}. Příkaz zapne vývojový server frameworku Django.
 
-Díky použitým nástrojům je spuštění aplikace velice snadné, ale je zde několik dalších nedostatků. Instalace se skládá z několika kroků, při kterých může dojít k chybě. V nainstalované aplikaci neexistují žádná testovací data, včetně uživatelských účtů a vývojový server spouštěný při lokální instalaci se liší od serveru, který je používán v produkčním prostředí v KYPO. Z těchto důvodů jsem se rozhodl pro využití nástroje Vagrant\footnote{www.vagrantup.com}, který za pomocí virtualizace spustí a nakonfiguruje nový virtuální počítač se skórovací aplikací.
+Díky použitým nástrojům je spuštění aplikace velice snadné, ale je zde několik dalších nedostatků. Instalace se skládá z několika kroků, při kterých může dojít k chybě. V nainstalované aplikaci neexistují žádná testovací data, včetně uživatelských účtů a vývojový server, spouštěný při lokální instalaci, se liší od serveru, který je používán v produkčním prostředí v KYPO. Z těchto důvodů jsem se rozhodl pro využití nástroje Vagrant\footnote{www.vagrantup.com}, který za pomocí virtualizace spustí a nakonfiguruje nový virtuální počítač se skórovací aplikací.
 
 \subsection{Spuštění aplikace ve virtuálním prostředí}
 
-Pro zprovoznění aplikace je nezbytné mít k dispozici počítač podporující virtualizaci a dále nainstalované programy VirtualBox\footnote{www.virtualbox.org} a Vagrant. Pomocí jediného příkazu poté dojde ke spuštění virtuálního počítače, na který bude předinstalován operační systém Linux a do tohoto systému budou následně nainstalovány veškeré programy a balíčky nutné pro fungování aplikace. Po připravení prostředí pro běh systému jsou spuštěny další příkazy, které provedou vytvoření uživatelských účtů, ale také vytvoření testovacích dat, aby bylo možné spuštěnou aplikaci ihned využívat. 
+Pro zprovoznění aplikace je nezbytné mít k dispozici počítač podporující virtualizaci a dále nainstalované programy VirtualBox\footnote{www.virtualbox.org} a Vagrant. Pomocí jediného příkazu poté dojde ke spuštění virtuálního počítače, na který bude předinstalován operační systém Linux a do tohoto systému budou následně nainstalovány veškeré programy a balíčky nutné pro fungování aplikace. Po připravení prostředí pro běh systému jsou spuštěny další příkazy, které provedou vytvoření uživatelských účtů a testovacích dat, aby bylo možné spuštěnou aplikaci ihned využívat. 
 
 Prostředí ve virtuálním počítači je nakonfigurováno tak, aby se co nejvíce blížilo produkčnímu prostředí v KYPO. Jako webový server se používá Apache2, který je nakonfigurován tak, aby komunikoval pomocí šifrovaného protokolu HTTPS. Aplikace s webovým serverem komunikuje pomocí WSGI (Web Server Gateway Interface). WSGI představuje jednotné rozhraní pro komunikaci webových serverů a aplikací naprogramovaných v jazyce Python.
 
@@ -584,7 +584,7 @@ Jako relační databázový systém se využívá SQLite, který byl zvolen pře
 
 Aplikace získává při volání koncového bodu $/charts/score$ v API aktuální výsledky bodů z automatického skórování nad tabulkou $logs$. Během jednoho cvičení může být vygenerováno až 10000 záznamů hodnocení, a tak aplikace musí být schopna pracovat s velkými počty záznamů. Testováním aplikace se ukázalo, že ORM systém je pro operace nad tímto množstvím dat nevhodný a získávání skóre trvalo řádově několik sekund. V tomto případě se ukázalo jako efektivní využít agregačních SQL dotazů. 
 
-Konkrétně pro získání celkového bodového zisku z automatického skóringu byl použit následující SQL dotaz.
+Konkrétně byl pro získání celkového bodového zisku z automatického skóringu použit následující SQL dotaz.
 
 \begin{markdown*}{%
   fencedCode,
@@ -596,7 +596,7 @@ GROUP BY team_id
 ```
 \end{markdown*}
 
-Dotaz využívá funkce $SUM$ pro získání součtu bodů a klauzule $GROUP\ BY$, pro seskupení dat podle identifikátorů jednotlivých týmů. Výběr dat je omezen pouze na validní záznamy z automatického skórování.
+Dotaz využívá funkce $SUM$ pro získání součtu bodů a klauzule $GROUP\ BY$ pro seskupení dat podle identifikátorů jednotlivých týmů. Výběr dat je omezen pouze na validní záznamy z automatického skórování.
 
 Všechny změny bodového skóre v čase se získávají pomocí volání API $/charts/timeline$. Vzhledem k tomu, že tyto hodnoty se opět berou z výše uvedené tabulky $logs$, naráží tato operace opět na limity ORM systému. S přihlédnutím ke skutečnosti, že automatický skórovací systém vkládá do aplikace záznamy o nedostupnosti služeb v dávkách (např. 4 záznamy ve stejný okamžik), jsem se rozhodl využít opět agregační dotaz, který takové záznamy spojí do jednoho a zrychlí tak získávání záznamů a sníží se datový objem dat.
 
@@ -617,52 +617,33 @@ V dotazu dochází pomocí klauzule $GROUP\ BY$ k seskupení dat, která mají s
 
 \section{Automatické testování}
 
-Nedílnou součástí celého projektu jsou automatické systémové testy, které testují softwarovou aplikaci jako celek, zda se chová dle požadavků \cite{difSysTest}.
+Nedílnou součástí celého projektu jsou automatické systémové testy, které testují aplikaci jako celek, zda se chová dle požadavků \cite{difSysTest}.
 
 Díky svojí komplexitě mohou testy odhalit chybné chování na kterékoliv vrstvě aplikace. Příkladem systémového testu je vložení nového záznamu do systému pomocí API a následné provedení kontroly, zda odpověď serveru obsahuje očekávaná data včetně kontroly správného uložení dat v databázovém systému.
 
-Pro implementaci testů byly využity knihovny obsažené v Django REST framework. Pomocí dostupných funkcí je možné sestavit HTTP požadavek, který bude odeslán na spuštěný vývojový server. Po odeslání požadavku je možné provést kontrolu, zda data obdržená v odpovědi serveru odpovídají očekávaným datům. V případě vytváření, úpravy, nebo mazání dat se zároveň provádí i kontrola dat v databázovém systému. 
+Pro implementaci testů byly využity knihovny obsažené v Django REST framework. Pomocí dostupných funkcí je možné sestavit HTTP požadavek, který bude odeslán na spuštěný vývojový server. Po odeslání požadavku je možné provést kontrolu, zda data obdržená v odpovědi serveru odpovídají očekávaným datům. V případě vytváření, úpravy nebo mazání dat se zároveň provádí i kontrola dat v databázovém systému. 
 
-Celkem bylo implementováno 57 testů. Pro každý existující koncový bod API a každou dostupnou HTTP metodu existuje minimálně jeden test. Pro metody POST a PUT existují typicky varianty testu s validními a nevalidními daty. Testy se nachází v souboru $tests.py$ v adresáři $cyberex\_api$ a jejich spuštění je možné provést v příkazové řádce, spuštěním příkazu $test$ frameworku Django.
+Celkem bylo implementováno 57 testů. Pro každý existující koncový bod API a každou dostupnou HTTP metodu existuje minimálně jeden test. Pro metody POST a PUT existují typicky varianty testu s validními a nevalidními daty. Testy se nachází v souboru $tests.py$ v adresáři $cyberex\_api$ a jejich spuštění je možné provést v příkazové řádce spuštěním příkazu $test$ frameworku Django.
 
 Výše uvedené testy jsem využíval pro ověření funkčnosti celého systému po provedení úprav. V praxi je vhodné ověřovat testováním funkčnost softwaru před každou změnou na produkčním prostředí.
 
 \section{Reálné nasazení aplikace na Cyber Czech 2018}
 
-%% Komplexněji popsat nasazení na Cyberexu + chyby a jejich opravi a iterace nad applikací
-%% pozor na překryv se závěrem, případně závěr přepsat
+Vytvořená aplikace byla použita při dvou cvičeních Cyber Czech 2018 a při reálném nasazení skórovací aplikace se neobjevily žádné vážné nedostatky.
 
-Vytvořená aplikace byla použita při dvou cvičeních Cyber Czech 2018 a reálné nasazení skórovací aplikace neobjevilo žádné vážné nedostatky.
+Jelikož v prezentační vrstvě nebyla dosud implementována správa uživatelů, aktivoval jsem v aplikaci automatickou administraci frameworku Django. Kromě správy uživatelů jsem v administraci povolil přístup i ke správě týmů a veškerého hodnocení. Účelem tohoto nástroje je umožnit servisní zásah do celé aplikace, při běžném používání však není tento nástroj potřebný. Administrace je mimo jiné využívána i pro vymazání veškerého obsahu z databáze před zahájením nového cvičení.
 
-Jelikož v prezentační vrstvě nebyla dosud implementována správa uživatelů, aktivoval jsem v aplikaci spuštěnígenerickou administraci frameworku Django. Kromě správy uživatelů jsem v administraci povolil přístup i ke správě týmů, a veškerého hodnocení. Účelem tohoto nástroje je umožnit servisní zásah do celé aplikace, při běžném používání však není tento nástroj potřebný. Nástroj je mimo jiné využíván i pro vymazání veškerého obsahu z databáze, před zahájením nového cvičení.
+Při prvním cvičení, které probíhalo v říjnu 2018, se objevil jediný problém. Spočíval v tom, že vlivem neznámé chyby se v administraci aplikace nezobrazilo několik záznamů z manuálního hodnocení, vložených při předchozím testování. Při mazání všech záznamů zůstalo toto hodnocení uloženo v tabulce $manualLogs$. Získávání seznamu manuálního hodnocení v API tyto záznamy neodesílalo, jelikož k nim neexistoval žádný záznam v tabulce $logs$. Během cvičení však v tabulce $logs$ vznikly nové záznamy z automatického hodnocení a tyto měly identifikátory shodné s těmi, které byly uloženy u nezobrazeného hodnocení. Existencí záznamů v tabulce $logs$ se začaly neviditelné manuální hodnocení zobrazovat, a bylo tak nutné je manuálně smazat. Abych v budoucnu podobné situace předešel, doplnil jsem software o modul SQL Explorer\footnote{www.github.com/groveco/django-sql-explorer}, pomocí kterého je umožněno administrátorovi spouštět databázové dotazy, a je tak možné odhalit případnou chybu v databázi.
 
-Při prvním cvičení které probíhalo v říjnu 2018 se objevil jediný problém, který spočíval v tom, že vlivem neznámé chyby se v administraci aplikace nezobrazilo několik záznamů z manuálního hodnocení, které byly do aplikace vloženy při předchozím testování. Při mazání všech záznamů zůstalo toto hodnocení uloženo v tabulce $manualLogs$. Získávání seznamu manuálního hodnocení v API tyto záznamy neodesílalo, jelikož k nim neexistoval žádný záznam v tabulce $logs$. Během cvičení však v tabulce $logs$ vznikly nové  záznamy z automatického hodnocení a tyto měly identifikátory shodné s těmi, které byly uloženy u nezobrazeného hodnocení. Existencí záznamů v tabulce $logs$ se začali neviditelné manuální hodnocení zobrazovat a bylo tak nutné je manuálně smazat. Abych v budoucnu podobné situace předešel, doplnil jsem software o modul SQL Explorer\footnote{www.github.com/groveco/django-sql-explorer} pomocí kterého je umožněno administrátorovi spouštět databázové dotazy a je tak možné odhalit případnou chybu v databázi.
-
-Během druhého cvičení se objevily problémy s odezvou API, které však byly způsobeny dlouhodobým přetížením serveru, kde byla aplikace spuštěna. Dále se ukázalo, že aplikace stále nedisponuje dostatkem nástrojů, pro případ nutného servisního zásahu. Při cvičení se objevila chyba v jednom ze systémů se kterým pracovali členové modrého týmu. Vlivem této chyby došlo k vložení několika stovek automatických hodnocení, které bylo potřeba smazat. Nástroj SQL Explorer který jsem přidal po prvním cvičení však umožňoval přístup k datům pouze v režimu pro čtení a veškeré neplatné záznamy tak bylo nutné manuálně smazat. Po tomto cvičení jsem nástroj upravil tak, aby umožňoval použití i modifikačních SQL dotazů a do budoucna je tedy pro administrátora zajištěn plnohodnotný nástroj pro jakýkoliv zásah do databáze.
-
-
-
+Během druhého cvičení se objevily problémy s odezvou API, které však byly způsobeny dlouhodobým přetížením serveru, kde byla aplikace spuštěna. Dále se ukázalo, že aplikace stále nedisponuje dostatkem nástrojů pro případ nutného servisního zásahu. Při cvičení se objevila chyba v jednom ze systémů, se kterým pracovali členové modrého týmu. Vlivem této chyby došlo k vložení několika stovek automatických hodnocení, které bylo potřeba smazat. Nástroj SQL Explorer, který jsem přidal po prvním cvičení, umožňoval přístup k datům pouze v režimu pro čtení a veškeré neplatné záznamy bylo nutné smazat manuálně. Po tomto cvičení jsem nástroj upravil, aby umožňoval použití i modifikačních SQL dotazů a do budoucna je pro administrátora zajištěn plnohodnotný nástroj pro jakýkoliv zásah do databáze.
 
 \chapter{Závěr}
 
-%% Zatím spíše pracovní závěr
-%% - popisuje jak výsledek práce, tak nasazení na cyberex, 
-%% tak doporučení pro další vývoj
-%% 
-%% formulujte doporučení pro další rozvoj.
-%% --------------------
-%% - správa týmů přes portál 
-%% - správa uživatelů přes portál
-%% - mapa nedostupných služeb automatického skóringu
-%% - stránkování na backendu (aut. skóring i manual) ??? Asi zbytečné
-%% - lepší nástroje pro správu - avšak nasadil jsem tam sql explorer tak promyslet...
+V rámci mojí bakalářské práce byl vytvořen nástroj pro hodnocení účastníků kyberbezpečnostního cvičení Cyber Czech. Nástroj zajišťuje pouze servisní vrstvu celé skórovací aplikace a pomocí REST API komunikuje s prezentační vrstvou, která je vytvořena jako webová stránka a vznikla v rámci jiné bakalářské práce. Jako celek tento vytvořený software plně nahradil stávající aplikaci a kromě zachování veškeré původní funkcionality byl také nástroj rozšířen o nové funkce.
 
-V rámci mojí bakalářské práce byl vytvořen nástroj pro hodnocení účastníků kyberbezpečnostního cvičení Cyber Czech. Nástroj zajišťuje pouze servisní vrstvu celé skórovací aplikace a pomocí REST API komunikuje s prezentační vrstvou, která je vytvořena jako webová stránka a vznikla v rámci jiné bakalářské práce. Jako celek vytvořený software plně nahradil stávající aplikaci a kromě zachování veškeré původní funkcionality, byl nástroj rozšířen o nové funkce.
+Během vývoje jsem se setkal s technologiemi, které pro mě byly zcela nové a práce pro mě byla o to zajímavější. S postupným získáváním znalostí jsem některé části aplikace předělával, až jsem docílil stavu, se kterým jsem byl plně spokojen. Odměnou pro mě bylo, že aplikace během obou cvičení nevykazovala žádné chyby v mnou implementovaných částech.
 
-%% toto ještě promyslet:
-%%Během vývoje jsem se setkal s technologiemi, které pro mě byly zcela nové a práce tak pro mě měla velký přínos. 
-
-Díky reálnému využití je zcela jisté, že v budoucnu bude vývoj aplikace dále pokračovat. Již během druhého cvičení se objevily nápady, jak aplikaci rozšířit. Užitečnou funkcí, která by ulehčila přípravu aplikace na nové cvičení, by byla možnost hromadného vymazání tabulek $logs$, $manualLogs$ a $automaticLogs$ pokud právě neprobíhá žádné cvičení. Pro tuto funkci by mohl existovat speciální koncový bod v API, který by mohl spustit pouze administrátor. Další zajímavou funkcí, kterou by aplikace mohla disponovat, je výpis všech služeb, které jsou kontrolovány automatickým skóringem, a to včetně stavu těchto služeb. Výpisu by mohlo být využito pro znázornění, které služby jsou aktuálně dostupné nebo nedostupné a tento přehled by mohl být využit i pro porovnávání aktuálního stavu mezi všemi tými. Funkce, která by mohla přinést zjednodušení v práci s aplikací, je propojení správy uživatelů s již existujícím systémem v KYPO. Uživatelské účty jsou zvlášť vytvářeny ve skórovací aplikaci a zvlášť v portálu KYPO, který slouží pro přístup ke všem ostatním systémům používaným při cvičení. Pokud by do budoucna bylo možné tyto přihlašovací procesy spojit, přineslo by to zjednodušení celé správy uživatelů. Obdobný námět na vylepšení platí i pro správu týmů, které jsou opět zadávány do portálu KYPO a samostatně do skórovací aplikace. Ve skórovací aplikaci je pak u týmu uložen identifikátor z portálu KYPO. 
+Díky reálnému využití je zcela jisté, že v budoucnu bude vývoj aplikace dále pokračovat. Již během druhého cvičení se objevily nápady, jak aplikaci rozšířit. Užitečnou funkcí, která by ulehčila přípravu aplikace na nové cvičení, by byla možnost hromadného vymazání tabulek $logs$, $manualLogs$ a $automaticLogs$, pokud právě neprobíhá žádné cvičení. Pro tuto funkci by mohl existovat speciální koncový bod v API, který by mohl spustit pouze administrátor. Další zajímavou funkcí, kterou by aplikace mohla disponovat, je výpis všech služeb, které jsou kontrolovány automatickým skóringem, a to včetně stavu těchto služeb. Výpisu by mohlo být využito pro znázornění, které služby jsou aktuálně dostupné nebo nedostupné a tento přehled by mohl být využit i pro porovnávání aktuálního stavu mezi všemi týmy. Funkce, která by mohla přinést zjednodušení v práci s aplikací, je propojení správy uživatelů s již existujícím systémem v KYPO. Uživatelské účty jsou zvlášť vytvářeny ve skórovací aplikaci a zvlášť v portálu KYPO, který slouží pro přístup ke všem ostatním systémům používaným při cvičení. Pokud by do budoucna bylo možné tyto přihlašovací procesy spojit, přineslo by to zjednodušení celé správy uživatelů. Obdobný námět na vylepšení platí i pro správu týmů, které jsou opět zadávány do portálu KYPO a samostatně do skórovací aplikace. Ve skórovací aplikaci je pak u týmu uložen identifikátor z portálu KYPO. 
 
 \printbibliography[heading=bibintoc] %% Print the bibliography.
 
