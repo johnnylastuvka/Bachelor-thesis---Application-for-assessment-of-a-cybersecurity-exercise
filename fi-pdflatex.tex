@@ -19,9 +19,9 @@
            %% at your faculty.
   table,   %% This option causes the coloring of tables. Replace
            %% with `notable` to restore plain LaTeX tables.
-  lof,     %% This option prints the List of Figures. Replace with
+  nolof,     %% This option prints the List of Figures. Replace with
            %% `nolof` to hide the List of Figures.
-  lot,     %% This option prints the List of Tables. Replace with
+  nolot,     %% This option prints the List of Tables. Replace with
            %% `nolot` to hide the List of Tables.
   %% More options are listed in the user guide at
   %% <http://mirrors.ctan.org/macros/latex/contrib/fithesis/guide/mu/fi.pdf>.
@@ -32,11 +32,8 @@
 \usepackage{epsfig}
 
 \usepackage[
-  main=czech, %% By using `czech` or `slovak` as the main locale
-                %% instead of `english`, you can typeset the thesis
-                %% in either Czech or Slovak, respectively.
-  english, german, russian, slovak %% The additional keys allow
-]{babel}        %% foreign texts to be typeset as follows:
+  czech
+]{babel}
 %%
 %%   \begin{otherlanguage}{german}  ... \end{otherlanguage}
 %%   \begin{otherlanguage}{russian} ... \end{otherlanguage}
@@ -630,6 +627,22 @@ Celkem bylo implementováno 57 testů. Pro každý existující koncový bod API
 
 Výše uvedené testy jsem využíval pro ověření funkčnosti celého systému po provedení úprav. V praxi je vhodné ověřovat testováním funkčnost softwaru před každou změnou na produkčním prostředí.
 
+\section{Reálné nasazení aplikace na Cyber Czech 2018}
+
+%% Komplexněji popsat nasazení na Cyberexu + chyby a jejich opravi a iterace nad applikací
+%% pozor na překryv se závěrem, případně závěr přepsat
+
+Vytvořená aplikace byla použita při dvou cvičeních Cyber Czech 2018 a reálné nasazení skórovací aplikace neobjevilo žádné vážné nedostatky.
+
+Jelikož v prezentační vrstvě nebyla dosud implementována správa uživatelů, aktivoval jsem v aplikaci spuštěnígenerickou administraci frameworku Django. Kromě správy uživatelů jsem v administraci povolil přístup i ke správě týmů, a veškerého hodnocení. Účelem tohoto nástroje je umožnit servisní zásah do celé aplikace, při běžném používání však není tento nástroj potřebný. Nástroj je mimo jiné využíván i pro vymazání veškerého obsahu z databáze, před zahájením nového cvičení.
+
+Při prvním cvičení které probíhalo v říjnu 2018 se objevil jediný problém, který spočíval v tom, že vlivem neznámé chyby se v administraci aplikace nezobrazilo několik záznamů z manuálního hodnocení, které byly do aplikace vloženy při předchozím testování. Při mazání všech záznamů zůstalo toto hodnocení uloženo v tabulce $manualLogs$. Získávání seznamu manuálního hodnocení v API tyto záznamy neodesílalo, jelikož k nim neexistoval žádný záznam v tabulce $logs$. Během cvičení však v tabulce $logs$ vznikly nové  záznamy z automatického hodnocení a tyto měly identifikátory shodné s těmi, které byly uloženy u nezobrazeného hodnocení. Existencí záznamů v tabulce $logs$ se začali neviditelné manuální hodnocení zobrazovat a bylo tak nutné je manuálně smazat. Abych v budoucnu podobné situace předešel, doplnil jsem software o modul SQL Explorer\footnote{www.github.com/groveco/django-sql-explorer} pomocí kterého je umožněno administrátorovi spouštět databázové dotazy a je tak možné odhalit případnou chybu v databázi.
+
+Během druhého cvičení se objevily problémy s odezvou API, které však byly způsobeny dlouhodobým přetížením serveru, kde byla aplikace spuštěna. Dále se ukázalo, že aplikace stále nedisponuje dostatkem nástrojů, pro případ nutného servisního zásahu. Při cvičení se objevila chyba v jednom ze systémů se kterým pracovali členové modrého týmu. Vlivem této chyby došlo k vložení několika stovek automatických hodnocení, které bylo potřeba smazat. Nástroj SQL Explorer který jsem přidal po prvním cvičení však umožňoval přístup k datům pouze v režimu pro čtení a veškeré neplatné záznamy tak bylo nutné manuálně smazat. Po tomto cvičení jsem nástroj upravil tak, aby umožňoval použití i modifikačních SQL dotazů a do budoucna je tedy pro administrátora zajištěn plnohodnotný nástroj pro jakýkoliv zásah do databáze.
+
+
+
+
 \chapter{Závěr}
 
 %% Zatím spíše pracovní závěr
@@ -642,13 +655,14 @@ Výše uvedené testy jsem využíval pro ověření funkčnosti celého systém
 %% - správa uživatelů přes portál
 %% - mapa nedostupných služeb automatického skóringu
 %% - stránkování na backendu (aut. skóring i manual) ??? Asi zbytečné
-%% - 
+%% - lepší nástroje pro správu - avšak nasadil jsem tam sql explorer tak promyslet...
 
 V rámci mojí bakalářské práce byl vytvořen nástroj pro hodnocení účastníků kyberbezpečnostního cvičení Cyber Czech. Nástroj zajišťuje pouze servisní vrstvu celé skórovací aplikace a pomocí REST API komunikuje s prezentační vrstvou, která je vytvořena jako webová stránka a vznikla v rámci jiné bakalářské práce. Jako celek vytvořený software plně nahradil stávající aplikaci a kromě zachování veškeré původní funkcionality, byl nástroj rozšířen o nové funkce.
 
-Vytvořená aplikace byla použita hned při dvou cvičeních Cyber Czech 2018 a reálné nasazení skórovací aplikace neobjevilo žádné vážné nedostatky. Během druhého cvičení se objevily problémy s odezvou API, které však byly způsobeny dlouhodobým přetížením serveru, kde byla aplikace spuštěna. Dále se ukázalo, že v aplikaci chybí nástroj, pro efektivní hromadné mazání automatických hodnocení. Při cvičení se objevila chyba v jednom ze systémů se kterým pracovali členové modrého týmu. Vlivem této chyby došlo k vložení několika stovek automatických hodnocení, které bylo potřeba smazat. Veškeré záznamy musely být manuálně vyhledány a smazány. 
+%% toto ještě promyslet:
+%%Během vývoje jsem se setkal s technologiemi, které pro mě byly zcela nové a práce tak pro mě měla velký přínos. 
 
-Díky reálnému využití je zcela jisté, že v budoucnu bude vývoj aplikace dále pokračovat. Již během druhého cvičení se zjistilo, že aplikace potřebuje lepší nástroje pro správu dat, pro případ nutnosti administrátorského zásahu. Další zajímavou funkcí, kterou by aplikace mohla disponovat, je výpis všech služeb, které jsou kontrolovány automatickým skóringem, a to včetně stavu těchto služeb. Výpisu by mohlo být využito pro znázornění, které služby jsou aktuálně dostupné nebo nedostupné a tento přehled by mohl být využit i pro porovnávání aktuálního stavu mezi všemi tými. Funkce, která by mohla přinést zjednodušení v práci s aplikací, je propojení správy uživatelů s již existujícím systémem v KYPO. Uživatelské účty jsou zvlášť vytvářeny ve skórovací aplikaci a zvlášť v portálu KYPO, který slouží pro přístup ke všem ostatním systémům používaným při cvičení. Pokud by do budoucna bylo možné tyto přihlašovací procesy spojit, přineslo by to zjednodušení celé správy uživatelů. Obdobný námět na vylepšení platí i pro správu týmů, které jsou opět zadávány do portálu KYPO a samostatně do skórovací aplikace. Ve skórovací aplikaci je pak u týmu uložen identifikátor z portálu KYPO. 
+Díky reálnému využití je zcela jisté, že v budoucnu bude vývoj aplikace dále pokračovat. Již během druhého cvičení se objevily nápady, jak aplikaci rozšířit. Užitečnou funkcí, která by ulehčila přípravu aplikace na nové cvičení, by byla možnost hromadného vymazání tabulek $logs$, $manualLogs$ a $automaticLogs$ pokud právě neprobíhá žádné cvičení. Pro tuto funkci by mohl existovat speciální koncový bod v API, který by mohl spustit pouze administrátor. Další zajímavou funkcí, kterou by aplikace mohla disponovat, je výpis všech služeb, které jsou kontrolovány automatickým skóringem, a to včetně stavu těchto služeb. Výpisu by mohlo být využito pro znázornění, které služby jsou aktuálně dostupné nebo nedostupné a tento přehled by mohl být využit i pro porovnávání aktuálního stavu mezi všemi tými. Funkce, která by mohla přinést zjednodušení v práci s aplikací, je propojení správy uživatelů s již existujícím systémem v KYPO. Uživatelské účty jsou zvlášť vytvářeny ve skórovací aplikaci a zvlášť v portálu KYPO, který slouží pro přístup ke všem ostatním systémům používaným při cvičení. Pokud by do budoucna bylo možné tyto přihlašovací procesy spojit, přineslo by to zjednodušení celé správy uživatelů. Obdobný námět na vylepšení platí i pro správu týmů, které jsou opět zadávány do portálu KYPO a samostatně do skórovací aplikace. Ve skórovací aplikaci je pak u týmu uložen identifikátor z portálu KYPO. 
 
 \printbibliography[heading=bibintoc] %% Print the bibliography.
 
