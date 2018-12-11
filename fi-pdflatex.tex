@@ -44,7 +44,7 @@
     title         = {Aplikace pro hodnocení kyberbezpečnostního cvičení},
     keywords      = {Kybernetický polygon, obranná bezpečnostní cvičení, CSIRT-MU, KYPO, Python, Django, REST API},
     TeXkeywords   = {Kybernetický polygon, obranná bezpečnostní cvičení, CSIRT-MU, KYPO, Python, Django, REST API},
-    abstract      = {V rámci této bakalářské práce byla navržena a~implementována nová aplikace pro hodnocení účastníků kyberbezpečnostního cvičení, která nahradila stávající aplikaci používanou v~prostředí KYPO. V~teoretické části práce je nejdříve představeno cvičení Cyber Czech, kde se tento software používá a~následně je proveden rozbor dříve vytvořené aplikace. Na základě zjištěných nedostatků a~nově definovaných požadavků je navržen datový model a aplikační programové rozhraní. V~rámci praktické části je navržená aplikace implementována za pomocí Django REST Framework a~je zhodnoceno použití aplikace při cvičení Cyber Czech 2018. V~závěru práce jsou stanoveny další doporučení pro rozvoj aplikace.},
+    abstract      = {V~rámci této bakalářské práce byla navržena a~implementována nová aplikace pro hodnocení účastníků kyberbezpečnostního cvičení, která nahradila stávající aplikaci používanou v~prostředí KYPO. V~teoretické části práce je nejdříve představeno cvičení Cyber Czech, kde se tento software používá a~následně je proveden rozbor dříve vytvořené aplikace. Na základě zjištěných nedostatků a~nově definovaných požadavků je navržen datový model a aplikační programové rozhraní. V~rámci praktické části je navržená aplikace implementována za pomocí Django REST Framework a~je zhodnoceno použití aplikace při cvičení Cyber Czech 2018. V~závěru práce jsou stanoveny další doporučení pro rozvoj aplikace.},
     thanks        = {Rád bych poděkovat svému vedoucímu práce RNDr. Janu Vykopalovi, Ph.D. a~dále RNDr. Vítu Rusňákovi, Ph.D. za jejich odborné rady a~pomoc při řešení této práce.},
     bib           = {references-mendeley.bib, bibliography.bib}, 
 }
@@ -83,14 +83,14 @@ Předmětem této práce je inovace aplikace, která slouží k~hodnocení úča
 
 Nový systém bude rozdělen na dva samostatné celky. Servisní vrstvu, jejíž návrh a~vývoj je předmětem této práce, a~prezentační vrstvu vytvořenou v~rámci jiné práce. Oba tyto celky spolu budou komunikovat díky aplikačnímu programovému rozhraní servisní vrstvy. Výsledná aplikace poskytne uživatelům spolehlivý nástroj, který je nepostradatelnou součástí celého cvičení. 
 
-V kapitole \ref{cyberex} se věnuji popisu samotného cvičení Cyber Czech, jeho organizaci a~významu hodnoticí aplikace. Kapitola \ref{oldApp} popisuje stávající hodnoticí aplikaci a~v~textu jsou podrobně rozebrány veškeré její nedostatky. V~kapitole \ref{newApp} se zabývám návrhem nové hodnoticí aplikace a~v~následující kapitole \ref{implementationNewApp} se zaměřuji na samotnou implementaci nové aplikace a~popisuji problémy, se kterými jsem se při vývoji zabýval. V~závěrečné kapitole \ref{end} shrnuji dosažené cíle mojí práce a~formuluji doporučení pro další vývoj celého systému.
+V~kapitole \ref{cyberex} se věnuji popisu samotného cvičení Cyber Czech, jeho organizaci a~významu hodnoticí aplikace. Kapitola \ref{oldApp} popisuje stávající hodnoticí aplikaci a~v~textu jsou podrobně rozebrány veškeré její nedostatky. V~kapitole \ref{newApp} se zabývám návrhem nové hodnoticí aplikace a~v~následující kapitole \ref{implementationNewApp} se zaměřuji na samotnou implementaci nové aplikace a~popisuji problémy, se kterými jsem se při vývoji zabýval. V~závěrečné kapitole \ref{end} shrnuji dosažené cíle mojí práce a~formuluji doporučení pro další vývoj celého systému.
 
 \chapter{Kyberbezpečnostní cvičení Cyber Czech}
 \label{cyberex}
 
 Pro kyberbezpečnostní profesionály jsou nezbytné znalosti nejrůznějších typů útoků a~způsoby, jak se proti těmto útokům bránit. Z~tohoto důvodu se stávají stále populárnější kyberbezpečnostní cvičení, kde mohou účastníci nové znalosti a~zkušenosti získávat a~prohlubovat pomocí aktivního zapojení do cvičení.
 
-V následující kapitole popisuji Kybernetický polygon Masarykovy univerzity a~kyberbezpečnostní cvičení Cyber Czech, které je zde pořádáno. Věnuji se popisu účastníků tohoto cvičení a~představení systému hodnocení, včetně hodnoticí aplikace.
+V~následující kapitole popisuji Kybernetický polygon Masarykovy univerzity a~kyberbezpečnostní cvičení Cyber Czech, které je zde pořádáno. Věnuji se popisu účastníků tohoto cvičení a~představení systému hodnocení, včetně hodnoticí aplikace.
 
 \section{Kybernetický polygon Masarykovy univerzity}
 
@@ -98,7 +98,7 @@ Kybernetický polygon Masarykovy univerzity (zkráceně KYPO) vznikl jako projek
 
 KYPO je navržen jako modulární distribuovaný systém \cite{Vykopal2017KYPOCases}. Virtuální prostředí KYPO je vytvořeno v~cloudu, ve kterém je možné velice rychle a~opakovaně vytvářet nové funkční počítačové sítě včetně zařízení v~nich. Stejně tak je možné velice snadno provádět údržbu těchto sítí a~zařízení. Uzavřené virtuální prostředí KYPO zajišťuje, aby uživatelé mohli ve vytvořených sítích bezpečně provádět jakékoliv experimenty, aniž by mohly být ovlivněny počítačové systémy mimo toto prostředí.
 
-KYPO slouží pro výuku studentů Masarykovy univerzity a~kromě již zmíněného kyberbezpečnostního cvičení Cyber Czech zde probíhají i~jiné vzdělávací akce. Jednou z těchto akcí jsou například CTF (Capture the Flag) hry, které jsou zaměřeny na výuku základních technik penetračního testování počítačových sítí a~jejich služeb. Účastník hry se nachází v~roli útočníka, který postupuje několika úrovněmi hry a~jeho hlavním cílem je převzít kontrolu nad serverem a~využít jej pro následný DDoS útok \cite{Vykopal2017KYPOCases}.
+KYPO slouží pro výuku studentů Masarykovy univerzity a~kromě již zmíněného kyberbezpečnostního cvičení Cyber Czech zde probíhají i~jiné vzdělávací akce. Jednou z~těchto akcí jsou například CTF (Capture the Flag) hry, které jsou zaměřeny na výuku základních technik penetračního testování počítačových sítí a~jejich služeb. Účastník hry se nachází v~roli útočníka, který postupuje několika úrovněmi hry a~jeho hlavním cílem je převzít kontrolu nad serverem a~využít jej pro následný DDoS útok \cite{Vykopal2017KYPOCases}.
 
 \section{Popis cvičení Cyber Czech}
 
@@ -243,7 +243,7 @@ Entitně relační diagram na obr. \ref{fig:erdDjango} ukazuje část systému p
     \label{fig:erdDjango}
 \end{figure}
 
-Při implementaci stávající hodnoticí aplikace byl pozměněn, v diplomové práci, navržený datový model a~vlivem těchto rozdílů se do databáze zanesly nejrůznější nedostatky. V~následujících odstavcích nejdříve popíšu samotný datový model, který je zachycen na obrázku \ref{fig:erdOldApp}. Následně shrnu nedostatky tohoto modelu. 
+Při implementaci stávající hodnoticí aplikace byl pozměněn, v~diplomové práci, navržený datový model a~vlivem těchto rozdílů se do databáze zanesly nejrůznější nedostatky. V~následujících odstavcích nejdříve popíšu samotný datový model, který je zachycen na obrázku \ref{fig:erdOldApp}. Následně shrnu nedostatky tohoto modelu. 
 
 \begin{figure}[h!]
     \centering
@@ -270,21 +270,21 @@ Při implementaci stávající hodnoticí aplikace byl pozměněn, v diplomové 
 
 \subsection{Nedostatky datového modelu}
 
-V původním datovém modelu jsem shledal několik nedostatků. V~následujících odstavcích se zaměřím na ty nejvážnější.
+V~původním datovém modelu jsem shledal několik nedostatků. V~následujících odstavcích se zaměřím na ty nejvážnější.
 
-V tabulce \texttt{sumofservicelog} neexistuje žádná vazba, ze které by šlo určit, která služba byla nedostupná a~způsobila tak bodovou penalizaci. Nelze tedy žádným způsobem kontrolovat, která služba stržení bodů způsobila a~nelze ani získat informaci o~tom, kolik bodů bylo celkem za nedostupnost dané služby strženo. V~původním návrhu datového modelu měla být tato informace uložena v~tabulce \texttt{log}, avšak při implementaci se tato tabulka pro automatické hodnocení nevyužila. 
+V~tabulce \texttt{sumofservicelog} neexistuje žádná vazba, ze které by šlo určit, která služba byla nedostupná a~způsobila tak bodovou penalizaci. Nelze tedy žádným způsobem kontrolovat, která služba stržení bodů způsobila a~nelze ani získat informaci o~tom, kolik bodů bylo celkem za nedostupnost dané služby strženo. V~původním návrhu datového modelu měla být tato informace uložena v~tabulce \texttt{log}, avšak při implementaci se tato tabulka pro automatické hodnocení nevyužila. 
 
 Nelze snadno sledovat vývoj bodového ohodnocení v~čase, protože pro přesné zjištění těchto dat je nutné procházet dvě tabulky (\texttt{log} a~\texttt{sumofservicelog}). Tento nedostatek opět souvisí s~nevyužitím tabulky \texttt{log} i~pro automatické hodnocení.
 
 Tabulky \texttt{sumofservicelog} a~\texttt{sumofobjectivelog} jsou nadbytečné. Data uložená v~těchto tabulkách by bylo možné získat z~tabulky \texttt{log}. Navíc pomocí agregačních dotazů nad touto tabulkou by bylo možné získat celkové skóre v~řádu desítek milisekund i~nad obrovským množstvím záznamů. Nutnost neustálé aktualizace dat v~této tabulce vnáší navíc do aplikace složitější logiku náchylnou na chybu. 
 
-U manuálního hodnocení týmů v~tabulce \texttt{log} dochází k~ukládání reference na tabulku \texttt{objective} a~dále se ukládá i~informace o~uživatelské roli (sloupec \texttt{category}), ze které bylo hodnocení zadáno, avšak tuto informaci je možné zjistit přímo z~vazby na tabulku \texttt{objective}.
+U~manuálního hodnocení týmů v~tabulce \texttt{log} dochází k~ukládání reference na tabulku \texttt{objective} a~dále se ukládá i~informace o~uživatelské roli (sloupec \texttt{category}), ze které bylo hodnocení zadáno, avšak tuto informaci je možné zjistit přímo z~vazby na tabulku \texttt{objective}.
 
-V tabulce \texttt{objective} je nadbytečný atribut \texttt{category}, který obsahuje číselný identifikátor role. Sloupec není v~aplikaci nikde využit. Při vytvoření záznamu v~tabulce \texttt{sumofobjectivelog} se tento sloupec překopíruje do sloupce \texttt{category}, ale dále se s~touto hodnotou nikde v~aplikaci nepracuje.
+V~tabulce \texttt{objective} je nadbytečný atribut \texttt{category}, který obsahuje číselný identifikátor role. Sloupec není v~aplikaci nikde využit. Při vytvoření záznamu v~tabulce \texttt{sumofobjectivelog} se tento sloupec překopíruje do sloupce \texttt{category}, ale dále se s~touto hodnotou nikde v~aplikaci nepracuje.
 
 Tabulka \texttt{exercise} umožňuje do sloupce \texttt{name} uložit hodnotu \texttt{start} nebo \texttt{stop}, avšak s~hodnotou \texttt{stop} aplikace žádným způsobem dále nepracuje, jelikož délka cvičení je nastavena atributem \texttt{duration} a~není tedy potřeba nastavovat čas ukončení cvičení. Data v~tabulce \texttt{exercise}, která mají ve sloupci \texttt{name} uloženou hodnotu \texttt{stop}, tedy nemají žádný význam.
 
-V datovém modelu se dále vůbec nepočítalo s~možností ukládat informace o~tom, který uživatel zadal týmu dané hodnocení. Nebylo tedy možné dohledat, kdo je zodpovědný za udělené skóre.
+V~datovém modelu se dále vůbec nepočítalo s~možností ukládat informace o~tom, který uživatel zadal týmu dané hodnocení. Nebylo tedy možné dohledat, kdo je zodpovědný za udělené skóre.
 
 Nedostatkem v~relačním návrhu je skutečnost, že pro ukládání dat, která odpovídají údajům uloženým v~jiné tabulce, není využito cizích klíčů. Např. v~případě uživatelských rolí se ukládá role pouze jako textový název (tabulka \texttt{objective} a~sloupec \texttt{role}). Pro využití klauzule \texttt{JOIN} v~SQL dotazech je toto nevyhovující.
 
@@ -292,7 +292,7 @@ Nedostatkem v~relačním návrhu je skutečnost, že pro ukládání dat, která
 
 Kromě nedostatků v~datovém modelu vykazuje aplikace další anomálie, které se projevují neočekávanými pády aplikace, případně výpisem chybných dat v~aplikaci.
 
-K neočekávanému pádu aplikace dochází např. při odeslání manuálního hodnocení, kde bodové ohodnocení je mimo specifikovaný rozsah. Další chybu způsobovalo odeslání formuláře bez vybraného týmu. Oba případy způsobily pád aplikace, uživateli byla zobrazena chyba a~pomocí tlačítka zpět se musel vrátit na původní stránku.
+K~neočekávanému pádu aplikace dochází např. při odeslání manuálního hodnocení, kde bodové ohodnocení je mimo specifikovaný rozsah. Další chybu způsobovalo odeslání formuláře bez vybraného týmu. Oba případy způsobily pád aplikace, uživateli byla zobrazena chyba a~pomocí tlačítka zpět se musel vrátit na původní stránku.
 
 Chybně se chová i~časomíra, ukazující, kolik času zbývá do konce cvičení. Výpočty s~časem nejsou prováděny správně, a~tak například po ukončení cvičení dojde k~zobrazení časového údaje se záporným počtem hodin, které zbývají do ukončení cvičení.
 
@@ -318,7 +318,7 @@ Dalším krokem, který zjednoduší architekturu celé aplikace, je vyčleněn�
 Během několika ročníků cvičení Cyber Czech se objevila celá řada následujících nových požadavků na aplikaci.
 
 \begin{enumerate}
-\item Vytvoření rozvrhu pro hodnocené události -- jednou ze zásadních novinek nové aplikace bude zobrazení rozvrhu naplánovaných událostí, kde uživatelé hodnoticí aplikace velice přehledně uvidí, které události by měly být v~jakém čase prováděny, viz návrh rozvrhu v prezentační vrstvě, na obrázku č. \ref{fig:wireframeTimetable}. Jednotlivým událostem bude možné nastavovat, zda jsou již ve stavu provádění, případně zda událost byla úspěšně, nebo neúspěšně provedena. Bude tedy nezbytné k~událostem umožnit ukládat čas, kdy mají být události provedeny. Údaj, který se bude ukládat, bude pouze počet hodin a~minut od začátku cvičení, kdy má daná událost nastat. Díky tomu bude možné stanovit různý čas zahájení cvičení a~v~systému bude uloženo, že daná událost má být provedena například dvě hodiny po zahájení cvičení.
+\item Vytvoření rozvrhu pro hodnocené události -- jednou ze zásadních novinek nové aplikace bude zobrazení rozvrhu naplánovaných událostí, kde uživatelé hodnoticí aplikace velice přehledně uvidí, které události by měly být v~jakém čase prováděny, viz návrh rozvrhu v~prezentační vrstvě, na obrázku č. \ref{fig:wireframeTimetable}. Jednotlivým událostem bude možné nastavovat, zda jsou již ve stavu provádění, případně zda událost byla úspěšně, nebo neúspěšně provedena. Bude tedy nezbytné k~událostem umožnit ukládat čas, kdy mají být události provedeny. Údaj, který se bude ukládat, bude pouze počet hodin a~minut od začátku cvičení, kdy má daná událost nastat. Díky tomu bude možné stanovit různý čas zahájení cvičení a~v~systému bude uloženo, že daná událost má být provedena například dvě hodiny po zahájení cvičení.
 \item Řízení přístupu pro hodnocení týmů -- u~každého uživatele bude možné nastavit, kterým modrým týmům může zadávat hodnocení. Během cvičení je typické, že určití členové červeného týmu provádí útoky pouze na jeden vybraný modrý tým. Pomocí tohoto nastavení bude tedy možné vytvořit uživatelský účet, který bude moci hodnotit pouze předdefinovaný tým a~bude tím sníženo riziko možné chyby při zadávání hodnocení.
 \item Zlepšení správy uživatelských účtů -- původní aplikace neobsahovala žádné nástroje pro správu uživatelů a~tato správa musela být prováděna přímo v~databázi samotného systému. Nové API by mělo obsahovat funkce pro vytváření a~úpravu uživatelů a~jejich zařazování do dříve definovaných týmů.
 \item Možnost nahrávání souborů k~hodnocení -- při vytváření hodnocení by mělo být možné nahrávat například snímek obrazovky nebo jiný obrazový, případně textový soubor. Příloha může sloužit jako důkaz o~úspěšně provedeném útoku.
@@ -331,7 +331,7 @@ Během několika ročníků cvičení Cyber Czech se objevila celá řada násle
 \begin{figure}
     \centering
     \includegraphics[width=13cm]{images/Web-Wireframe1.eps}
-    \caption{Návrh znázorňující možnou podobu rozvrhu naplánovaných událostí v prezentační vrstvě. Události jsou zabarveny podle svého stavu. Zeleně jsou úspěšně dokončené události, červeně jsou neúspěšně dokončené události a šedě jsou události, které jsou, nebo budou prováděny. Svislá červená linka představuje aktuální čas na časové ose.}
+    \caption{Návrh znázorňující možnou podobu rozvrhu naplánovaných událostí v~prezentační vrstvě. Události jsou zabarveny podle svého stavu. Zeleně jsou úspěšně dokončené události, červeně jsou neúspěšně dokončené události a šedě jsou události, které jsou, nebo budou prováděny. Svislá červená linka představuje aktuální čas na časové ose.}
     \label{fig:wireframeTimetable}
 \end{figure}
 
@@ -348,18 +348,18 @@ Veškerou novou funkcionalitu systému zachycuje diagram případu užití na ob
 
 Původní hodnoticí aplikace byla implementována pomocí programovacího jazyka Python s~využitím frameworku Django. Tento systém velice usnadňuje tvorbu webových aplikací a~existuje pro něj rozšíření v~podobě Django REST framework. Rozšíření je určeno speciálně pro vytváření API a~pomocí nástrojů, které obsahuje, je možné efektivně vyvíjet propracované systémy. Výhodou tohoto frameworku je především výborná provázanost s~Django ORM systémem, kdy není nutné implementovat například funkce pro ukládání a~úpravu dat, protože tyto funkce jsou obstarány automaticky. Dále tato nástavba umožňuje snadný převod dat do strojově čitelných formátů (JSON, XML) za použití tzv. serializerů. Nezbytnou součástí frameworku je rozhraní pro vytváření automatických systémových testů pro jednotlivé přístupové body v~API.
 
-U jazyka Python dojde k~přechodu z~verze 2.7 na verzi 3.5, aby bylo možné použít nejnovější vydání frameworku Django, který již Python 2.7 nepodporuje. Python 2.7 je již zastaralý a~bylo oznámeno ukončení podpory této verze k~roku 2020 \cite{python27}.
+U~jazyka Python dojde k~přechodu z~verze 2.7 na verzi 3.5, aby bylo možné použít nejnovější vydání frameworku Django, který již Python 2.7 nepodporuje. Python 2.7 je již zastaralý a~bylo oznámeno ukončení podpory této verze k~roku 2020 \cite{python27}.
 
 
 \section{Revize datového modelu}
 
 Při revizi původního datového modelu jsem zjistil, že aplikace vykazuje mnohé nedostatky. Zaměřil jsem se především na odstranění duplicity dat a~kvalitnější interpretaci ukládaných informací, aby bylo možné sestavovat efektivnější databázové dotazy. Dále jsem se zabýval zlepšením v~oblasti řízení přístupu uživatelů k~datům.
 
-Z pohledu duplicity dat bylo nevyhovující ukládání bodového hodnocení pro daný tým. Duplicita spočívala v~tom, že se při každém vložení nového hodnocení informace vložila nejprve do tabulky \texttt{logs} a~poté se aktualizovala hodnota se součtem hodnocení pro konkrétní tým v~tabulce \texttt{sumofobjectivelog}. Pro zápis jednoho hodnocení tedy bylo nutné vložit do databáze dva nové záznamy z~nichž jeden obsahoval duplicitní data.
+Z~pohledu duplicity dat bylo nevyhovující ukládání bodového hodnocení pro daný tým. Duplicita spočívala v~tom, že se při každém vložení nového hodnocení informace vložila nejprve do tabulky \texttt{logs} a~poté se aktualizovala hodnota se součtem hodnocení pro konkrétní tým v~tabulce \texttt{sumofobjectivelog}. Pro zápis jednoho hodnocení tedy bylo nutné vložit do databáze dva nové záznamy z~nichž jeden obsahoval duplicitní data.
 
-V databázovém modelu chyběla identifikace uživatelů zodpovědných za vložený obsah nebo hodnocení. 
+V~databázovém modelu chyběla identifikace uživatelů zodpovědných za vložený obsah nebo hodnocení. 
 
-V případě ukládání manuálního a~automatického hodnocení se jedná o~data se stejnou strukturou. Bohužel, v~původním návrhu byla tato data ukládána odděleně do dvou tabulek \texttt{logs} a~\texttt{states}, což vedlo ke složitější logice při sestavování databázových dotazů.
+V~případě ukládání manuálního a~automatického hodnocení se jedná o~data se stejnou strukturou. Bohužel, v~původním návrhu byla tato data ukládána odděleně do dvou tabulek \texttt{logs} a~\texttt{states}, což vedlo ke složitější logice při sestavování databázových dotazů.
 
 \subsection{Návrh řešení nedostatků datového modelu}
 Pro ukládání automatického nebo manuálního hodnocení je navržena jedna společná tabulka, která nese informaci o~tom, který tým je hodnocen, kdy bylo hodnocení provedeno a~počet udělených bodů. Data, která jsou specifická pro konkrétní typ hodnocení, jsou poté uložena v~samostatné tabulce. Mezi těmito tabulkami je vytvořena vazba. Díky tomu je možné snadněji procházet data pouze z~jednoho typu hodnocení.
@@ -426,10 +426,10 @@ Každá entita je reprezentována samostatnou třídou a~může být rozšířen
 
 \subsection{Serializace dat}
 \label{serializer}
-V systému jsou databázová data reprezentována pomocí entit ORM systému, pro jejich převod do strojově čitelného formátu slouží speciální serializační třídy. Pomocí těchto tříd lze však provést i~opačný proces, tedy ze strojově čitelného formátu vytvořit nebo upravit entitu. Pomocí mapování na ORM datový model je možné realizovat, aby tento proces probíhal zcela automaticky. Programátor však může i~nadále do tohoto procesu zasáhnout implementací vlastní metody pro ukládání či editaci. Implementace vlastních metod jsem využil pro ukládání záznamu o~hodnocení, kdy se ukládají data do dvou různých databázových tabulek a~není tak možné využít generického chování funkcí pro ukládání.
+V~systému jsou databázová data reprezentována pomocí entit ORM systému, pro jejich převod do strojově čitelného formátu slouží speciální serializační třídy. Pomocí těchto tříd lze však provést i~opačný proces, tedy ze strojově čitelného formátu vytvořit nebo upravit entitu. Pomocí mapování na ORM datový model je možné realizovat, aby tento proces probíhal zcela automaticky. Programátor však může i~nadále do tohoto procesu zasáhnout implementací vlastní metody pro ukládání či editaci. Implementace vlastních metod jsem využil pro ukládání záznamu o~hodnocení, kdy se ukládají data do dvou různých databázových tabulek a~není tak možné využít generického chování funkcí pro ukládání.
 
 \subsection{Adresářová struktura}
-V hlavním adresáři aplikace se nachází soubor \texttt{manage.py}. Soubor slouží pro spouštění příkazů frameworku Django, tedy například spuštění vývojového webového serveru nebo automatických testů. Adresářová struktura je rozdělena na dva samostatné adresáře \texttt{scoring} a~\texttt{cyberex\_api}.
+V~hlavním adresáři aplikace se nachází soubor \texttt{manage.py}. Soubor slouží pro spouštění příkazů frameworku Django, tedy například spuštění vývojového webového serveru nebo automatických testů. Adresářová struktura je rozdělena na dva samostatné adresáře \texttt{scoring} a~\texttt{cyberex\_api}.
 
 Adresář \texttt{scoring} obsahuje konfigurační soubor \texttt{settings.py}, ve kterém se nachází veškeré nastavení aplikace. V~souboru \texttt{globals.py} je zadefinována hodnota výchozího bodového skóre každého týmu. Soubor \texttt{urls.py} obsahuje routovací pravidla, pomocí kterých se příchozí požadavky předávají jednotlivým modulům, respektive funkcím.
 
@@ -487,7 +487,7 @@ pipenv run runserver
 
 Příkaz \lstinline[columns=fixed]{pipenv run runserver} je alias definovaný v~souboru \texttt{Pipfile} a~reprezentuje příkaz \lstinline[columns=fixed]{python manage.py runserver}. Příkaz zapne vývojový server frameworku Django.
 
-Díky použitým nástrojům je spuštění aplikace velice snadné, ale je zde několik dalších nedostatků. Instalace se skládá z~několika kroků, při kterých může dojít k~chybě. V~nainstalované aplikaci neexistují žádná testovací data, včetně uživatelských účtů a~vývojový server, spouštěný při lokální instalaci, se liší od serveru, který je používán v~produkčním prostředí v~KYPO. Z~těchto důvodů jsem se rozhodl pro využití nástroje Vagrant \cite{vagrant}, který za pomocí virtualizace spustí a~nakonfiguruje nový virtuální počítač s hodnoticí aplikací.
+Díky použitým nástrojům je spuštění aplikace velice snadné, ale je zde několik dalších nedostatků. Instalace se skládá z~několika kroků, při kterých může dojít k~chybě. V~nainstalované aplikaci neexistují žádná testovací data, včetně uživatelských účtů a~vývojový server, spouštěný při lokální instalaci, se liší od serveru, který je používán v~produkčním prostředí v~KYPO. Z~těchto důvodů jsem se rozhodl pro využití nástroje Vagrant \cite{vagrant}, který za pomocí virtualizace spustí a~nakonfiguruje nový virtuální počítač s~hodnoticí aplikací.
 
 \subsection{Spuštění aplikace ve virtuálním prostředí}
 
@@ -499,12 +499,12 @@ Jako relační databázový systém se využívá SQLite, který byl zvolen pře
 
 \section{Reálné nasazení aplikace}
 
-Vytvořená aplikace byla použita při dvou cvičeních Cyber Czech 2018, která se konala v termínech 16.--17. října a 20.--21. listopadu. Před samotným cvičením Cyber Czech proběhly ještě dvě generální zkoušky v termínech 21. září a 12. října. V následujících kapitolách popíšu jednotlivé použití aplikace a zjištěné nedostatky.
+Vytvořená aplikace byla použita při dvou cvičeních Cyber Czech 2018, která se konala v~termínech 16.--17. října a 20.--21. listopadu. Před samotným cvičením Cyber Czech proběhly ještě dvě generální zkoušky v~termínech 21. září a 12. října. V~následujících kapitolách popíšu jednotlivé použití aplikace a zjištěné nedostatky.
 
 \subsection{Generální zkoušky}
-Při generálních zkouškách byla testována funkčnost servisní vrstvy hodnoticí aplikace spolu s prezentační vrstvou. Oba systémy spolu bez problému spolupracovaly a nebyl objeven žádný problém v propojení těchto systémů. Poprvé byla vyzkoušena hodnoticí aplikace na širším okruhu uživatelů. Ve webové aplikaci se během zkoušky objevily drobné nedostatky, avšak i přesto sklidila aplikace pozitivní hodnocení.
+Při generálních zkouškách byla testována funkčnost servisní vrstvy hodnoticí aplikace spolu s~prezentační vrstvou. Oba systémy spolu bez problému spolupracovaly a nebyl objeven žádný problém v~propojení těchto systémů. Poprvé byla vyzkoušena hodnoticí aplikace na širším okruhu uživatelů. Ve webové aplikaci se během zkoušky objevily drobné nedostatky, avšak i přesto sklidila aplikace pozitivní hodnocení.
 
-Drobné problémy byly objeveny i v servisní vrstvě aplikace. Některé koncové body API měly příliš vysokou odezvu, a~bylo proto nutné provést jejich optimalizaci.
+Drobné problémy byly objeveny i v~servisní vrstvě aplikace. Některé koncové body API měly příliš vysokou odezvu, a~bylo proto nutné provést jejich optimalizaci.
 
 Aplikace získává při volání koncového bodu \texttt{/charts/score} v~API aktuální výsledky bodů z~automatického skórování nad tabulkou \texttt{logs}. Během jednoho cvičení může být vygenerováno až 10 000 záznamů hodnocení, a~tak aplikace musí být schopna pracovat s~velkými počty záznamů. Testováním aplikace se ukázalo, že ORM systém je pro operace nad tímto množstvím dat nevhodný a~získávání skóre trvalo řádově několik sekund. V~tomto případě se ukázalo jako efektivní využít agregačních SQL dotazů. 
 
@@ -538,7 +538,7 @@ ORDER BY time
 ```
 \end{markdown*}
 
-V dotazu dochází pomocí klauzule \texttt{GROUP\ BY} k~seskupení dat, která mají stejný čas vložení. Opět je využito funkce \texttt{SUM} pro získání celkové sumy bodů.
+V~dotazu dochází pomocí klauzule \texttt{GROUP\ BY} k~seskupení dat, která mají stejný čas vložení. Opět je využito funkce \texttt{SUM} pro získání celkové sumy bodů.
 
 Díky těmto úpravám došlo ke snížení odezvy těchto koncových bodů API z~několika sekund na řádově stovky milisekund. 
 
@@ -554,7 +554,7 @@ Během druhého cvičení se objevily problémy s~odezvou API, které však byly
 \chapter{Závěr}
 \label{end}
 
-V rámci mojí bakalářské práce jsem provedl rozbor stávající hodnoticí aplikace a~na základě zjištěných nedostatků jsem vytvořil návrh datového modelu a~aplikačního programového rozhraní pro novou aplikaci, kterou jsem následně implementoval za použití Django REST Framework. Vytvořený nástroj zajišťuje servisní vrstvu celé hodnoticí aplikace a~pomocí REST API komunikuje s~prezentační vrstvou, která je vytvořena jako webová aplikace a~vznikla v~rámci jiné bakalářské práce. 
+V~rámci mojí bakalářské práce jsem provedl rozbor stávající hodnoticí aplikace a~na základě zjištěných nedostatků jsem vytvořil návrh datového modelu a~aplikačního programového rozhraní pro novou aplikaci, kterou jsem následně implementoval za použití Django REST Framework. Vytvořený nástroj zajišťuje servisní vrstvu celé hodnoticí aplikace a~pomocí REST API komunikuje s~prezentační vrstvou, která je vytvořena jako webová aplikace a~vznikla v~rámci jiné bakalářské práce. 
 
 Jako celek tento vytvořený software plně nahradil stávající aplikaci a~kromě zachování veškeré původní funkcionality byl také nástroj rozšířen o~nové funkce, které uživatelům aplikace umožní komfortnější používání a~organizátorům cvičení zajistí možnost lepšího řízení celého cvičení. Jedná se například o~možnost zobrazení rozvrhu s~naplánovanými událostmi nebo zlepšení správy uživatelských účtů viz kapitola \ref{novePozadavky}.
 
@@ -562,16 +562,16 @@ Díky reálnému využití je jisté, že v~budoucnu se bude aplikace dále roz�
 
 Během vývoje jsem se setkal s~technologiemi, které pro mě byly zcela nové a~práce pro mě byla o~to zajímavější. S~postupným získáváním znalostí jsem některé části aplikace refaktoroval, až jsem docílil stavu, se kterým jsem byl plně spokojen. Odměnou pro mě bylo, že aplikace během obou cvičení nevykazovala žádné chyby v~mnou implementovaných částech a~od uživatelů přicházely na hodnoticí aplikaci pozitivní ohlasy.
 
-Po druhém použití v praxi se objevily nápady, jak aplikaci rozšířit. Užitečnou funkcí, která by ulehčila přípravu aplikace na nové cvičení, by byla možnost hromadného vymazání záznamů o hodnocení, pokud právě neprobíhá žádné cvičení. Pro tuto funkci by mohl existovat nový koncový bod v~API, který by mohl spustit pouze administrátor. 
+Po druhém použití v~praxi se objevily nápady, jak aplikaci rozšířit. Užitečnou funkcí, která by ulehčila přípravu aplikace na nové cvičení, by byla možnost hromadného vymazání záznamů o~hodnocení, pokud právě neprobíhá žádné cvičení. Pro tuto funkci by mohl existovat nový koncový bod v~API, který by mohl spustit pouze administrátor. 
 
-Další užitečnou funkcí, kterou by aplikace mohla disponovat, je výpis všech služeb, které jsou kontrolovány automatickým skórováním, a~to včetně stavu těchto služeb. Výpis by obsahoval názvy služeb, barevně by byl odlišen stav dostupnosti každé služby a mohla by být zobrazena informace o tom, kolik celkem bylo za nedostupnost dané služby strženo bodů.
+Další užitečnou funkcí, kterou by aplikace mohla disponovat, je výpis všech služeb, které jsou kontrolovány automatickým skórováním, a~to včetně stavu těchto služeb. Výpis by obsahoval názvy služeb, barevně by byl odlišen stav dostupnosti každé služby a mohla by být zobrazena informace o~tom, kolik celkem bylo za nedostupnost dané služby strženo bodů.
 
-Výpisu by mohlo být využito pro porovnávání aktuálního stavu mezi všemi týmy a mohl by být i veřejně prezentován pro ukázání rozdílů mezi týmy. Funkce, která by mohla přinést zjednodušení v~práci s~aplikací, je propojení správy uživatelů s~již existujícím systémem v~KYPO. Uživatelské účty jsou zvlášť vytvářeny v hodnoticí aplikaci a~zvlášť v~portálu KYPO, který slouží pro přístup ke všem ostatním systémům používaným při cvičení. Pokud by do budoucna bylo možné tyto přihlašovací procesy spojit, přineslo by to zjednodušení celé správy uživatelů. Obdobný námět na vylepšení platí i~pro správu týmů, které jsou opět zadávány do portálu KYPO a~samostatně do hodnoticí aplikace. Pro správné spárování týmů je v hodnoticí aplikaci uložen identifikátor týmu z~portálu KYPO.
+Výpisu by mohlo být využito pro porovnávání aktuálního stavu mezi všemi týmy a mohl by být i veřejně prezentován pro ukázání rozdílů mezi týmy. Funkce, která by mohla přinést zjednodušení v~práci s~aplikací, je propojení správy uživatelů s~již existujícím systémem v~KYPO. Uživatelské účty jsou zvlášť vytvářeny v~hodnoticí aplikaci a~zvlášť v~portálu KYPO, který slouží pro přístup ke všem ostatním systémům používaným při cvičení. Pokud by do budoucna bylo možné tyto přihlašovací procesy spojit, přineslo by to zjednodušení celé správy uživatelů. Obdobný námět na vylepšení platí i~pro správu týmů, které jsou opět zadávány do portálu KYPO a~samostatně do hodnoticí aplikace. Pro správné spárování týmů je v~hodnoticí aplikaci uložen identifikátor týmu z~portálu KYPO.
 
 \printbibliography[heading=bibintoc] %% Print the bibliography.
 
 \appendix %% Start the appendices.
-\chapter{Informace k elektronické příloze}
+\chapter{Informace k~elektronické příloze}
 
 Elektronická příloha obsahuje dva adresáře.
 
@@ -582,10 +582,10 @@ Elektronická příloha obsahuje dva adresáře.
     \item \url{https://www.virtualbox.org/wiki/Downloads}
     \item \url{https://www.vagrantup.com/downloads.html}
 \end{itemize}
-Pro spuštění stačí v adresáři \texttt{cyberex-control-app} spustit příkaz \texttt{vagrant up}.
+Pro spuštění stačí v~adresáři \texttt{cyberex-control-app} spustit příkaz \texttt{vagrant up}.
 Po úspěšném spuštění virtuálního počítače bude aplikace dostupná na adrese
-\texttt{192.168.88.99} pomocí protokolu \texttt{HTTPS}. V případě kolize této adresy s jinou adresou v síti je nutné
-před spuštěním virtuálního stroje upravit tuto adresu v souboru \texttt{Vagrantfile}.
+\texttt{192.168.88.99} pomocí protokolu \texttt{HTTPS}. V~případě kolize této adresy s~jinou adresou v~síti je nutné
+před spuštěním virtuálního stroje upravit tuto adresu v~souboru \texttt{Vagrantfile}.
 Do virtuálního počítače bude nainstalován operační systém Ubuntu 16.04.
 Minimální požadavky na virtuální počítač, ve kterém bude aplikace spuštěna,
 jsou:
@@ -594,7 +594,7 @@ jsou:
     \item HDD 5 GB
     \item 900 MHz x86 procesor
 \end{itemize}
-Soubor \texttt{README.md} v adresáři \texttt{cyberex-control-app} obsahuje veškeré informace o tom, jak provést spuštění aplikace, jak provést přihlášení do aplikace a následně odeslat testovací požadavek do API.
+Soubor \texttt{README.md} v~adresáři \texttt{cyberex-control-app} obsahuje veškeré informace o~tom, jak provést spuštění aplikace, jak provést přihlášení do aplikace a následně odeslat testovací požadavek do API.
 
 \chapter{Struktura API nové hodnoticí aplikace}
 \label{appendAPI}
