@@ -1,17 +1,3 @@
-%%%%    !!!!!!!!!!!!!!!!!!!!!
-%%%%    DŮLEŽITÉ
-%%%%
-%%%%    Před generováním finální verze spusť nad souborem program vlna
-%%%%    http://www.fit.vutbr.cz/~martinek/latex/czech.html
-%%%%    Ten zajistí, aby řádek nekončil samostatným znakem a, i, o apod.
-%%%%
-%%%%    !!!!!!!!!!!!!!!!!!!!!
-
-
-
-
-
-
 \documentclass[
   digital,
   twoside,
@@ -573,19 +559,22 @@ Výpisu by mohlo být využito pro porovnávání aktuálního stavu mezi všemi
 \appendix %% Start the appendices.
 \chapter{Informace k~elektronické příloze}
 
-Elektronická příloha obsahuje dva adresáře.
+
+\section*{Informace k~elektronické příloze}
+
+Elektronická příloha je rozdělena na dva adresáře, které obsahují dokumentaci API a zdrojové kódy vytvořeného softwaru. Aplikace je šířena pod licencí MIT.
 
 \paragraph{Dokumentace API} Adresář obsahuje soubor \texttt{index.html}, který lze otevřít ve webovém prohlížeči a obsahuje offline dokumentaci API. Online dokumentace je dostupná na adrese \url{https://app.swaggerhub.com/apis/muni-cyberex/Cyberex_control_app/1.0.0#/}.
     
-\paragraph{cyberex-control-app} Adresář obsahuje zdrojové kódy aplikace. Pro spuštění aplikace je nutné mít nainstalován program VirtualBox verze 5 nebo vyšší a Vagrant verze 1.9 nebo vyšší.
+\paragraph{cyberex-control-app} Adresář obsahuje zdrojové kódy aplikace. Aplikaci lze spustit lokálně, nebo ve virtuálním počítači za použití nástroje Vagrant. Oba postupy spuštění jsou popsány v souboru \texttt{README.md}.
+Pro použití aplikace ve virtuálním počítači je nutné mít nainstalován program VirtualBox verze 5 nebo vyšší a Vagrant verze 1.9 nebo vyšší.
 \begin{itemize}
     \item \url{https://www.virtualbox.org/wiki/Downloads}
     \item \url{https://www.vagrantup.com/downloads.html}
 \end{itemize}
 Pro spuštění stačí v~adresáři \texttt{cyberex-control-app} spustit příkaz \texttt{vagrant up}.
-Po úspěšném spuštění virtuálního počítače bude aplikace dostupná na adrese
-\texttt{192.168.88.99} pomocí protokolu \texttt{HTTPS}. V~případě kolize této adresy s~jinou adresou v~síti je nutné
-před spuštěním virtuálního stroje upravit tuto adresu v~souboru \texttt{Vagrantfile}.
+Po dokončení instalace virtuálního počítače bude aplikace dostupná na adrese
+\texttt{192.168.88.99} pomocí protokolu \texttt{HTTPS}. V~případě kolize této adresy s~jinou adresou v~síti je nutné před spuštěním virtuálního stroje upravit tuto adresu v~souboru \texttt{Vagrantfile}.
 Do virtuálního počítače bude nainstalován operační systém Ubuntu 16.04.
 Minimální požadavky na virtuální počítač, ve kterém bude aplikace spuštěna,
 jsou:
@@ -594,7 +583,7 @@ jsou:
     \item HDD 5 GB
     \item 900 MHz x86 procesor
 \end{itemize}
-Soubor \texttt{README.md} v~adresáři \texttt{cyberex-control-app} obsahuje veškeré informace o~tom, jak provést spuštění aplikace, jak provést přihlášení do aplikace a následně odeslat testovací požadavek do API.
+V souboru \texttt{README.md} je dále popsáno, jak provést přihlášení do aplikace a následně odeslat testovací požadavek do API.
 
 \chapter{Struktura API nové hodnoticí aplikace}
 \label{appendAPI}
