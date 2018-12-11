@@ -331,7 +331,7 @@ Během několika ročníků cvičení Cyber Czech se objevila celá řada násle
 \begin{figure}
     \centering
     \includegraphics[width=13cm]{images/Web-Wireframe1.eps}
-    \caption{Návrh znázorňující možnou podobu rozvrhu naplánovaných událostí v prezentační vrstvě. Události jsou zabarveny podle svého stavu. Zeleně jsou úspěšně dokončené události, červeně jsou neúspěšně dokončené události a šedě jsou události, které jsou teprve prováděny. Svislá červená linka představuje aktuální čas na časové ose.}
+    \caption{Návrh znázorňující možnou podobu rozvrhu naplánovaných událostí v prezentační vrstvě. Události jsou zabarveny podle svého stavu. Zeleně jsou úspěšně dokončené události, červeně jsou neúspěšně dokončené události a šedě jsou události, které jsou, nebo budou prováděny. Svislá červená linka představuje aktuální čas na časové ose.}
     \label{fig:wireframeTimetable}
 \end{figure}
 
@@ -368,7 +368,7 @@ Významnou změnou v~datovém modelu bylo vypuštění databázových tabulek, k
 
 Pro identifikaci, který uživatel je zodpovědný za zaslané hodnocení, případně další obsah, byl do tabulek \texttt{logs}, \texttt{files} a~\texttt{comments} přidán atribut pro uložení této informace. Nová aplikace bude využívat autentizačního a~autorizačního systému frameworku Django, z~tohoto důvodu je do tohoto atributu ukládán cizí klíč na tabulku \texttt{auth\_user}, která je součástí frameworku.
 
-\section{Nový datový model}
+\subsection{Nový datový model}
 
 Datový model samotné aplikace se skládá z~9 databázových tabulek. V~následující kapitole se budu zabývat podrobným popisem významu jednotlivých tabulek, definicí atributů a~popisu relačních vztahů.
 
@@ -478,6 +478,7 @@ Veškeré závislosti jsou definovány v~souboru \texttt{Pipfile}, kde se nachá
 pipenv install
 \end{lstlisting}
 
+\noindent
 Pomocí dalšího příkazu lze již spustit samotnou aplikaci.
 
 \begin{lstlisting}
@@ -498,10 +499,10 @@ Jako relační databázový systém se využívá SQLite, který byl zvolen pře
 
 \section{Reálné nasazení aplikace}
 
-Vytvořená aplikace byla použita při dvou cvičeních Cyber Czech 2018, která se konala v termínech 16.--17. října a 20.--21. listopadu. Před samotným cvičením Cyber Czech proběhla ještě generální zkouška. V následujících kapitolách popíšu jednotlivé použití aplikace a zjištěné nedostatky.
+Vytvořená aplikace byla použita při dvou cvičeních Cyber Czech 2018, která se konala v termínech 16.--17. října a 20.--21. listopadu. Před samotným cvičením Cyber Czech proběhly ještě dvě generální zkoušky v termínech 21. září a 12. října. V následujících kapitolách popíšu jednotlivé použití aplikace a zjištěné nedostatky.
 
-\subsection{Generální zkouška}
-Při generální zkoušce byla testována funkčnost servisní vrstvy hodnoticí aplikace spolu s prezentační vrstvou. Oba systémy spolu bez problému spolupracovaly a nebyl objeven žádný problém v propojení těchto systémů. Poprvé byla vyzkoušena hodnoticí aplikace na širším okruhu uživatelů. Ve webové aplikaci se během zkoušky objevily drobné nedostatky, avšak i přesto sklidila aplikace pozitivní hodnocení.
+\subsection{Generální zkoušky}
+Při generálních zkouškách byla testována funkčnost servisní vrstvy hodnoticí aplikace spolu s prezentační vrstvou. Oba systémy spolu bez problému spolupracovaly a nebyl objeven žádný problém v propojení těchto systémů. Poprvé byla vyzkoušena hodnoticí aplikace na širším okruhu uživatelů. Ve webové aplikaci se během zkoušky objevily drobné nedostatky, avšak i přesto sklidila aplikace pozitivní hodnocení.
 
 Drobné problémy byly objeveny i v servisní vrstvě aplikace. Některé koncové body API měly příliš vysokou odezvu, a~bylo proto nutné provést jejich optimalizaci.
 
@@ -523,6 +524,7 @@ Dotaz využívá funkce \texttt{SUM} pro získání součtu bodů a~klauzule \te
 
 Všechny změny bodového skóre v~čase se získávají pomocí volání API \texttt{/charts/timeline}. Vzhledem k~tomu, že tyto hodnoty se opět berou z~výše uvedené tabulky \texttt{logs}, naráží tato operace opět na limity ORM systému. S~přihlédnutím ke skutečnosti, že automatický skórovací systém vkládá do aplikace záznamy o~nedostupnosti služeb v~dávkách (např. 4 záznamy ve stejný okamžik), jsem se rozhodl využít opět agregační dotaz, který takové záznamy spojí do jednoho a~zrychlí tak získávání záznamů a~sníží se datový objem dat.
 
+\noindent
 Výsledný SQL dotaz má nasledující podobu.
 
 \begin{markdown*}{%
@@ -540,12 +542,13 @@ V dotazu dochází pomocí klauzule \texttt{GROUP\ BY} k~seskupení dat, která 
 
 Díky těmto úpravám došlo ke snížení odezvy těchto koncových bodů API z~několika sekund na řádově stovky milisekund. 
 
-\subsection{Cvičeních Cyber Czech 2018}
+\subsection{První běh cvičení}
 
 Jelikož v~prezentační vrstvě nebyla dosud implementována správa uživatelů, bylo nutné před samotným cvičením aktivovat v~aplikaci automatickou administraci frameworku Django. Kromě správy uživatelů jsem v~administraci povolil přístup i~ke správě týmů a~veškerého hodnocení. Účelem tohoto nástroje se stalo umožnit servisní zásah do celé aplikace, při běžném používání však není tento nástroj potřebný. Administrace je mimo jiné využívána i~pro vymazání veškerého obsahu z~databáze před zahájením nového cvičení.
 
 Při prvním cvičení se objevil jediný problém. Spočíval v~tom, že vlivem neznámé chyby se v~administraci aplikace nezobrazilo několik záznamů z~manuálního hodnocení, vložených při předchozím testování. Při mazání všech záznamů zůstalo toto hodnocení uloženo v~tabulce \texttt{manualLogs}. Získávání seznamu manuálního hodnocení v~API tyto záznamy neodesílalo, jelikož k~nim neexistoval žádný záznam v~tabulce \texttt{logs}. Během cvičení však v~tabulce \texttt{logs} vznikly nové záznamy z~automatického hodnocení a~tyto měly identifikátory shodné s~těmi, které byly uloženy u~nezobrazeného hodnocení. Kvůli existenci záznamů v~tabulce \texttt{logs} se začaly neviditelné manuální hodnocení zobrazovat, a~bylo tak nutné je manuálně smazat. Abych v~budoucnu podobné situace předešel, doplnil jsem software o~modul SQL Explorer \cite{sqlexplorer}, pomocí kterého je umožněno administrátorovi spouštět databázové dotazy, a~je tak možné odhalit případnou chybu v~databázi.
 
+\subsection{Druhý běh cvičení}
 Během druhého cvičení se objevily problémy s~odezvou API, které však byly způsobeny dlouhodobým přetížením serveru, kde byla aplikace spuštěna. Dále se ukázalo, že aplikace stále nedisponuje dostatkem nástrojů pro případ nutného servisního zásahu. Při cvičení se objevila chyba v~jednom ze systémů, se kterým pracovali členové modrého týmu. Vlivem této chyby došlo k~vložení několika stovek automatických hodnocení, které bylo potřeba smazat. Nástroj SQL Explorer, který jsem přidal po prvním cvičení, umožňoval přístup k~datům pouze v~režimu pro čtení a~veškeré neplatné záznamy bylo nutné smazat manuálně. Po tomto cvičení jsem nástroj upravil, aby umožňoval použití i~modifikačních SQL dotazů a~do budoucna je pro administrátora zajištěn plnohodnotný nástroj pro jakýkoliv zásah do databáze.
 
 \chapter{Závěr}
@@ -553,13 +556,16 @@ Během druhého cvičení se objevily problémy s~odezvou API, které však byly
 
 V rámci mojí bakalářské práce jsem provedl rozbor stávající hodnoticí aplikace a~na základě zjištěných nedostatků jsem vytvořil návrh datového modelu a~aplikačního programového rozhraní pro novou aplikaci, kterou jsem následně implementoval za použití Django REST Framework. Vytvořený nástroj zajišťuje servisní vrstvu celé hodnoticí aplikace a~pomocí REST API komunikuje s~prezentační vrstvou, která je vytvořena jako webová aplikace a~vznikla v~rámci jiné bakalářské práce. 
 
-Jako celek tento vytvořený software plně nahradil stávající aplikaci a~kromě zachování veškeré původní funkcionality byl také nástroj rozšířen o~nové funkce, které uživatelům aplikace umožní komfortnější používání a~organizátorům cvičení zajistí možnost lepšího řízení celého cvičení. Jedná se například o~možnost zobrazení rozvrhu s~naplánovanými událostmi nebo zlepšení správy uživatelských účtů. Všechny nové požadavky byly popsány v~kapitole \ref{novePozadavky}. Až na požadavek č.~\ref{pozadavek6}~byly všechny implementovány, u~zbývajícího \ref{pozadavek6}.~požadavku byla provedena příprava v~servisní vrstvě aplikace, ale v~prezentační vrstvě zatím zobrazování upozornění není implementováno.
+Jako celek tento vytvořený software plně nahradil stávající aplikaci a~kromě zachování veškeré původní funkcionality byl také nástroj rozšířen o~nové funkce, které uživatelům aplikace umožní komfortnější používání a~organizátorům cvičení zajistí možnost lepšího řízení celého cvičení. Jedná se například o~možnost zobrazení rozvrhu s~naplánovanými událostmi nebo zlepšení správy uživatelských účtů viz kapitola \ref{novePozadavky}.
 
-Díky reálnému využití je zcela jisté, že v~budoucnu se bude aplikace dále rozšiřovat o~nové funkce, a~proto pro mě při vývoji bylo prioritou vytvoření přehledného kódu, který bude vhodně rozvržen do samostatných metod a~bude respektovat principy MVC (Model-view-controller) architektury. Implementace nových funkcí tak bude mnohem snazší. Velký důraz jsem kladl i~na vytvoření dostatečného množství automatických testů, aby bylo možné kdykoliv ověřit funkčnost celé aplikace.
+Díky reálnému využití je jisté, že v~budoucnu se bude aplikace dále rozšiřovat o~nové funkce, a~proto pro mě při vývoji bylo prioritou vytvoření přehledného kódu, který bude vhodně rozvržen do samostatných metod a~bude respektovat principy MVC (Model-view-controller) architektury. Implementace nových funkcí tak bude mnohem snazší. Velký důraz jsem kladl i~na vytvoření dostatečného množství automatických testů, aby bylo možné kdykoliv ověřit funkčnost celé aplikace.
 
 Během vývoje jsem se setkal s~technologiemi, které pro mě byly zcela nové a~práce pro mě byla o~to zajímavější. S~postupným získáváním znalostí jsem některé části aplikace refaktoroval, až jsem docílil stavu, se kterým jsem byl plně spokojen. Odměnou pro mě bylo, že aplikace během obou cvičení nevykazovala žádné chyby v~mnou implementovaných částech a~od uživatelů přicházely na hodnoticí aplikaci pozitivní ohlasy.
 
-Po druhém použití v praxi se objevily nápady, jak aplikaci rozšířit. Užitečnou funkcí, která by ulehčila přípravu aplikace na nové cvičení, by byla možnost hromadného vymazání záznamů o hodnocení, pokud právě neprobíhá žádné cvičení. Pro tuto funkci by mohl existovat nový koncový bod v~API, který by mohl spustit pouze administrátor. Další užitečnou funkcí, kterou by aplikace mohla disponovat, je výpis všech služeb, které jsou kontrolovány automatickým skórováním, a~to včetně stavu těchto služeb. Výpis by obsahoval názvy služeb, barevně by byl odlišen stav dostupnosti každé služby a mohla by být zobrazena informace o tom, kolik celkem bylo za nedostupnost dané služby strženo bodů.
+Po druhém použití v praxi se objevily nápady, jak aplikaci rozšířit. Užitečnou funkcí, která by ulehčila přípravu aplikace na nové cvičení, by byla možnost hromadného vymazání záznamů o hodnocení, pokud právě neprobíhá žádné cvičení. Pro tuto funkci by mohl existovat nový koncový bod v~API, který by mohl spustit pouze administrátor. 
+
+Další užitečnou funkcí, kterou by aplikace mohla disponovat, je výpis všech služeb, které jsou kontrolovány automatickým skórováním, a~to včetně stavu těchto služeb. Výpis by obsahoval názvy služeb, barevně by byl odlišen stav dostupnosti každé služby a mohla by být zobrazena informace o tom, kolik celkem bylo za nedostupnost dané služby strženo bodů.
+
 Výpisu by mohlo být využito pro porovnávání aktuálního stavu mezi všemi týmy a mohl by být i veřejně prezentován pro ukázání rozdílů mezi týmy. Funkce, která by mohla přinést zjednodušení v~práci s~aplikací, je propojení správy uživatelů s~již existujícím systémem v~KYPO. Uživatelské účty jsou zvlášť vytvářeny v hodnoticí aplikaci a~zvlášť v~portálu KYPO, který slouží pro přístup ke všem ostatním systémům používaným při cvičení. Pokud by do budoucna bylo možné tyto přihlašovací procesy spojit, přineslo by to zjednodušení celé správy uživatelů. Obdobný námět na vylepšení platí i~pro správu týmů, které jsou opět zadávány do portálu KYPO a~samostatně do hodnoticí aplikace. Pro správné spárování týmů je v hodnoticí aplikaci uložen identifikátor týmu z~portálu KYPO.
 
 \printbibliography[heading=bibintoc] %% Print the bibliography.
