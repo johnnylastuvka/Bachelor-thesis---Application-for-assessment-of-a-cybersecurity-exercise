@@ -119,7 +119,7 @@ Ke správě skóre modrých týmů během cvičení slouží hodnoticí aplikace
 \end{itemize}
 
 \subsection{Hodnoticí aplikace}
-Pro hodnocení účastníků cvičení Cyber Czech aktuálně slouží na míru vytvořený software, který je dostupný jako webová aplikace a~umožňuje zadávání hodnocení pro modré týmy a~nabízí přehledné zobrazení aktuálního skóre všech modrých týmů. Do programu mají přístup všichni účastníci cvičení, kteří zadávají hodnocení za modré týmy, které do systému přístup nemají. Modré týmy mají pouze přehled prostřednictvím promítání o~svém celkovém skóre a~pořadí mezi týmy. Komplexnější zpětná vazba je účastníkům poskytována až po skončení cvičení \cite{Vykopal2017TimelyExercises}.
+Pro hodnocení účastníků cvičení Cyber Czech aktuálně slouží na míru vytvořený software, který je dostupný jako webová aplikace a~umožňuje zadávání hodnocení pro modré týmy a~nabízí přehledné zobrazení aktuálního skóre všech modrých týmů. Do programu mají přístup všichni účastníci cvičení, kteří zadávají hodnocení pro modré týmy, které do systému přístup nemají. Modré týmy mají pouze přehled prostřednictvím promítání o~svém celkovém skóre a~pořadí mezi týmy. Komplexnější zpětná vazba je účastníkům poskytována až po skončení cvičení \cite{Vykopal2017TimelyExercises}.
 
 \subsection{Hodnocené oblasti}
 Během cvičení získávají modré týmy hodnocení, na kterém závisí jejich umístění ve výsledném pořadí. Hodnocení je rozděleno do několika oblastní podle zdroje hodnocení.
@@ -137,7 +137,7 @@ Jak lze vidět na obrázku \ref{fig:kypoNetwork}, síť vytvořená pro potřeby
 
 \begin{itemize}
     \item Globální síť -- představuje společnou síťovou infrastrukturu, ve které se nachází např. DNS nebo e-mailové servery. Jedná se o~simulaci veřejného internetu, ve které operují jak útočníci, tak legitimní uživatelé systému. Na serveru v~této síti je spuštěna hodnoticí aplikace, kterou se budu později blíže zabývat. Aby mohli účastníci cvičení například stahovat bezpečnostní aktualizace nebo vyhledávat potřebné informace na webových serverech, je tato síť připojena také k~veřejnému internetu.
-    \item Sítě modrých týmů -- každý modrý tým má k~dispozici identickou síť, která je pomocí brány připojena do globální sítě. Každá síť modrého týmu obsahuje kritickou infrastrukturu a~zranitelné služby, které se snaží napadnout červený tým. Síť modrých týmů je dále rozdělena do tří celků -- na demilitarizovanou zónu (DMZ), pracovní stanice a~na servery. V~síti je přítomna monitorovací služba, která sleduje síťový provoz, a~do této služby je integrována logovací infrastruktura. Každý stroj v~síti je poté nakonfigurován tak, aby zapisoval do centrálního logovacího serveru veškeré změny stavu této služby \cite{1319597}. Monitorovací infrastruktury využívá hodnoticí aplikace, která na základě zjištěných nedostupností služeb vytváří bodové penalizace.
+    \item Sítě modrých týmů -- každý modrý tým má k~dispozici identickou síť, která je pomocí brány připojena do globální sítě. Každá síť modrého týmu obsahuje kritickou infrastrukturu a~zranitelné služby, které se snaží napadnout červený tým. Síť modrých týmů je dále rozdělena do tří celků -- na demilitarizovanou zónu (DMZ), pracovní stanice a~na servery. V síti je přítomna monitorovací služba, která sleduje síťový provoz a zaznamenává veškeré výpadky služeb. Získaných dat využívá hodnoticí aplikace, která na základě zjištěných nedostupností služeb vytváří bodové penalizace \cite{1319597}.
 \end{itemize}
 
 \begin{figure}[ht]
@@ -187,7 +187,7 @@ Funkční požadavky shrnuje diagram případů užití na obr. \ref{fig:useCase
 \end{figure}
 
 \section{Model hodnocení účastníků cvičení}
-Model pro hodnocení týmů, účastnících se cvičení Cyber Czech, byl navržen tak, aby týmy získávaly bodovou penalizaci za nedostupnost předem definovaných služeb (dostupnost byla kontrolována automaticky, proto se používá termín automatické hodnocení) a~dále týmy získávaly, nebo ztrácely body pomocí manuálně zadaného hodnocení od červeného týmu, bílého týmu, fiktivních uživatelů spravovaného systému a~nebo od organizátorů cvičení (zelený tým).
+Model pro hodnocení týmů, účastnících se cvičení Cyber Czech, byl navržen tak, aby týmy získávaly bodovou penalizaci za nedostupnost předem definovaných služeb (dostupnost byla kontrolována automaticky, proto se používá termín automatické skórování) a~dále týmy získávaly, nebo ztrácely body pomocí manuálně zadaného hodnocení od červeného týmu, bílého týmu, fiktivních uživatelů spravovaného systému a~nebo od organizátorů cvičení (zelený tým).
 
 \subsection{Automatické skórování}
 Aplikace umožňuje členy modrého týmu bodově penalizovat za nedostupnost legitimních služeb. Pro kontrolu dostupnosti těchto služeb se využívá monitorovací systém přítomný ve virtuálním prostředí KYPO. V~případě nedostupnosti služby je vložen záznam do fronty v~RabbitMQ \cite{rabitmq} serveru a~aplikace si poté tento záznam načte a~vyhodnotí, zda má dojít k~bodové penalizaci daného týmu. Strukturu celého systému automatického hodnocení popisuje obrázek č. \ref{fig:autoScoring}.
